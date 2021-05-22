@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-   internal class EnergySource
+   internal abstract class EnergySource
     {
-        private float remainingEnergyPercentage;
+        private float m_RemainingEnergyPercentage;
     }
 }

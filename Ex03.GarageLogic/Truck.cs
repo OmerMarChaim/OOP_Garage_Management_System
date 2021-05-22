@@ -8,7 +8,7 @@ namespace Ex03.GarageLogic
 {
     class Truck : Vehicle
     {
-        private bool containsDangerousMaterials;
-        private float maxCargoweight;
+        private bool m_ContainsDangerousMaterials;
+        private float m_MaxCargoweight;
     }
 }

@@ -8,8 +8,8 @@ namespace Ex03.GarageLogic
 {
     class Electric : EnergySource
     {
-        private float remainingTimeOfEngineOperationInHours;
-        private float maxTimeOfEngineOperationInHours;
+        private float m_RemainingTimeOfEngineOperationInHours;
+        private float m_MaxTimeOfEngineOperationInHours;
 
         /// <summary>
         /// method that receives how many more hours to add, and charges the battery,

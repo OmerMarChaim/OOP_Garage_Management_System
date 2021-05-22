@@ -8,6 +8,14 @@ namespace Ex03.GarageLogic
 {
     class VehicleFactory
     {
-        
+        public enum eVehicleType
+        {
+            
+        }
+
+        internal void manufactureNewVehicle()
+        {
+
+        }
     }
 }
