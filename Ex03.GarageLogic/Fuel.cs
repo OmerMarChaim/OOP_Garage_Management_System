@@ -16,8 +16,8 @@ namespace Ex03.GarageLogic
             Octane98
         }
 
-       private float CurrentAmountOfFuelInLiters;
-       private float MaxAmountOfFuelInLiters;
+       private float m_CurrentAmountOfFuelInLiters;
+       private float m_MaxAmountOfFuelInLiters;
 
         /// <summary>
         /// A method that receives how much more fuel to add, and changes the amount of fuel,

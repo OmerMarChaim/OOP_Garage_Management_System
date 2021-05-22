@@ -8,6 +8,6 @@ namespace Ex03.GarageLogic
 {
    internal class EnergySource
     {
-        private float remainingEnergyPercentage;
+        private float m_RemainingEnergyPercentage;
     }
 }
