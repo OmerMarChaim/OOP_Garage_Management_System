@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    internal class Car : Vehicle
+    class Car : Vehicle
     {
         private enum eCarColor
         {
@@ -15,12 +15,11 @@ namespace Ex03.GarageLogic
             White,
             Black
         }
+
+        private int i;
         private enum eNumberOfDoors
         {
-        Two = 2,
-        Three = 3,
-        Four = 4,
-        Five = 5
+        Two = 2,Three = 3,Four = 4,Five = 5
         }
       
     }
