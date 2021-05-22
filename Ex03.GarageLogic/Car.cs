@@ -16,7 +16,7 @@ namespace Ex03.GarageLogic
             Black
         }
 
-        private int i;
+        private int m_I;
         private enum eNumberOfDoors
         {
         Two = 2,Three = 3,Four = 4,Five = 5

@@ -7,9 +7,21 @@ namespace Ex03.GarageLogic
 {
     public class Vehicle
     {
-        private String modelName;
-        private String licenseNumber;
-        private List<Wheel> wheels;
-        private EnergySource engine;
+        private String m_ModelName;
+        private String m_LicenseNumber;
+        private List<Wheel> m_Wheels;
+        private EnergySource m_Engine;
+
+        private List<Wheel> Wheels
+        {
+            get { return m_Wheels; }
+        }
+        private void inflateTiresToMaximum()
+        {
+            foreach(Wheel wheel in Wheels)
+            {
+                wheel.inflateToMaximum();
+            }
+        }
     }
 }
