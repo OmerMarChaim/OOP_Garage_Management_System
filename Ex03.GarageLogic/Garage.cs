@@ -8,7 +8,7 @@ using static Ex03.GarageLogic.OwnerDetails;
 
 namespace Ex03.GarageLogic
 {
-    class Garage
+    public class Garage
     {
         private Dictionary<string, Vehicle> m_VehicleInventory;
         private Dictionary<string, OwnerDetails> m_OwnerDetailsTickets;
@@ -37,7 +37,7 @@ namespace Ex03.GarageLogic
         /// with a filtering option based on the status of each vehicle
         /// </summary>
         /// <returns></returns>
-        internal List<string> ListOfLicenseNumbersInTheGarage()
+        public List<string> ListOfLicenseNumbersInTheGarage()
         {
 
             return null;

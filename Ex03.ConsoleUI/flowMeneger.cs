@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace Ex03.ConsoleUI
 {
     class flowMeneger
@@ -48,7 +50,7 @@ namespace Ex03.ConsoleUI
                     InsertNewVehicle();
                     break;
                 case eMenuOpiton.listOfLicense:
-                    despleyListOfLicense();
+                    displayListOfLicense();
                     break;
                 case eMenuOpiton.ChangeVehiclesStatus:
                     ChangeVehiclesStatus();
@@ -101,7 +103,8 @@ namespace Ex03.ConsoleUI
         /// </summary>
         private void InflateTires()
         {
-            throw new NotImplementedException();
+            string licenseNumber = ConsoleUserInterface.getValidLicenseNumber();
+
         }
         /// <summary>
         /// OMER
@@ -110,16 +113,18 @@ namespace Ex03.ConsoleUI
         /// </summary>
         private void ChangeVehiclesStatus()
         {
-        string licenseNumber =    ConsoleUserInterface.getValidLicenseNumber();
+        string licenseNumber =  ConsoleUserInterface.getValidLicenseNumber();
+       
         }
         /// <summary>
         /// OMER
         /// 2. Display a list of license numbers
         /// currently in the garage, with a filtering option based on the status of each vehicle
         /// </summary>
-        private void despleyListOfLicense()
+        private void displayListOfLicense()
         {
-            throw new NotImplementedException();
+
+            List <object>  listOfLicenseNumbersInTheGarage= Ex03.GarageLogic.Garage.ListOfLicenseNumbersInTheGarage();
         }
         /// <summary>
         /// 1. “Insert” a new vehicle into the garage.

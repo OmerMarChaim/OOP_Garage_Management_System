@@ -14,42 +14,9 @@
         </TypeIdentifier>
       </Enum>
     </NestedTypes>
-    <InheritanceLine Type="Ex03.GarageLogic.Vehicle" ManuallyRouted="true">
-      <Path>
-        <Point X="6.75" Y="3.584" />
-        <Point X="6.75" Y="5.267" />
-        <Point X="9.5" Y="5.267" />
-        <Point X="9.5" Y="6" />
-      </Path>
-    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Car.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Ex03.GarageLogic.Motorcycle">
-    <Position X="6.5" Y="5.75" Width="1.5" />
-    <Compartments>
-      <Compartment Name="Nested Types" Collapsed="false" />
-    </Compartments>
-    <NestedTypes>
-      <Enum Name="Ex03.GarageLogic.Motorcycle.eLicenseType" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>Motorcycle.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Enum>
-    </NestedTypes>
-    <InheritanceLine Type="Ex03.GarageLogic.Vehicle" ManuallyRouted="true" FixedFromPoint="true">
-      <Path>
-        <Point X="6.75" Y="3.584" />
-        <Point X="6.75" Y="5.267" />
-        <Point X="7.25" Y="5.267" />
-        <Point X="7.25" Y="5.75" />
-      </Path>
-    </InheritanceLine>
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
-      <FileName>Motorcycle.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Ex03.GarageLogic.Wheel">
@@ -58,20 +25,12 @@
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AACAAAAAAAAAAACAAAAAAAAAAAAAAAAAQAAAEAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAACAAAAACAIAAAQAAAAAQAABEAAAAAA=</HashCode>
       <FileName>Wheel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Ex03.GarageLogic.Truck">
     <Position X="4.25" Y="6" Width="1.5" />
-    <InheritanceLine Type="Ex03.GarageLogic.Vehicle" ManuallyRouted="true">
-      <Path>
-        <Point X="6.75" Y="3.584" />
-        <Point X="6.75" Y="5.251" />
-        <Point X="5" Y="5.251" />
-        <Point X="5" Y="6" />
-      </Path>
-    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
       <FileName>Truck.cs</FileName>
@@ -119,15 +78,39 @@
   <Class Name="Ex03.GarageLogic.Garage">
     <Position X="11" Y="0.5" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AkIAAAAAAAAEAAAAAAAAAAAAAEAAAAAAAgAAAAAAAAA=</HashCode>
+      <HashCode>AEIAAAAAAAAAAACAAAAAAAAAAEAAAAAAAAAAAAIAAAA=</HashCode>
       <FileName>Garage.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Ex03.GarageLogic.Vehicle">
     <Position X="4.75" Y="1" Width="2.75" />
+    <NestedTypes>
+      <Enum Name="Ex03.GarageLogic.Vehicle.eNumberOfWheel" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Vehicle.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AQAAAAAAEAEAAAAAAAAAAAAAAAAgAAAQAAAAAAAAAgA=</HashCode>
+      <HashCode>AQABAAAAAgAAABAAAAAAEAAAQAAgAAAQAAAAAAgAAgA=</HashCode>
       <FileName>Vehicle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ex03.GarageLogic.Motorcycle">
+    <Position X="6.5" Y="5.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="Ex03.GarageLogic.Motorcycle.eLicenseType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Motorcycle.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Motorcycle.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Struct Name="Ex03.GarageLogic.OwnerDetails">
