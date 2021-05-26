@@ -13,7 +13,7 @@ namespace Ex03.GarageLogic
             
         }
 
-        internal void manufactureNewVehicle()
+        internal void ManufactureNewVehicle()
         {
 
         }

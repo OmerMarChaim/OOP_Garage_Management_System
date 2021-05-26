@@ -26,8 +26,7 @@ namespace Ex03.GarageLogic
         /// <param name="i_HowMuchMoreFuelToAdd"></param>
         /// <param name="i_FuelYypeEnter"></param>
         private void refuelingOperation(float i_HowMuchMoreFuelToAdd, eFuelType i_FuelYypeEnter)
-       {
-
-       }
+        {
+        }
     }
 }

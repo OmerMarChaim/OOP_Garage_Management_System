@@ -8,11 +8,22 @@ namespace Ex03.GarageLogic
 {
     class Motorcycle : Vehicle
     {
+        private int m_EngineVolume;
+        private eLicenseType m_LicenseType;
+
         private enum eLicenseType
         {
-            A, B1, Aa, Bb
+            A,
+            B1,
+            AA,
+            Bb
         }
 
-        private int m_EngineVolume;
+        public Motorcycle()
+        {
+            N
+        }
+
+
     }
 }

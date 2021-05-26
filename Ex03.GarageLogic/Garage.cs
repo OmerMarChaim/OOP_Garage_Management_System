@@ -27,7 +27,7 @@ namespace Ex03.GarageLogic
         /// </summary>
         /// <param name="i_Vehicle"></param>
         /// <param name="i_LicenseNumber"></param>
-        internal void insertNewVehicle (Vehicle i_Vehicle , String i_LicenseNumber)
+        internal void InsertNewVehicle (Vehicle i_Vehicle , String i_LicenseNumber)
         {
 
         }
@@ -37,7 +37,7 @@ namespace Ex03.GarageLogic
         /// with a filtering option based on the status of each vehicle
         /// </summary>
         /// <returns></returns>
-        internal List<string> listOfLicenseNumbersInTheGarage()
+        internal List<string> ListOfLicenseNumbersInTheGarage()
         {
 
             return null;
@@ -60,7 +60,7 @@ namespace Ex03.GarageLogic
         /// </summary>
         /// <param name="i_LicenseNumber"></param>
         /// <returns></returns>
-        internal List<string> displayVehicleInformation(string i_LicenseNumber)
+        internal List<string> DisplayVehicleInformation(string i_LicenseNumber)
         {
             return null;
         }
