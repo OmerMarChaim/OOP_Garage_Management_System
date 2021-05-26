@@ -1,14 +1,14 @@
 ﻿
 namespace Ex03.GarageLogic
 {
-    internal struct OwnerDetails
+    public struct OwnerDetails
     {
         private string m_Name;
         private string m_PhoneNumer;
         private eStatus m_CurrentStatus;
         private string m_VehicleLicenseNumber;
 
-        internal enum eStatus
+        public enum eStatus
         {
             InRepair,
             Repaired,
