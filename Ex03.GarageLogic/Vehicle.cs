@@ -73,9 +73,15 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public List<> GetWheelsDetails()
+        public Dictionary<string, float> GetWheelsDetails()
         {
-            
+            Dictionary<string, float> details = new Dictionary<string, float>();
+            foreach(Wheel wheel in Wheels)
+            {
+                details.Add(wheel.ManufacturerName,wheel.CurrentAirPressure);
+            }
+
+            return details;
         }
     }
 }
