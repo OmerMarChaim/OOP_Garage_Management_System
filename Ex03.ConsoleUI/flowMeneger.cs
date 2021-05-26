@@ -8,7 +8,7 @@ namespace Ex03.ConsoleUI
 {
     class flowMeneger
     {
-        public Garage m_Garage;
+        public static Garage s_Garage;
         public enum eMenuOpiton 
         {
             newVehicle,
