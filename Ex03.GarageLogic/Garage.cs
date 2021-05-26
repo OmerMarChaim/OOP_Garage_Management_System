@@ -32,7 +32,7 @@ namespace Ex03.GarageLogic
         {
 
         }
-
+        
         /// <summary>
         /// Display a list of license numbers currently in the garage,
         /// with a filtering option based on the status of each vehicle
@@ -50,7 +50,10 @@ namespace Ex03.GarageLogic
         /// <param name="i_LicenseNumber"></param>
         /// <param name="i_DesiredStatus"></param>
         internal void ChangeVehicleStatusInTheGarage(string i_LicenseNumber, eStatus i_DesiredStatus)
+        public void ChangeVehicleStatusInTheGarage(string i_LicenseNumber, eStatus i_DesiredStatus) 
         {
+            OwnerDetails specificVehicleOwner = m_OwnerDetailsTickets[i_LicenseNumber];
+            specificVehicleOwner.CarStatus = i_DesiredStatus;
 
         }
 

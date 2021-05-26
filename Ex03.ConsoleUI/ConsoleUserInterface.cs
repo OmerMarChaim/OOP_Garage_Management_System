@@ -15,9 +15,29 @@ namespace Ex03.ConsoleUI
             throw new NotImplementedException();
         }
 
-        public static string GetLicenseNumber()
+        public static string listToString(List<string> i_ListOfLicenseNumbersInTheGarage)
         {
             throw new NotImplementedException();
+        }
+        /// <summary>
+        /// chack if the input is between 1-3
+        /// </summary>
+        public static int getValidLicenseNumberBetween1To3()
+        {
+            throw new NotImplementedException();
+        }
+
+        public static string getValidLicenseNumberInGarage(Garage i_Garage)
+        {
+           string licenseNumber= getValidLicenseNumber();
+           while (i_Garage.isLicenseNumberInGarage(licenseNumber) == false)
+           {
+               Console.WriteLine($@"the car with license number  {licenseNumber} is not in the garage , please enter a new one:"));
+               licenseNumber = ConsoleUserInterface.getValidLicenseNumber();
+           }
+
+           return licenseNumber;
+
         }
     }
 }

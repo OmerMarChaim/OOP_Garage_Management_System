@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Diagnostics.Eventing.Reader;
 using Ex03.GarageLogic;
-
+using static Ex03.ConsoleUI.ConsoleUserInterface;
+using static Ex03.GarageLogic.OwnerDetails.eStatus;
 
 namespace Ex03.ConsoleUI
 {
@@ -111,9 +112,11 @@ namespace Ex03.ConsoleUI
         /// </summary>
         private void InflateTires()
         {
-            string licenseNumber = ConsoleUserInterface.getValidLicenseNumber();
+            string licenseNumber = ConsoleUserInterface.getValidLicenseNumberInGarage(s_Garage);
+            s_Garage.inflateTiresInCarToMax(licenseNumber);
 
         }
+
         /// <summary>
         /// OMER
         /// 3. Change a certain vehicle’s status
@@ -121,9 +124,36 @@ namespace Ex03.ConsoleUI
         /// </summary>
         private void ChangeVehiclesStatus()
         {
-        string licenseNumber =  ConsoleUserInterface.getValidLicenseNumber();
-       
+            
+            string licenseNumber = ConsoleUserInterface.getValidLicenseNumberInGarage(s_Garage);
+           
+            ///todo -
+            /// get the current car status
+            OwnerDetails.eStatus currentStatus = s_Garage.getCurrentCarStatus(licenseNumber);
+            Console.WriteLine($@"***Your current status is {currentStatus}***" );
+
+            Console.WriteLine($@"To which status you want to change the car :
+1. In Repair,
+2. Repaired,
+3. Payed");
+            int userInputNumber =ConsoleUserInterface.getValidLicenseNumberBetween1To3();
+            OwnerDetails.eStatus desireStatus;
+            switch(userInputNumber)
+            {
+                case 1:
+                    desireStatus = InRepair;
+                    break;
+                case 2:
+                    desireStatus = Repaired;
+                    break;
+               default:
+                    desireStatus = Payed;
+                    break;
+            }
+            
+            s_Garage.ChangeVehicleStatusInTheGarage(licenseNumber,desireStatus);
         }
+
         /// <summary>
         /// OMER
         /// 2. Display a list of license numbers
@@ -132,8 +162,14 @@ namespace Ex03.ConsoleUI
         private void displayListOfLicense()
         {
 
-            List <object>  listOfLicenseNumbersInTheGarage= m_Garage.ListOfLicenseNumbersInTheGarage();
+            List<string> listOfLicenseNumbersInTheGarage = s_Garage.ListOfLicenseNumbersInTheGarage();
+            string listOfLicenseNumberString = ConsoleUserInterface.listToString(listOfLicenseNumbersInTheGarage);
+            string displayMessage = string.Format("this is the list of the License Numbers in The Garage");
+            Console.WriteLine(
+                $@"{displayMessage}
+{listOfLicenseNumbersInTheGarage}");
         }
+
         /// <summary>
         /// 1. “Insert” a new vehicle into the garage.
         /// The user will be asked to select a vehicle type out of the supported vehicle types,
