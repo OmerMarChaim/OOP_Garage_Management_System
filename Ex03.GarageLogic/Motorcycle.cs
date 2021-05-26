@@ -19,11 +19,6 @@ namespace Ex03.GarageLogic
             Bb
         }
 
-        public Motorcycle()
-        {
-            N
-        }
-
 
     }
 }
