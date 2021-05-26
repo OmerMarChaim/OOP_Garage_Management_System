@@ -1,21 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using Ex03.GarageLogic;
+
+
 namespace Ex03.ConsoleUI
 {
     class flowMeneger
     {
+        public Garage m_Garage;
         public enum eMenuOpiton 
         {
-            newVehicle ,
+            newVehicle,
             listOfLicense,
             ChangeVehiclesStatus,
             InflateTires,
-             RefuelFuel,
-              ChargeElectricVehicle,
-              DisplayVehicleInformation
+            RefuelFuel,
+            ChargeElectricVehicle,
+            DisplayVehicleInformation
 
         }
+
+        public flowMeneger()
+        {
+            m_Garage = new Garage();
+        }
+
 
         void startMenu()
         {
@@ -77,7 +87,8 @@ namespace Ex03.ConsoleUI
         /// </summary>
         private void DisplayVehicleInformation()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("For displaying vehicle information, enter license number");
+            
         }
         /// <summary>
         /// OMRI
@@ -124,7 +135,7 @@ namespace Ex03.ConsoleUI
         private void displayListOfLicense()
         {
 
-            List <object>  listOfLicenseNumbersInTheGarage= Ex03.GarageLogic.Garage.ListOfLicenseNumbersInTheGarage();
+            List <object>  listOfLicenseNumbersInTheGarage= m_Garage.ListOfLicenseNumbersInTheGarage();
         }
         /// <summary>
         /// 1. “Insert” a new vehicle into the garage.
