@@ -1,8 +1,12 @@
 ﻿using System;
+using Ex03.GarageLogic;
+
+
 namespace Ex03.ConsoleUI
 {
     class flowMeneger
     {
+        public Garage m_Garage;
         public enum eMenuOpiton 
         {
             newVehicle ,
@@ -75,7 +79,8 @@ namespace Ex03.ConsoleUI
         /// </summary>
         private void DisplayVehicleInformation()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("For displaying vehicle information, enter license number");
+            
         }
         /// <summary>
         /// OMRI

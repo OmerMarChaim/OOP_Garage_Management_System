@@ -8,7 +8,7 @@ using static Ex03.GarageLogic.OwnerDetails;
 
 namespace Ex03.GarageLogic
 {
-    class Garage
+    public class Garage
     {
         private Dictionary<string, Vehicle> m_VehicleInventory;
         private Dictionary<string, OwnerDetails> m_OwnerDetailsTickets;
