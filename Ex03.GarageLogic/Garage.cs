@@ -50,6 +50,9 @@ namespace Ex03.GarageLogic
         /// <param name="i_LicenseNumber"></param>
         /// <param name="i_DesiredStatus"></param>
         internal void ChangeVehicleStatusInTheGarage(string i_LicenseNumber, eStatus i_DesiredStatus)
+        {
+            throw new NotImplementedException();
+        }
         public void ChangeVehicleStatusInTheGarage(string i_LicenseNumber, eStatus i_DesiredStatus) 
         {
             OwnerDetails specificVehicleOwner = m_OwnerDetailsTickets[i_LicenseNumber];
@@ -98,7 +101,9 @@ namespace Ex03.GarageLogic
 
             string typeOfEnergy = chosenVehicle.Engine.Type.ToString();
             resultedDictionary.Add("Type", typeOfEnergy);
-            resultedDictionary.Add($"Status {typeOfEnergy}");
+            string remainingEnergyPercentage = $"{chosenVehicle.Engine.RemainingEnergyPercentage.ToString()}%";
+            resultedDictionary.Add($"Status {typeOfEnergy}",remainingEnergyPercentage);
+            
 
 
             return resultedDictionary;

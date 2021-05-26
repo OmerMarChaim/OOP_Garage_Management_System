@@ -73,7 +73,9 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public Dictionary<string, float> GetWheelsDetails()
+        public abstract string GetExtraDetails();
+
+        public Dictionary<string, string> GetWheelsDetails()
         {
             Dictionary<string, float> details = new Dictionary<string, float>();
             foreach(Wheel wheel in Wheels)
