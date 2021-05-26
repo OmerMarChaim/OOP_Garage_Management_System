@@ -9,7 +9,7 @@ namespace Ex03.ConsoleUI
 {
     class flowMeneger
     {
-        public static Garage s_Garage;
+        private static Garage s_Garage;
         public enum eMenuOpiton 
         {
             newVehicle,
@@ -21,12 +21,6 @@ namespace Ex03.ConsoleUI
             DisplayVehicleInformation
 
         }
-
-        public flowMeneger()
-        {
-            s_Garage = new Garage();
-        }
-
 
         void startMenu()
         {
@@ -61,7 +55,7 @@ namespace Ex03.ConsoleUI
                     InsertNewVehicle();
                     break;
                 case eMenuOpiton.listOfLicense:
-                    displayListOfLicense();
+                    despleyListOfLicense();
                     break;
                 case eMenuOpiton.ChangeVehiclesStatus:
                     ChangeVehiclesStatus();
@@ -89,7 +83,10 @@ namespace Ex03.ConsoleUI
         private void DisplayVehicleInformation()
         {
             Console.WriteLine("For displaying vehicle information, enter license number");
-            
+            string inputLicenseNumber = ConsoleUserInterface.GetLicenseNumber();
+            string details = s_Garage.GetVehicleDetails(inputLicenseNumber);
+
+
         }
         /// <summary>
         /// OMRI

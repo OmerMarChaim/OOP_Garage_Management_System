@@ -10,7 +10,7 @@ namespace Ex03.GarageLogic
 {
     public class Garage
     {
-        private Dictionary<string, Vehicle> m_VehicleInventory;
+        private readonly Dictionary<string, Vehicle> m_VehicleInventory;
         private Dictionary<string, OwnerDetails> m_OwnerDetailsTickets;
 
 
@@ -60,11 +60,25 @@ namespace Ex03.GarageLogic
         /// </summary>
         /// <param name="i_LicenseNumber"></param>
         /// <returns></returns>
-        internal List<string> DisplayVehicleInformation(string i_LicenseNumber)
+        internal Dictionary<string,string> DisplayVehicleInformation(string i_LicenseNumber)
         {
             return null;
         }
 
+        public Dictionary<string,string> GetVehicleDetails(string i_InputLicenseNumber)
+        {
+            Vehicle chosenVehicle = this.m_VehicleInventory[i_InputLicenseNumber];
+            string modelName = chosenVehicle.ModelName,
+                   ownerName = this.m_OwnerDetailsTickets[i_InputLicenseNumber].Name,
+                   currentStatus = this.m_OwnerDetailsTickets[i_InputLicenseNumber].CurrentStatus.ToString(),
+                   tiresDetails = chosenVehicle.GetWheelsDetails();
+            Vehicle 
+            
+            string currentDetails = $@"License Number: {i_InputLicenseNumber}
+Model Name: {chosenVehicle.ModelName}
+Owner's name: {ownerName}
+Status in garage: {currentStatus}
+Tire specifications: {tiresDetails}
         public bool isLicenseNumberInGarage(string i_LicenseNumber)
         {
           return m_OwnerDetailsTickets.ContainsKey(i_LicenseNumber);
