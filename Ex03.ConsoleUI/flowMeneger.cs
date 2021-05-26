@@ -95,7 +95,8 @@ namespace Ex03.ConsoleUI
         /// </summary>
         private void ChargeElectricVehicle()
         {
-            throw new NotImplementedException();
+            string licenseNumber = ConsoleUserInterface.getValidLicenseNumberInGarage(s_Garage);
+            s_Garage.isElectricVehicle(licenseNumber);
         }
         /// <summary>
         /// OMRI THE ONE AND ONLY
@@ -104,7 +105,7 @@ namespace Ex03.ConsoleUI
         /// </summary>
         private void RefuelFuel()
         {
-            throw new NotImplementedException();
+            string licenseNumber = ConsoleUserInterface.getValidLicenseNumberInGarage(s_Garage);
         }
         /// <summary>
         /// OMER

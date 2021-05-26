@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Ex03.GarageLogic.Car">
-    <Position X="8.75" Y="6" Width="1.5" />
+    <Position X="9.5" Y="5.75" Width="1.5" />
     <NestedTypes>
       <Enum Name="Ex03.GarageLogic.Car.eCarColor" Collapsed="true">
         <TypeIdentifier>
@@ -30,7 +30,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Ex03.GarageLogic.Truck">
-    <Position X="4.25" Y="6" Width="1.5" />
+    <Position X="4.75" Y="6" Width="1.5" />
     <TypeIdentifier>
       <HashCode>QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
       <FileName>Truck.cs</FileName>
@@ -45,8 +45,15 @@
   </Class>
   <Class Name="Ex03.GarageLogic.EnergySource">
     <Position X="1.25" Y="1.5" Width="2" />
+    <NestedTypes>
+      <Enum Name="Ex03.GarageLogic.EnergySource.eTypeOfEnegy" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>EnergySource.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAIAAAAAAAAAAAAAAgAAAAAAAAAACAAQAAAAAAAAA=</HashCode>
       <FileName>EnergySource.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -62,14 +69,6 @@
         </TypeIdentifier>
       </Enum>
     </NestedTypes>
-    <InheritanceLine Type="Ex03.GarageLogic.EnergySource" FixedFromPoint="true">
-      <Path>
-        <Point X="2.25" Y="2.603" />
-        <Point X="2.25" Y="3.625" />
-        <Point X="1.25" Y="3.625" />
-        <Point X="1.25" Y="4" />
-      </Path>
-    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAIAAQAAAAAA=</HashCode>
       <FileName>Fuel.cs</FileName>
@@ -97,7 +96,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Ex03.GarageLogic.Motorcycle">
-    <Position X="6.5" Y="5.75" Width="1.5" />
+    <Position X="7.25" Y="5.75" Width="1.5" />
     <Compartments>
       <Compartment Name="Nested Types" Collapsed="false" />
     </Compartments>
@@ -123,7 +122,7 @@
       </Enum>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>EAAABAAAAAAEAABAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <HashCode>EAAABAAAAAAEEABAAAAAAAQIAAAAAAAAAAAABACAAAA=</HashCode>
       <FileName>OwnerDetails.cs</FileName>
     </TypeIdentifier>
   </Struct>

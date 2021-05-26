@@ -14,8 +14,6 @@ namespace Ex03.GarageLogic
         private Dictionary<string, OwnerDetails> m_OwnerDetailsTickets;
 
 
-
-
         /// <summary>
         /// "Insert” a new vehicle into the garage. The user will be asked to select a vehicle type out of the supported vehicle types,
         /// and to input the license number of the vehicle.
@@ -53,6 +51,7 @@ namespace Ex03.GarageLogic
         {
             throw new NotImplementedException();
         }
+       
         public void ChangeVehicleStatusInTheGarage(string i_LicenseNumber, eStatus i_DesiredStatus) 
         {
             OwnerDetails specificVehicleOwner = m_OwnerDetailsTickets[i_LicenseNumber];
@@ -101,12 +100,37 @@ namespace Ex03.GarageLogic
 
             string typeOfEnergy = chosenVehicle.Engine.Type.ToString();
             resultedDictionary.Add("Type", typeOfEnergy);
-            string remainingEnergyPercentage = $"{chosenVehicle.Engine.RemainingEnergyPercentage.ToString()}%";
-            resultedDictionary.Add($"Status {typeOfEnergy}",remainingEnergyPercentage);
-            
+            resultedDictionary.Add($"Status {typeOfEnergy}");
 
 
             return resultedDictionary;
+        }
+
+        public void isElectricVehicle(string i_LicenseNumber)
+        {
+            Vehicle specificVehicle = m_VehicleInventory[i_LicenseNumber];
+        
+           // if(specificVehicle.Engine.Type==
+        }
+        public bool isLicenseNumberInGarage(string i_LicenseNumber)
+        {
+            return m_OwnerDetailsTickets.ContainsKey(i_LicenseNumber);
+        }
+
+        public void inflateTiresInCarToMax(string i_LicenseNumber)
+        {
+            Vehicle specificVehicle = m_VehicleInventory[i_LicenseNumber];
+            foreach (Wheel wheel in specificVehicle.Wheels)
+            {
+                wheel.InflateToMaximum();
+            }
+        }
+
+        public eStatus getCurrentCarStatus(string i_LicenseNumber)
+        {
+            OwnerDetails specificVehicleOwner = m_OwnerDetailsTickets[i_LicenseNumber];
+            eStatus currentStatus = specificVehicleOwner.CarStatus;
+            return currentStatus;
         }
     }
 }

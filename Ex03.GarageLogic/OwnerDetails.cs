@@ -28,7 +28,7 @@ namespace Ex03.GarageLogic
             get { return m_VehicleLicenseNumber; }
         }
 
-        internal enum eStatus
+        public enum eStatus
         {
             InRepair,
             Repaired,

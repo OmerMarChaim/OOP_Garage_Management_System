@@ -9,9 +9,9 @@ namespace Ex03.GarageLogic
    internal abstract class EnergySource
     {
         private float m_RemainingEnergyPercentage;
-        private eTypeOfEnegy m_Type;
+        public eTypeOfEnegy m_Type;
 
-        protected enum eTypeOfEnegy
+        public enum eTypeOfEnegy
         {
             Battary,
             Fual
@@ -20,6 +20,7 @@ namespace Ex03.GarageLogic
         public eTypeOfEnegy Type
         {
             get { return m_Type; }
+            
         }
         
         public float RemainingEnergyPercentage
