@@ -8,6 +8,26 @@ namespace Ex03.GarageLogic
         private eStatus m_CurrentStatus;
         private string m_VehicleLicenseNumber;
 
+        public string Name
+        {
+            get { return m_Name; }
+        }
+        
+        public string PhoneNumer
+        {
+            get { return m_PhoneNumer; }
+        }
+        
+        public eStatus CurrentStatus
+        {
+            get { return m_CurrentStatus; }
+        }
+        
+        public string VehicleLicenseNumber
+        {
+            get { return m_VehicleLicenseNumber; }
+        }
+
         internal enum eStatus
         {
             InRepair,

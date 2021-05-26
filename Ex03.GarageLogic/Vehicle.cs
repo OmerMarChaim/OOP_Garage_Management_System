@@ -18,6 +18,17 @@ namespace Ex03.GarageLogic
             m_ModelName = String.Empty;
             m_LicenseNumber = String.Empty;
             r_Wheels = new List<Wheel>();
+            m_Engine = null;
+        }
+
+        internal void SetElectricEngine()
+        {
+            m_Engine = new Electric();
+        }
+        
+        internal void SetFuelEngine()
+        {
+            m_Engine = new Fuel();
         }
 
         internal enum eNumberOfWheel
@@ -46,8 +57,13 @@ namespace Ex03.GarageLogic
             get { return r_Wheels; }
         }
 
-        
-        
+        internal EnergySource Engine
+        {
+            get { return EnergySource m_Engine; }
+        }
+
+
+
 
         protected void InflateTiresToMaximum()
         {
@@ -55,6 +71,11 @@ namespace Ex03.GarageLogic
             {
                 wheel.InflateToMaximum();
             }
+        }
+
+        public List<> GetWheelsDetails()
+        {
+            
         }
     }
 }

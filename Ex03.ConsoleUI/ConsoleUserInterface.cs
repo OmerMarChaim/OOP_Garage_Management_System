@@ -14,5 +14,10 @@ namespace Ex03.ConsoleUI
         {
             throw new NotImplementedException();
         }
+
+        public static string GetLicenseNumber()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
