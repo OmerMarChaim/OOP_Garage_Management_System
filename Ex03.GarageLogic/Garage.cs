@@ -26,7 +26,7 @@ namespace Ex03.GarageLogic
         /// </summary>
         /// <param name="i_Vehicle"></param>
         /// <param name="i_LicenseNumber"></param>
-        internal void InsertNewVehicle (Vehicle i_Vehicle , String i_LicenseNumber)
+        internal void InsertNewVehicle(Vehicle i_Vehicle, String i_LicenseNumber)
         {
 
         }
@@ -47,10 +47,12 @@ namespace Ex03.GarageLogic
         /// </summary>
         /// <param name="i_LicenseNumber"></param>
         /// <param name="i_DesiredStatus"></param>
+       
         public void ChangeVehicleStatusInTheGarage(string i_LicenseNumber, eStatus i_DesiredStatus) 
         {
             OwnerDetails specificVehicleOwner = m_OwnerDetailsTickets[i_LicenseNumber];
             specificVehicleOwner.CarStatus = i_DesiredStatus;
+
         }
 
         /// <summary>
@@ -60,36 +62,61 @@ namespace Ex03.GarageLogic
         /// </summary>
         /// <param name="i_LicenseNumber"></param>
         /// <returns></returns>
-        internal Dictionary<string,string> DisplayVehicleInformation(string i_LicenseNumber)
+        internal Dictionary<string, string> DisplayVehicleInformation(string i_LicenseNumber)
         {
             return null;
         }
 
+        // Display vehicle information
+        // (License number, v
+        // Model name, v
+        // Owner name, v
+        // Status in garage, v
+        /// Tire specifications (manufacturer and air pressure), v 
+        /// Fuel status + Fuel type / Battery status,
+        /// other relevant information based on vehicle type)
         public Dictionary<string, string> GetVehicleDetails(string i_InputLicenseNumber)
-      
         {
+            Dictionary<string, string> resultedDictionary = new Dictionary<string, string>();
             Vehicle chosenVehicle = this.m_VehicleInventory[i_InputLicenseNumber];
-            string modelName = chosenVehicle.ModelName,
-                   ownerName = this.m_OwnerDetailsTickets[i_InputLicenseNumber].Name,
-                   currentStatus = this.m_OwnerDetailsTickets[i_InputLicenseNumber].CurrentStatus.ToString(),
-                   tiresDetails = chosenVehicle.GetWheelsDetails();
+            resultedDictionary.Add("License number", i_InputLicenseNumber);
+            resultedDictionary.Add("Model Name", chosenVehicle.ModelName);
+            resultedDictionary.Add("Owner Name", this.m_OwnerDetailsTickets[i_InputLicenseNumber].Name);
+            resultedDictionary.Add(
+                "currentStatus",
+                this.m_OwnerDetailsTickets[i_InputLicenseNumber].CurrentStatus.ToString());
 
-            string currentDetails = $@"License Number: {i_InputLicenseNumber}
-Model Name: {chosenVehicle.ModelName}
-Owner's name: {ownerName}
-Status in garage: {currentStatus}
-Tire specifications: {tiresDetails}";
+            Dictionary<string, float> wheelsDetails = chosenVehicle.GetWheelsDetails();
+
+            foreach(KeyValuePair<string, float> pair in wheelsDetails)
+            {
+                string value = pair.Value.ToString();
+                resultedDictionary.Add(pair.Key, value);
+            }
+
+            string typeOfEnergy = chosenVehicle.Engine.Type.ToString();
+            resultedDictionary.Add("Type", typeOfEnergy);
+            resultedDictionary.Add($"Status {typeOfEnergy}");
+
+
+            return resultedDictionary;
         }
-    
+
+        public void isElectricVehicle(string i_LicenseNumber)
+        {
+            Vehicle specificVehicle = m_VehicleInventory[i_LicenseNumber];
+        
+           // if(specificVehicle.Engine.Type==
+        }
         public bool isLicenseNumberInGarage(string i_LicenseNumber)
         {
-          return m_OwnerDetailsTickets.ContainsKey(i_LicenseNumber);
+            return m_OwnerDetailsTickets.ContainsKey(i_LicenseNumber);
         }
 
         public void inflateTiresInCarToMax(string i_LicenseNumber)
         {
             Vehicle specificVehicle = m_VehicleInventory[i_LicenseNumber];
-            foreach(Wheel wheel in specificVehicle.Wheels)
+            foreach (Wheel wheel in specificVehicle.Wheels)
             {
                 wheel.InflateToMaximum();
             }
@@ -100,12 +127,6 @@ Tire specifications: {tiresDetails}";
             OwnerDetails specificVehicleOwner = m_OwnerDetailsTickets[i_LicenseNumber];
             eStatus currentStatus = specificVehicleOwner.CarStatus;
             return currentStatus;
-        }
-
-        public void isElectricVehicle(string i_LicenseNumber)
-        {
-            Vehicle specificVehicle = m_VehicleInventory[i_LicenseNumber];
-            specificVehicle.Engine.
         }
     }
 }
