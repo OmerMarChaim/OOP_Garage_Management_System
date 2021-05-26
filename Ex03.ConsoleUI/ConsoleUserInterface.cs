@@ -8,5 +8,9 @@ namespace Ex03.ConsoleUI
 {
     class ConsoleUserInterface
     {
+        public static string getValidLicenseNumber()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

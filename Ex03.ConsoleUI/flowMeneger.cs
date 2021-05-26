@@ -110,7 +110,7 @@ namespace Ex03.ConsoleUI
         /// </summary>
         private void ChangeVehiclesStatus()
         {
-            throw new NotImplementedException();
+        string licenseNumber =    ConsoleUserInterface.getValidLicenseNumber();
         }
         /// <summary>
         /// OMER
