@@ -69,6 +69,7 @@ namespace Ex03.ConsoleUI
             }
         }
         /// <summary>
+        /// OMRI
         /// Display vehicle information (License number, Model name, Owner name, Status in garage,
         /// Tire specifications (manufacturer and air pressure),
         /// Fuel status + Fuel type / Battery status, other relevant information based on vehicle type)
@@ -78,6 +79,7 @@ namespace Ex03.ConsoleUI
             throw new NotImplementedException();
         }
         /// <summary>
+        /// OMRI
         /// 6. Charge an electric-based vehicle
         /// (Prompting the user for the license number and number of minutes to charge)
         /// </summary>
@@ -86,6 +88,7 @@ namespace Ex03.ConsoleUI
             throw new NotImplementedException();
         }
         /// <summary>
+        /// OMRI THE ONE AND ONLY
         /// 5. Refuel a fuel-based vehicle
         /// (Prompting the user for the license number, fuel type and amount to fill)
         /// </summary>
@@ -94,6 +97,7 @@ namespace Ex03.ConsoleUI
             throw new NotImplementedException();
         }
         /// <summary>
+        /// OMER
         /// 4. Inflate tires to maximum (Prompting the user for the license number)
         /// </summary>
         private void InflateTires()
@@ -101,6 +105,7 @@ namespace Ex03.ConsoleUI
             throw new NotImplementedException();
         }
         /// <summary>
+        /// OMER
         /// 3. Change a certain vehicle’s status
         /// (Prompting the user for the license number and new desired status)
         /// </summary>
@@ -109,6 +114,7 @@ namespace Ex03.ConsoleUI
             throw new NotImplementedException();
         }
         /// <summary>
+        /// OMER
         /// 2. Display a list of license numbers
         /// currently in the garage, with a filtering option based on the status of each vehicle
         /// </summary>
