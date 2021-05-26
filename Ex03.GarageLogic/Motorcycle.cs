@@ -11,6 +11,11 @@ namespace Ex03.GarageLogic
         private int m_EngineVolume;
         private eLicenseType m_LicenseType;
 
+        public Motorcycle()
+        {
+            m_EngineVolume = 0;
+        }
+
         private enum eLicenseType
         {
             A,
@@ -19,6 +24,11 @@ namespace Ex03.GarageLogic
             Bb
         }
 
-
+        // ReSharper disable once InconsistentNaming
+        public override void GetExtraDetails(ref Dictionary<string, string> io_DictionaryRef)
+        {
+            io_DictionaryRef.Add("Engine Volume", m_EngineVolume.ToString());
+            io_DictionaryRef.Add("License Type", m_LicenseType.ToString());
+        }
     }
 }
