@@ -6,9 +6,15 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    class Truck : Vehicle
+    internal class Truck : Vehicle
     {
         private bool m_ContainsDangerousMaterials;
-        private float m_MaxCargoweight;
+        private float m_MaxCargoWeight;
+
+        public override void getExtraDetailsForSpecificKindOfVehicle(ref Dictionary<string, object> io_DictionaryRef)
+        {
+            io_DictionaryRef.Add("Contains dangerous materials", m_ContainsDangerousMaterials);
+            io_DictionaryRef.Add("Max cargo weight",m_MaxCargoWeight);
+        }
     }
 }

@@ -47,11 +47,7 @@ namespace Ex03.GarageLogic
         /// </summary>
         /// <param name="i_LicenseNumber"></param>
         /// <param name="i_DesiredStatus"></param>
-        internal void ChangeVehicleStatusInTheGarage(string i_LicenseNumber, eStatus i_DesiredStatus)
-        {
-            throw new NotImplementedException();
-        }
-       
+
         public void ChangeVehicleStatusInTheGarage(string i_LicenseNumber, eStatus i_DesiredStatus) 
         {
             OwnerDetails specificVehicleOwner = m_OwnerDetailsTickets[i_LicenseNumber];
@@ -79,29 +75,20 @@ namespace Ex03.GarageLogic
         /// Tire specifications (manufacturer and air pressure), v 
         /// Fuel status + Fuel type / Battery status,
         /// other relevant information based on vehicle type)
-        public Dictionary<string, string> GetVehicleDetails(string i_InputLicenseNumber)
+        public Dictionary<string, object> GetVehicleDetails(string i_InputLicenseNumber)
         {
-            Dictionary<string, string> resultedDictionary = new Dictionary<string, string>();
+            Dictionary<string, object> resultedDictionary = new Dictionary<string, object>();
             Vehicle chosenVehicle = this.m_VehicleInventory[i_InputLicenseNumber];
             resultedDictionary.Add("License number", i_InputLicenseNumber);
             resultedDictionary.Add("Model Name", chosenVehicle.ModelName);
             resultedDictionary.Add("Owner Name", this.m_OwnerDetailsTickets[i_InputLicenseNumber].Name);
             resultedDictionary.Add(
                 "currentStatus",
-                this.m_OwnerDetailsTickets[i_InputLicenseNumber].CurrentStatus.ToString());
+                $"{this.m_OwnerDetailsTickets[i_InputLicenseNumber].CurrentStatus}");
 
-            Dictionary<string, float> wheelsDetails = chosenVehicle.GetWheelsDetails();
-
-            foreach(KeyValuePair<string, float> pair in wheelsDetails)
-            {
-                string value = pair.Value.ToString();
-                resultedDictionary.Add(pair.Key, value);
-            }
-
-            string typeOfEnergy = chosenVehicle.Engine.Type.ToString();
-            resultedDictionary.Add("Type", typeOfEnergy);
-            resultedDictionary.Add($"Status {typeOfEnergy}");
-
+            chosenVehicle.GetWheelsDetails(ref resultedDictionary);
+            chosenVehicle.GetEngineDetails(ref resultedDictionary);
+            chosenVehicle.getExtraDetailsForSpecificKindOfVehicle(ref resultedDictionary);
 
             return resultedDictionary;
         }
@@ -131,6 +118,24 @@ namespace Ex03.GarageLogic
             OwnerDetails specificVehicleOwner = m_OwnerDetailsTickets[i_LicenseNumber];
             eStatus currentStatus = specificVehicleOwner.CarStatus;
             return currentStatus;
+        }
+
+        public void ReFuelFuelInSpesificVehicle(string i_LicenseNumber, int i_AmountFuelToFill,)
+        {
+            ///need to check is out of range, if so throw exception to the UI and it need to hendle it .
+
+            /// if o.k,
+
+            Vehicle specificVehicle = m_VehicleInventory[i_LicenseNumber];
+
+            if(specificVehicle.Engine.Type == EnergySource.eTypeOfEnegy.Fuel)
+            {
+                GarageLogic.Fuel fuelEngine = (specificVehicle.Engine) as Fuel;
+                fuelEngine.Type
+                fuelEngine.refuelingOperation();
+            }
+         
+
         }
     }
 }

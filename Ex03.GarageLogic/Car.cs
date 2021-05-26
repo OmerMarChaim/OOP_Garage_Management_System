@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    class Car : Vehicle
+    internal class Car : Vehicle
     {
+        private eCarColor m_Color;
+        private eNumberOfDoors m_NumberOfDoors;
         private enum eCarColor
         {
             Red,
@@ -16,16 +18,15 @@ namespace Ex03.GarageLogic
             Black
         }
 
-        private int m_I;
         private enum eNumberOfDoors
         {
         Two = 2,Three = 3,Four = 4,Five = 5
         }
-        
-        public override Dictionary<string, string> GetExtraDetails()
+
+        public override void GetExtraDetails(ref Dictionary<string, string> io_DictionaryRef)
         {
-            
-            throw new NotImplementedException();
+            io_DictionaryRef.Add("Color", m_Color.ToString());
+            io_DictionaryRef.Add("Number of doors", m_NumberOfDoors.ToString());
         }
     }
 }

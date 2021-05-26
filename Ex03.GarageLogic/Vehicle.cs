@@ -59,7 +59,7 @@ namespace Ex03.GarageLogic
 
         internal EnergySource Engine
         {
-            get { return EnergySource m_Engine; }
+            get { return m_Engine; }
         }
 
 
@@ -72,18 +72,22 @@ namespace Ex03.GarageLogic
                 wheel.InflateToMaximum();
             }
         }
-
-        public abstract string GetExtraDetails();
-
-        public Dictionary<string, string> GetWheelsDetails()
+        // ReSharper disable once InconsistentNaming
+        public abstract void  getExtraDetailsForSpecificKindOfVehicle(ref Dictionary<string, object> io_DictionaryRef);
+        // ReSharper disable once InconsistentNaming
+        public void GetWheelsDetails(ref Dictionary<string, object> io_DictionaryRef)
         {
-            Dictionary<string, float> details = new Dictionary<string, float>();
             foreach(Wheel wheel in Wheels)
             {
-                details.Add(wheel.ManufacturerName,wheel.CurrentAirPressure);
+                io_DictionaryRef.Add(wheel.ManufacturerName,wheel.CurrentAirPressure);
             }
-
-            return details;
+        }
+        // ReSharper disable once InconsistentNaming
+        public void GetEngineDetails(ref Dictionary<string, object> io_DictionaryRef)
+        {
+            string typeOfEnergy = this.Engine.Type.ToString();
+            io_DictionaryRef.Add("Type", this.Engine.Type);
+            io_DictionaryRef.Add($"{typeOfEnergy} Status", $"{this.Engine.RemainingEnergyPercentage}%");
         }
     }
 }

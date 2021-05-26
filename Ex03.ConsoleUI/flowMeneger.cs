@@ -83,8 +83,8 @@ namespace Ex03.ConsoleUI
         private void DisplayVehicleInformation()
         {
             Console.WriteLine("For displaying vehicle information, enter license number");
-            string inputLicenseNumber = ConsoleUserInterface.GetLicenseNumber();
-            string details = s_Garage.GetVehicleDetails(inputLicenseNumber);
+            string licenseNumber = ConsoleUserInterface.getValidLicenseNumberInGarage(s_Garage);
+            Dictionary<string, object> detailsDictionary = s_Garage.GetVehicleDetails(licenseNumber);
 
 
         }
@@ -98,6 +98,7 @@ namespace Ex03.ConsoleUI
             string licenseNumber = ConsoleUserInterface.getValidLicenseNumberInGarage(s_Garage);
             s_Garage.isElectricVehicle(licenseNumber);
         }
+
         /// <summary>
         /// OMRI THE ONE AND ONLY
         /// 5. Refuel a fuel-based vehicle
@@ -105,7 +106,24 @@ namespace Ex03.ConsoleUI
         /// </summary>
         private void RefuelFuel()
         {
+            bool isValidAmountOfFuel = false;
             string licenseNumber = ConsoleUserInterface.getValidLicenseNumberInGarage(s_Garage);
+            while(isValidAmountOfFuel==false)
+            {
+                ///TODO -DEBUG
+                try 
+                {
+                    int amountFuelToFill = ConsoleUserInterface.getValidAmount();
+                    s_Garage.ReFuelFuelInSpesificVehicle(licenseNumber, amountFuelToFill); }
+                catch(Exception e) 
+                { 
+                    Console.WriteLine(e);
+
+                continue;
+                }
+
+                isValidAmountOfFuel = true;
+            }
         }
         /// <summary>
         /// OMER

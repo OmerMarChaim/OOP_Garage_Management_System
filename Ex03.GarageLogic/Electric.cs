@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    class Electric : EnergySource
+   public class Electric : EnergySource
     {
         private float m_RemainingTimeOfEngineOperationInHours;
         private float m_MaxTimeOfEngineOperationInHours;

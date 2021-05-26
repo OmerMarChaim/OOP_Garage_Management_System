@@ -39,5 +39,15 @@ namespace Ex03.ConsoleUI
            return licenseNumber;
 
         }
+        /// <summary>
+        /// give me just valid int of amount of fuel between 0-whathever
+        /// the logic check if its out of range.
+        /// </summary>
+        /// <param name="i_LicenseNumber"></param>
+        /// <returns></returns>
+        public static int getValidAmount()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
