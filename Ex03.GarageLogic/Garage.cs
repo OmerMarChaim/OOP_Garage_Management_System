@@ -88,7 +88,7 @@ namespace Ex03.GarageLogic
 
             chosenVehicle.GetWheelsDetails(ref resultedDictionary);
             chosenVehicle.GetEngineDetails(ref resultedDictionary);
-            chosenVehicle.getExtraDetailsForSpecificKindOfVehicle(ref resultedDictionary);
+            chosenVehicle.GetExtraDetails(ref resultedDictionary);
 
             return resultedDictionary;
         }
@@ -118,6 +118,7 @@ namespace Ex03.GarageLogic
         {
             OwnerDetails specificVehicleOwner = m_OwnerDetailsTickets[i_LicenseNumber];
             eStatus currentStatus = specificVehicleOwner.CarStatus;
+
             return currentStatus;
         }
 
@@ -127,6 +128,8 @@ namespace Ex03.GarageLogic
             Fuel.eFuelType i_FuelTypeFromUser)
         {
             ///need to check if is out of range, if so throw exception to the UI and it need to hendle it .
+
+            ///need to check is out of range, if so throw exception to the UI and it need to hendle it .
 
             /// if o.k,
 

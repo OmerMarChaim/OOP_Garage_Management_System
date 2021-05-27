@@ -73,7 +73,7 @@ namespace Ex03.GarageLogic
             }
         }
         // ReSharper disable once InconsistentNaming
-        public abstract void  getExtraDetailsForSpecificKindOfVehicle(ref Dictionary<string, object> io_DictionaryRef);
+        public abstract void  GetExtraDetails(ref Dictionary<string, object> io_DictionaryRef);
         // ReSharper disable once InconsistentNaming
         public void GetWheelsDetails(ref Dictionary<string, object> io_DictionaryRef)
         {

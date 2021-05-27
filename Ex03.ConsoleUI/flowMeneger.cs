@@ -27,7 +27,7 @@ namespace Ex03.ConsoleUI
             string helloMessage = string.Format("Welcome to Our garage");
             Console.WriteLine(helloMessage);
 
-            string menuOption = @"which service do you need ? please write the number :
+            string menuOption = @"Which service do you need ? please write the number :
 1. “Insert” a new vehicle into the garage.
 2. Display a list of license numbers currently in the garage
 3. Change a certain vehicle’s status
@@ -94,7 +94,7 @@ namespace Ex03.ConsoleUI
         private void DisplayVehicleInformation()
         {
             Console.WriteLine("For displaying vehicle information, enter license number");
-            string inputLicenseNumber = ConsoleUserInterface.getValidLicenseNumberInGarage(s_Garage);
+            string inputLicenseNumber = ConsoleUserInterface.GetValidLicenseNumberInGarage(s_Garage);
             Dictionary<string, object> detailsToPrint = s_Garage.GetVehicleDetails(inputLicenseNumber);
             Console.WriteLine("The details of the requested vehicle:");
             foreach(KeyValuePair<string, object> pair in detailsToPrint)
@@ -102,7 +102,7 @@ namespace Ex03.ConsoleUI
                 Console.WriteLine($"{pair.Key} : {pair.Value}");
             }
         }
-            string licenseNumber = ConsoleUserInterface.getValidLicenseNumberInGarage(s_Garage);
+            string licenseNumber = ConsoleUserInterface.GetValidLicenseNumberInGarage(s_Garage);
             Dictionary<string, object> detailsDictionary = s_Garage.GetVehicleDetails(licenseNumber);
 
 
@@ -113,7 +113,7 @@ namespace Ex03.ConsoleUI
         /// </summary>
         private void ChargeElectricVehicle()
         {
-            string licenseNumber = ConsoleUserInterface.getValidLicenseNumberInGarage(s_Garage);
+            string licenseNumber = ConsoleUserInterface.GetValidLicenseNumberInGarage(s_Garage);
             s_Garage.isElectricVehicle(licenseNumber);
         }
 
@@ -125,13 +125,13 @@ namespace Ex03.ConsoleUI
         private void RefuelFuel()
         {
             bool isValidAmountOfFuel = false;
-            string licenseNumber = ConsoleUserInterface.getValidLicenseNumberInGarage(s_Garage);
+            string licenseNumber = ConsoleUserInterface.GetValidLicenseNumberInGarage(s_Garage);
             while(isValidAmountOfFuel==false)
             {
                 ///TODO -DEBUG
                 try
                 {
-                    int amountFuelToFill = ConsoleUserInterface.getValidAmount();
+                    int amountFuelToFill = ConsoleUserInterface.GetValidAmount();
                     Fuel.eFuelType desaierFuelType = ConsoleUserInterface.getValideFuelType();
                     s_Garage.isDesaireFuelTypeIsFeetToSpecificCar(
                         licenseNumber,
@@ -161,7 +161,7 @@ namespace Ex03.ConsoleUI
         /// </summary>
         private void InflateTires()
         {
-            string licenseNumber = ConsoleUserInterface.getValidLicenseNumberInGarage(s_Garage);
+            string licenseNumber = ConsoleUserInterface.GetValidLicenseNumberInGarage(s_Garage);
             s_Garage.inflateTiresInCarToMax(licenseNumber);
         }
 
@@ -172,7 +172,7 @@ namespace Ex03.ConsoleUI
         /// </summary>
         private void ChangeVehiclesStatus()
         {
-            string licenseNumber = ConsoleUserInterface.getValidLicenseNumberInGarage(s_Garage);
+            string licenseNumber = ConsoleUserInterface.GetValidLicenseNumberInGarage(s_Garage);
 
             ///todo -
             /// get the current car status
@@ -184,7 +184,7 @@ namespace Ex03.ConsoleUI
 3. Payed";
             Console.WriteLine(MenuOption);
             string userInputInString = Console.ReadLine();
-            int userInputNumber = ConsoleUserInterface.getValidLicenseNumberBetween1To3(userInputInString, MenuOption);
+            int userInputNumber = ConsoleUserInterface.GetValidLicenseNumberBetween1To3(userInputInString, MenuOption);
             OwnerDetails.eStatus desireStatus;
             switch(userInputNumber)
             {
@@ -213,7 +213,7 @@ namespace Ex03.ConsoleUI
         private void displayListOfLicense()
         {
             List<string> listOfLicenseNumbersInTheGarage = s_Garage.ListOfLicenseNumbersInTheGarage();
-            string listOfLicenseNumberString = ConsoleUserInterface.listToString(listOfLicenseNumbersInTheGarage);
+            string listOfLicenseNumberString = ConsoleUserInterface.ListToString(listOfLicenseNumbersInTheGarage);
             string displayMessage = string.Format("this is the list of the License Numbers in The Garage");
             Console.WriteLine(
                 $@"{displayMessage}

@@ -11,7 +11,7 @@ namespace Ex03.GarageLogic
         private bool m_ContainsDangerousMaterials;
         private float m_MaxCargoWeight;
 
-        public override void getExtraDetailsForSpecificKindOfVehicle(ref Dictionary<string, object> io_DictionaryRef)
+        public override void GetExtraDetails(ref Dictionary<string, object> io_DictionaryRef)
         {
             io_DictionaryRef.Add("Contains dangerous materials", m_ContainsDangerousMaterials);
             io_DictionaryRef.Add("Max cargo weight",m_MaxCargoWeight);

@@ -24,8 +24,7 @@ namespace Ex03.GarageLogic
             Bb
         }
 
-        // ReSharper disable once InconsistentNaming
-        public override void GetExtraDetails(ref Dictionary<string, string> io_DictionaryRef)
+        public override void GetExtraDetails(ref Dictionary<string, object> io_DictionaryRef)
         {
             io_DictionaryRef.Add("Engine Volume", m_EngineVolume.ToString());
             io_DictionaryRef.Add("License Type", m_LicenseType.ToString());

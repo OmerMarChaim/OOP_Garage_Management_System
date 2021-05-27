@@ -5,17 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using Ex03.GarageLogic;
 
-
 namespace Ex03.ConsoleUI
 {
     class ConsoleUserInterface
     {
-        public static string getValidLicenseNumber()
+        public static string GetValidLicenseNumber()
         {
             throw new NotImplementedException();
         }
 
-        public static string listToString(List<string> i_ListOfLicenseNumbersInTheGarage)
+        public static string ListToString(List<string> i_ListOfLicenseNumbersInTheGarage)
         {
             throw new NotImplementedException();
         }
@@ -24,37 +23,38 @@ namespace Ex03.ConsoleUI
         /// chack if the input is between 1-3
         /// </summary>
         /// <param name="i_UserInputInString"></param>
-        public static int getValidLicenseNumberBetween1To3(string i_UserInputInString, string i_MenuOption)
+        public static int GetValidLicenseNumberBetween1To3(string i_UserInputInString, string i_MenuOption)
         {
             return getValidInputInSpecifIcRange(i_UserInputInString, 1, 3, i_MenuOption);
         }
 
-        public static string getValidLicenseNumberInGarage(Garage i_Garage)
+        public static string GetValidLicenseNumberInGarage(Garage i_Garage)
         {
-           string licenseNumber= getValidLicenseNumber();
-           while (i_Garage.isLicenseNumberInGarage(licenseNumber) == false)
-           {
-               Console.WriteLine($@"the car with license number  {licenseNumber} is not in the garage , please enter a new one:"));
-               licenseNumber = ConsoleUserInterface.getValidLicenseNumber();
-           }
+            string licenseNumber = GetValidLicenseNumber();
+            while(i_Garage.isLicenseNumberInGarage(licenseNumber) == false)
+            {
+                Console.WriteLine(
+                    $@"the car with license number  {licenseNumber} is not in the garage , please enter a new one:");
+                licenseNumber = ConsoleUserInterface.GetValidLicenseNumber();
+            }
 
-           return licenseNumber;
-
+            return licenseNumber;
         }
+
         /// <summary>
         /// give me just valid int of amount of fuel between 0-whathever
         /// the logic check if its out of range.
         /// </summary>
         /// <param name="i_LicenseNumber"></param>
         /// <returns></returns>
-        public static int getValidAmount()
+        public static int GetValidAmount()
         {
             throw new NotImplementedException();
         }
 
         public static int getValidInputBetween1To7(string i_UserInPut, string i_MenuOption)
         {
-          return getValidInputInSpecifIcRange(i_UserInPut,1,7, i_MenuOption)
+            return getValidInputInSpecifIcRange(i_UserInPut, 1, 7, i_MenuOption)
         }
 
         public static flowMeneger.eMenuOpiton fromIntToeMenuOpiton(int i_IntUserInput)
@@ -76,6 +76,7 @@ please enter by the number
             string userInputInString = Console.ReadLine();
             int userInputInt = getValidInputBetween1To4(userInputInString, MenuOption);
             Fuel.eFuelType resFuelType = fromIntToeFuelType(userInputInt);
+
             return resFuelType;
         }
 
@@ -86,41 +87,42 @@ please enter by the number
 
         private static int getValidInputBetween1To4(string i_UserInput, string i_MenuOption)
         {
-         return   getValidInputInSpecifIcRange(i_UserInput,1,4, i_MenuOption);
+            return getValidInputInSpecifIcRange(i_UserInput, 1, 4, i_MenuOption);
         }
 
-        private static int getValidInputInSpecifIcRange(string i_UserInput,int i_minNum ,int i_maxNum , string i_messageToShowIfNotGood)
+        private static int getValidInputInSpecifIcRange(
+            string i_UserInput,
+            int i_MinNum,
+            int i_MaxNum,
+            string i_MessageToShow)
         {
             bool isNumber = false;
             bool isInRange = false;
             int userInputInt = -1;
-            while (isNumber == false && isInRange == false)
+            while(isNumber == false && isInRange == false)
             {
-                isNumber = int.TryParse(i_UserInput, out  userInputInt);
+                isNumber = int.TryParse(i_UserInput, out userInputInt);
                 if(isNumber == true)
                 {
-                    if(userInputInt >= i_minNum && userInputInt <= i_maxNum)
+                    if(userInputInt >= i_MinNum && userInputInt <= i_MaxNum)
                     {
                         isNumber = true;
+
                         break;
                     }
 
                     Console.WriteLine($@"the number {userInputInt} is not in range .");
-
-
                 }
                 else
                 {
                     Console.WriteLine($@"You didnt enter a number, please enter one");
-
                 }
-                ///the original text that we asked from user
-                Console.WriteLine(i_messageToShowIfNotGood);
 
+                ///the original text that we asked from user
+                Console.WriteLine(i_MessageToShow);
             }
 
             return userInputInt;
-
         }
     }
 }
