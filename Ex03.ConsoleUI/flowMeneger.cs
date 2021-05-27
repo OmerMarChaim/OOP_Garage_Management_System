@@ -10,7 +10,8 @@ namespace Ex03.ConsoleUI
     class flowMeneger
     {
         private static Garage s_Garage;
-        public enum eMenuOpiton 
+
+        public enum eMenuOpiton
         {
             newVehicle,
             listOfLicense,
@@ -19,17 +20,14 @@ namespace Ex03.ConsoleUI
             RefuelFuel,
             ChargeElectricVehicle,
             DisplayVehicleInformation
-
         }
 
         void startMenu()
         {
-   
-
             string helloMessage = string.Format("Welcome to Our garage");
             Console.WriteLine(helloMessage);
-            
-            string MenuOption = @"which service do you need ? please write the number :
+
+            string menuOption = @"which service do you need ? please write the number :
 1. “Insert” a new vehicle into the garage.
 2. Display a list of license numbers currently in the garage
 3. Change a certain vehicle’s status
@@ -38,12 +36,12 @@ namespace Ex03.ConsoleUI
 6. Charge an electric-based vehicle
 7. Display specific vehicle information
 ";
-            Console.WriteLine(MenuOption);
+            Console.WriteLine(menuOption);
             string userInPut = Console.ReadLine();
+            int intUserInput = ConsoleUserInterface.getValidInputBetween1To7(userInPut, menuOption);
+            eMenuOpiton numberOfUserChoose = ConsoleUserInterface.fromIntToeMenuOpiton(intUserInput);
 
-          eMenuOpiton numberOfUserChoose=  isValidInput(userInPut);
-
-          doUserChoice(numberOfUserChoose);
+            doUserChoice(numberOfUserChoose);
         }
 
         private void doUserChoice(eMenuOpiton i_NumberOfUserChoose)
@@ -53,27 +51,40 @@ namespace Ex03.ConsoleUI
             {
                 case eMenuOpiton.newVehicle:
                     InsertNewVehicle();
+
                     break;
                 case eMenuOpiton.listOfLicense:
                     despleyListOfLicense();
+
                     break;
                 case eMenuOpiton.ChangeVehiclesStatus:
                     ChangeVehiclesStatus();
+
                     break;
                 case eMenuOpiton.InflateTires:
                     InflateTires();
+
                     break;
                 case eMenuOpiton.RefuelFuel:
                     RefuelFuel();
+
                     break;
                 case eMenuOpiton.ChargeElectricVehicle:
                     ChargeElectricVehicle();
+
                     break;
                 case eMenuOpiton.DisplayVehicleInformation:
                     DisplayVehicleInformation();
+
                     break;
             }
         }
+
+        private void despleyListOfLicense()
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// OMRI
         /// Display vehicle information (License number, Model name, Owner name, Status in garage,
@@ -83,11 +94,18 @@ namespace Ex03.ConsoleUI
         private void DisplayVehicleInformation()
         {
             Console.WriteLine("For displaying vehicle information, enter license number");
+            string inputLicenseNumber = ConsoleUserInterface.getValidLicenseNumberInGarage(s_Garage);
+            Dictionary<string, object> detailsToPrint = s_Garage.GetVehicleDetails(inputLicenseNumber);
+            Console.WriteLine("The details of the requested vehicle:");
+            foreach(KeyValuePair<string, object> pair in detailsToPrint)
+            {
+                Console.WriteLine($"{pair.Key} : {pair.Value}");
+            }
+        }
             string licenseNumber = ConsoleUserInterface.getValidLicenseNumberInGarage(s_Garage);
             Dictionary<string, object> detailsDictionary = s_Garage.GetVehicleDetails(licenseNumber);
 
 
-        }
         /// <summary>
         /// OMRI
         /// 6. Charge an electric-based vehicle
@@ -114,7 +132,8 @@ namespace Ex03.ConsoleUI
                 try 
                 {
                     int amountFuelToFill = ConsoleUserInterface.getValidAmount();
-                    s_Garage.ReFuelFuelInSpesificVehicle(licenseNumber, amountFuelToFill); }
+                    Fuel.eFuelType desaierFuelType = ConsoleUserInterface.getValideFuelType();
+                    s_Garage.ReFuelFuelInSpecificVehicle(licenseNumber, amountFuelToFill); }
                 catch(Exception e) 
                 { 
                     Console.WriteLine(e);
@@ -125,6 +144,7 @@ namespace Ex03.ConsoleUI
                 isValidAmountOfFuel = true;
             }
         }
+
         /// <summary>
         /// OMER
         /// 4. Inflate tires to maximum (Prompting the user for the license number)
@@ -133,7 +153,6 @@ namespace Ex03.ConsoleUI
         {
             string licenseNumber = ConsoleUserInterface.getValidLicenseNumberInGarage(s_Garage);
             s_Garage.inflateTiresInCarToMax(licenseNumber);
-
         }
 
         /// <summary>
@@ -143,34 +162,37 @@ namespace Ex03.ConsoleUI
         /// </summary>
         private void ChangeVehiclesStatus()
         {
-            
             string licenseNumber = ConsoleUserInterface.getValidLicenseNumberInGarage(s_Garage);
-           
+
             ///todo -
             /// get the current car status
             OwnerDetails.eStatus currentStatus = s_Garage.getCurrentCarStatus(licenseNumber);
-            Console.WriteLine($@"***Your current status is {currentStatus}***" );
-
-            Console.WriteLine($@"To which status you want to change the car :
+            Console.WriteLine($@"***Your current status is {currentStatus}***");
+            string MenuOption = $@"To which status you want to change the car :
 1. In Repair,
 2. Repaired,
-3. Payed");
-            int userInputNumber =ConsoleUserInterface.getValidLicenseNumberBetween1To3();
+3. Payed";
+            Console.WriteLine(MenuOption);
+            string userInputInString = Console.ReadLine();
+            int userInputNumber = ConsoleUserInterface.getValidLicenseNumberBetween1To3(userInputInString, MenuOption);
             OwnerDetails.eStatus desireStatus;
             switch(userInputNumber)
             {
                 case 1:
                     desireStatus = InRepair;
+
                     break;
                 case 2:
                     desireStatus = Repaired;
+
                     break;
-               default:
+                default:
                     desireStatus = Payed;
+
                     break;
             }
-            
-            s_Garage.ChangeVehicleStatusInTheGarage(licenseNumber,desireStatus);
+
+            s_Garage.ChangeVehicleStatusInTheGarage(licenseNumber, desireStatus);
         }
 
         /// <summary>
@@ -180,7 +202,6 @@ namespace Ex03.ConsoleUI
         /// </summary>
         private void displayListOfLicense()
         {
-
             List<string> listOfLicenseNumbersInTheGarage = s_Garage.ListOfLicenseNumbersInTheGarage();
             string listOfLicenseNumberString = ConsoleUserInterface.listToString(listOfLicenseNumbersInTheGarage);
             string displayMessage = string.Format("this is the list of the License Numbers in The Garage");
@@ -205,14 +226,10 @@ namespace Ex03.ConsoleUI
         }
 
         /// <summary>
-        /// CHECK IF WE GET ONE OF the numbers as needed
+        /// CHECK IF WE number between 1-7
         /// return int
         /// </summary>
         /// <param name="i_UserInPut"></param>
-        private eMenuOpiton isValidInput(string i_UserInPut)
-        {
-            throw new NotImplementedException();
-
-        }
+        
     }
 }

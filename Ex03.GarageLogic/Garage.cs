@@ -120,10 +120,10 @@ namespace Ex03.GarageLogic
             return currentStatus;
         }
 
-        public void ReFuelFuelInSpesificVehicle(string i_LicenseNumber, int i_AmountFuelToFill,)
+        public void ReFuelFuelInSpecificVehicle(string i_LicenseNumber, int i_AmountFuelToFill,Fuel.eFuelType i_FuelTypeFromUser)
         {
             ///need to check is out of range, if so throw exception to the UI and it need to hendle it .
-
+            
             /// if o.k,
 
             Vehicle specificVehicle = m_VehicleInventory[i_LicenseNumber];
@@ -131,10 +131,25 @@ namespace Ex03.GarageLogic
             if(specificVehicle.Engine.Type == EnergySource.eTypeOfEnegy.Fuel)
             {
                 GarageLogic.Fuel fuelEngine = (specificVehicle.Engine) as Fuel;
-                fuelEngine.Type
-                fuelEngine.refuelingOperation();
+                if(fuelEngine.FuelType != i_FuelTypeFromUser)
+                {
+                    ///todo
+                    /// throw exception of NOT THE SAME TYPE OF FUEL
+                }
+                else
+                {
+                    fuelEngine.refuelingOperation(i_AmountFuelToFill,i_FuelTypeFromUser);
+
+                }
+
             }
-         
+            else
+            {
+                ///todo
+                /// throw exception of THIS CAR ISNOT FUEL BASED 
+
+            }
+
 
         }
     }

@@ -8,12 +8,19 @@ namespace Ex03.GarageLogic
 {
     public class Fuel :EnergySource
     {
+        private eFuelType m_FuelType;
        public enum eFuelType
         {
             Soler,
             Octane95,
             Octane96,
             Octane98
+        }
+
+      
+       public eFuelType FuelType
+       {
+           get { return m_FuelType; }
         }
 
        private float m_CurrentAmountOfFuelInLiters;
