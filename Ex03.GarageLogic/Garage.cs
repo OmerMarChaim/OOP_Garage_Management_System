@@ -30,7 +30,7 @@ namespace Ex03.GarageLogic
         {
 
         }
-        
+
         /// <summary>
         /// Display a list of license numbers currently in the garage,
         /// with a filtering option based on the status of each vehicle
@@ -48,7 +48,7 @@ namespace Ex03.GarageLogic
         /// <param name="i_LicenseNumber"></param>
         /// <param name="i_DesiredStatus"></param>
 
-        public void ChangeVehicleStatusInTheGarage(string i_LicenseNumber, eStatus i_DesiredStatus) 
+        public void ChangeVehicleStatusInTheGarage(string i_LicenseNumber, eStatus i_DesiredStatus)
         {
             OwnerDetails specificVehicleOwner = m_OwnerDetailsTickets[i_LicenseNumber];
             specificVehicleOwner.CarStatus = i_DesiredStatus;
@@ -96,9 +96,10 @@ namespace Ex03.GarageLogic
         public void isElectricVehicle(string i_LicenseNumber)
         {
             Vehicle specificVehicle = m_VehicleInventory[i_LicenseNumber];
-        
-           // if(specificVehicle.Engine.Type==
+
+            // if(specificVehicle.Engine.Type==
         }
+
         public bool isLicenseNumberInGarage(string i_LicenseNumber)
         {
             return m_OwnerDetailsTickets.ContainsKey(i_LicenseNumber);
@@ -107,7 +108,7 @@ namespace Ex03.GarageLogic
         public void inflateTiresInCarToMax(string i_LicenseNumber)
         {
             Vehicle specificVehicle = m_VehicleInventory[i_LicenseNumber];
-            foreach (Wheel wheel in specificVehicle.Wheels)
+            foreach(Wheel wheel in specificVehicle.Wheels)
             {
                 wheel.InflateToMaximum();
             }
@@ -120,37 +121,44 @@ namespace Ex03.GarageLogic
             return currentStatus;
         }
 
-        public void ReFuelFuelInSpecificVehicle(string i_LicenseNumber, int i_AmountFuelToFill,Fuel.eFuelType i_FuelTypeFromUser)
+        public void ReFuelFuelInSpecificVehicle(
+            string i_LicenseNumber,
+            int i_AmountFuelToFill,
+            Fuel.eFuelType i_FuelTypeFromUser)
         {
-            ///need to check is out of range, if so throw exception to the UI and it need to hendle it .
-            
+            ///need to check if is out of range, if so throw exception to the UI and it need to hendle it .
+
             /// if o.k,
 
             Vehicle specificVehicle = m_VehicleInventory[i_LicenseNumber];
 
+           
+                GarageLogic.Fuel fuelEngine = (specificVehicle.Engine) as Fuel;
+
+
+                fuelEngine.refuelingOperation(i_AmountFuelToFill, i_FuelTypeFromUser);
+        }
+
+       
+        public void isDesaireFuelTypeIsFeetToSpecificCar(string i_LicenseNumber, Fuel.eFuelType i_FuelTypeFromUser, out bool isFuel, out bool isSameFuelType)
+        {
+
+            isSameFuelType = false;
+            Vehicle specificVehicle = m_VehicleInventory[i_LicenseNumber];
             if(specificVehicle.Engine.Type == EnergySource.eTypeOfEnegy.Fuel)
             {
                 GarageLogic.Fuel fuelEngine = (specificVehicle.Engine) as Fuel;
-                if(fuelEngine.FuelType != i_FuelTypeFromUser)
-                {
-                    ///todo
-                    /// throw exception of NOT THE SAME TYPE OF FUEL
-                }
-                else
-                {
-                    fuelEngine.refuelingOperation(i_AmountFuelToFill,i_FuelTypeFromUser);
-
-                }
-
+                isSameFuelType = fuelEngine.FuelType == i_FuelTypeFromUser;
+                isFuel = true;
             }
             else
             {
-                ///todo
-                /// throw exception of THIS CAR ISNOT FUEL BASED 
-
+                isSameFuelType = false;
+                isFuel = false;
             }
 
 
         }
+
     }
 }

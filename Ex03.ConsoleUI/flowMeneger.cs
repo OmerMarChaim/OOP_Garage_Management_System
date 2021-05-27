@@ -129,16 +129,26 @@ namespace Ex03.ConsoleUI
             while(isValidAmountOfFuel==false)
             {
                 ///TODO -DEBUG
-                try 
+                try
                 {
                     int amountFuelToFill = ConsoleUserInterface.getValidAmount();
                     Fuel.eFuelType desaierFuelType = ConsoleUserInterface.getValideFuelType();
-                    s_Garage.ReFuelFuelInSpecificVehicle(licenseNumber, amountFuelToFill); }
-                catch(Exception e) 
-                { 
+                    s_Garage.isDesaireFuelTypeIsFeetToSpecificCar(
+                        licenseNumber,
+                        desaierFuelType,
+                        out bool isFuel,
+                        out bool isSameFuelType);
+                    if(isFuel == true && isSameFuelType == true)
+                    {
+                        s_Garage.ReFuelFuelInSpecificVehicle(licenseNumber, amountFuelToFill, desaierFuelType);
+
+                    }
+                }
+                catch(Exception e)
+                {
                     Console.WriteLine(e);
 
-                continue;
+                    continue;
                 }
 
                 isValidAmountOfFuel = true;
@@ -225,11 +235,6 @@ namespace Ex03.ConsoleUI
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// CHECK IF WE number between 1-7
-        /// return int
-        /// </summary>
-        /// <param name="i_UserInPut"></param>
         
     }
 }
