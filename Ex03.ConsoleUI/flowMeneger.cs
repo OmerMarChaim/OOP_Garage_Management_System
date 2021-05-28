@@ -125,30 +125,35 @@ namespace Ex03.ConsoleUI
         private void RefuelFuel()
         {
             bool isValidAmountOfFuel = false;
+            bool isFuel=false;
+            bool isSameFuelType=false;
             string licenseNumber = ConsoleUserInterface.GetValidLicenseNumberInGarage(s_Garage);
             while(isValidAmountOfFuel==false)
-            {
+            { 
                 ///TODO -DEBUG
                 try
                 {
                     int amountFuelToFill = ConsoleUserInterface.GetValidAmount();
                     Fuel.eFuelType desaierFuelType = ConsoleUserInterface.getValideFuelType();
-                    s_Garage.isDesaireFuelTypeIsFeetToSpecificCar(
-                        licenseNumber,
-                        desaierFuelType,
-                        out bool isFuel,
-                        out bool isSameFuelType);
+                    s_Garage.isDesaireFuelTypeIsFeetToSpecificCar(licenseNumber, desaierFuelType, out  isFuel, out  isSameFuelType);
                     if(isFuel == true && isSameFuelType == true)
                     {
                         s_Garage.ReFuelFuelInSpecificVehicle(licenseNumber, amountFuelToFill, desaierFuelType);
 
                     }
+                   
                 }
-                catch(Exception e)
+                catch(ArgumentException e)
                 {
-                    Console.WriteLine(e);
+                    if(isFuel == false)
+                    {
 
-                    continue;
+                    }
+                    else if (isSameFuelType)
+                    {
+                        /// throw no fit to fuel type.
+                    }
+continue;
                 }
 
                 isValidAmountOfFuel = true;
@@ -232,7 +237,31 @@ namespace Ex03.ConsoleUI
         /// </summary>
         private void InsertNewVehicle()
         {
-            throw new NotImplementedException();
+            VehicleFactory.eVehicleType VehicleTypeFromUser = ConsoleUserInterface.getValidVehicleType();
+            string licenseNumber = ConsoleUserInterface.getValidLicenseNumber();
+            if(s_Garage.isLicenseNumberInGarage(licenseNumber))
+            {
+                //change status and show some messege
+                VehicleFactory.eVehicleType VehicleTypeInGarage =  s_Garage.getVehicleType(licenseNumber); 
+                 if (VehicleTypeFromUser == VehicleTypeInGarage)
+                 {
+                     s_Garage.ChangeVehicleStatusInTheGarage(licenseNumber,OwnerDetails.eStatus.InRepair);
+                 }
+                 else
+                 {
+                     //todo
+                     ///enter a new Vehicle type its not feet 
+
+                 }
+
+            }
+            else
+            {
+                ///build new Vehicle
+                VehicleFactory.ManufactureNewVehicle(VehicleTypeFromUser,licenseNumber);
+            }
+
+
         }
 
         

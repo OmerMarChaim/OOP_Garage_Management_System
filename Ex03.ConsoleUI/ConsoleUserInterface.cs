@@ -9,6 +9,11 @@ namespace Ex03.ConsoleUI
 {
     class ConsoleUserInterface
     {
+        /// <summary>
+        /// just check format of License NUmber
+        /// </summary>
+        /// <returns></returns>
+        public static string getValidLicenseNumber()
         public static string GetValidLicenseNumber()
         {
             throw new NotImplementedException();
@@ -27,16 +32,20 @@ namespace Ex03.ConsoleUI
         {
             return getValidInputInSpecifIcRange(i_UserInputInString, 1, 3, i_MenuOption);
         }
-
+        /// <summary>
+        /// valid + in garage License NUMBER
+        ///
+        /// </summary>
+        /// <param name="i_Garage"></param>
+        /// <returns></returns>
         public static string GetValidLicenseNumberInGarage(Garage i_Garage)
         {
-            string licenseNumber = GetValidLicenseNumber();
-            while(i_Garage.isLicenseNumberInGarage(licenseNumber) == false)
-            {
-                Console.WriteLine(
-                    $@"the car with license number  {licenseNumber} is not in the garage , please enter a new one:");
-                licenseNumber = ConsoleUserInterface.GetValidLicenseNumber();
-            }
+           string licenseNumber= getValidLicenseNumber();
+           while (i_Garage.isLicenseNumberInGarage(licenseNumber) == false)
+           {
+               Console.WriteLine($@"the car with license number  {licenseNumber} is not in the garage , please enter a new one:");
+               licenseNumber = ConsoleUserInterface.getValidLicenseNumber();
+           }
 
             return licenseNumber;
         }
@@ -89,7 +98,7 @@ please enter by the number
         {
             return getValidInputInSpecifIcRange(i_UserInput, 1, 4, i_MenuOption);
         }
-
+//TODO isInRagne bool
         private static int getValidInputInSpecifIcRange(
             string i_UserInput,
             int i_MinNum,
@@ -123,6 +132,12 @@ please enter by the number
             }
 
             return userInputInt;
+
+        }
+        // out of a list we ask from factory
+        public static VehicleFactory.eVehicleType getValidVehicleType()
+        {
+            throw new NotImplementedException();
         }
     }
 }
