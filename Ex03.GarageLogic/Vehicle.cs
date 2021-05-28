@@ -7,18 +7,17 @@ namespace Ex03.GarageLogic
 {
     public abstract class Vehicle
     {
-        private String m_ModelName;
+        protected String m_ModelName;
         private String m_LicenseNumber;
         private readonly List<Wheel> r_Wheels;
         private EnergySource m_Engine;
         private readonly eNumberOfWheel r_NumberOfWheels;
 
-        protected Vehicle()
+        protected Vehicle(string i_LicenseNumber)
         {
-            m_ModelName = String.Empty;
-            m_LicenseNumber = String.Empty;
+             
+            m_LicenseNumber = i_LicenseNumber;
             r_Wheels = new List<Wheel>();
-            m_Engine = null;
         }
 
         internal void SetElectricEngine()
@@ -61,10 +60,6 @@ namespace Ex03.GarageLogic
         {
             get { return m_Engine; }
         }
-
-
-
-
         protected void InflateTiresToMaximum()
         {
             foreach(Wheel wheel in Wheels)

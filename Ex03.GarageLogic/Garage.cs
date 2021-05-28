@@ -170,5 +170,9 @@ namespace Ex03.GarageLogic
 
         }
 
+        public VehicleFactory.eVehicleType getVehicleType(string i_LicenseNumber)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

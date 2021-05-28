@@ -10,6 +10,10 @@ namespace Ex03.ConsoleUI
 {
     class ConsoleUserInterface
     {
+        /// <summary>
+        /// just check format of License NUmber
+        /// </summary>
+        /// <returns></returns>
         public static string getValidLicenseNumber()
         {
             throw new NotImplementedException();
@@ -28,13 +32,18 @@ namespace Ex03.ConsoleUI
         {
             return getValidInputInSpecifIcRange(i_UserInputInString, 1, 3, i_MenuOption);
         }
-
+        /// <summary>
+        /// valid + in garage License NUMBER
+        ///
+        /// </summary>
+        /// <param name="i_Garage"></param>
+        /// <returns></returns>
         public static string getValidLicenseNumberInGarage(Garage i_Garage)
         {
            string licenseNumber= getValidLicenseNumber();
            while (i_Garage.isLicenseNumberInGarage(licenseNumber) == false)
            {
-               Console.WriteLine($@"the car with license number  {licenseNumber} is not in the garage , please enter a new one:"));
+               Console.WriteLine($@"the car with license number  {licenseNumber} is not in the garage , please enter a new one:");
                licenseNumber = ConsoleUserInterface.getValidLicenseNumber();
            }
 
@@ -121,6 +130,11 @@ please enter by the number
 
             return userInputInt;
 
+        }
+        // out of a list we ask from factory
+        public static VehicleFactory.eVehicleType getValidVehicleType()
+        {
+            throw new NotImplementedException();
         }
     }
 }

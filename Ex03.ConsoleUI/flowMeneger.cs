@@ -190,7 +190,8 @@ continue;
             Console.WriteLine(MenuOption);
             string userInputInString = Console.ReadLine();
             int userInputNumber = ConsoleUserInterface.getValidLicenseNumberBetween1To3(userInputInString, MenuOption);
-            OwnerDetails.eStatus desireStatus;
+            
+            OwnerDetails.eStatus desireStatus= ConsoleUserInterface.fromIntTo;
             switch(userInputNumber)
             {
                 case 1:
@@ -237,7 +238,31 @@ continue;
         /// </summary>
         private void InsertNewVehicle()
         {
-            throw new NotImplementedException();
+            VehicleFactory.eVehicleType VehicleTypeFromUser = ConsoleUserInterface.getValidVehicleType();
+            string licenseNumber = ConsoleUserInterface.getValidLicenseNumber();
+            if(s_Garage.isLicenseNumberInGarage(licenseNumber))
+            {
+                //change status and show some messege
+                VehicleFactory.eVehicleType VehicleTypeInGarage =  s_Garage.getVehicleType(licenseNumber); 
+                 if (VehicleTypeFromUser == VehicleTypeInGarage)
+                 {
+                     s_Garage.ChangeVehicleStatusInTheGarage(licenseNumber,OwnerDetails.eStatus.InRepair);
+                 }
+                 else
+                 {
+                     //todo
+                     ///enter a new Vehicle type its not feet 
+
+                 }
+
+            }
+            else
+            {
+                ///build new Vehicle
+                VehicleFactory.ManufactureNewVehicle(VehicleTypeFromUser,licenseNumber);
+            }
+
+
         }
 
         

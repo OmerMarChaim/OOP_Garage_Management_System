@@ -6,15 +6,31 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    class VehicleFactory
+   public class VehicleFactory
     {
         public enum eVehicleType
         {
-            
+            Motorcycle,
+            Car,
+            Truck,
         }
 
-        internal void ManufactureNewVehicle()
+        public void ManufactureNewVehicle(eVehicleType i_VehicleTypeFromUser, string i_LicenseNumber)
         {
+            Vehicle newVehicle;
+
+            switch(i_VehicleTypeFromUser)
+            {
+                case eVehicleType.Car:
+                    newVehicle = new Car(i_LicenseNumber);
+                    break;
+                case eVehicleType.Motorcycle:
+                    newVehicle = new Motorcycle(i_LicenseNumber);
+                    break;
+                case eVehicleType.Truck:
+                    newVehicle = new Truck(i_LicenseNumber);
+                    break;
+            }
 
         }
     }
