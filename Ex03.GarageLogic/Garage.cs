@@ -150,18 +150,32 @@ namespace Ex03.GarageLogic
             Vehicle specificVehicle = m_VehicleInventory[i_LicenseNumber];
             if(specificVehicle.Engine.Type == EnergySource.eTypeOfEnegy.Fuel)
             {
-                GarageLogic.Fuel fuelEngine = (specificVehicle.Engine) as Fuel;
-                isSameFuelType = fuelEngine.FuelType == i_FuelTypeFromUser;
                 isFuel = true;
+                GarageLogic.Fuel fuelEngine = (specificVehicle.Engine) as Fuel;
+                if(isSameFuelType = fuelEngine.FuelType == i_FuelTypeFromUser)
+                {
+                    isSameFuelType = true;
+                }
+                else
+                {
+                    isSameFuelType = false;
+                    throw new ArgumentException(@"this Fuel Type is not fit");
+                }
+
             }
             else
             {
-                isSameFuelType = false;
+
                 isFuel = false;
+                throw new ArgumentException(@"this Vehicle is not Fuel Based");
             }
 
 
         }
 
+        public VehicleFactory.eVehicleType getVehicleType(string i_LicenseNumber)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
