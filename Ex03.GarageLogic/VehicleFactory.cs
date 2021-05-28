@@ -15,7 +15,7 @@ namespace Ex03.GarageLogic
             Truck,
         }
 
-        public void ManufactureNewVehicle(eVehicleType i_VehicleTypeFromUser, string i_LicenseNumber)
+        public static void ManufactureNewVehicle(eVehicleType i_VehicleTypeFromUser, string i_LicenseNumber)
         {
             Vehicle newVehicle;
 

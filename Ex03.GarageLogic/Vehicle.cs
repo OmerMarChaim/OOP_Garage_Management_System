@@ -68,7 +68,7 @@ namespace Ex03.GarageLogic
             }
         }
         // ReSharper disable once InconsistentNaming
-        public abstract void  GetExtraDetails(ref Dictionary<string, object> io_DictionaryRef);
+        public abstract void InsertExtraDetailsIntoDict(ref Dictionary<string, object> io_DictionaryRef);
         // ReSharper disable once InconsistentNaming
         public void GetWheelsDetails(ref Dictionary<string, object> io_DictionaryRef)
         {
@@ -84,5 +84,7 @@ namespace Ex03.GarageLogic
             io_DictionaryRef.Add("Type", this.Engine.Type);
             io_DictionaryRef.Add($"{typeOfEnergy} Status", $"{this.Engine.RemainingEnergyPercentage}%");
         }
+
+        public abstract List<string> GetExtraDetailsMembers();
     }
 }
