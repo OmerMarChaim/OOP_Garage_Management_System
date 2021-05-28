@@ -26,12 +26,7 @@ namespace Ex03.GarageLogic
        private float m_CurrentAmountOfFuelInLiters;
        private float m_MaxAmountOfFuelInLiters;
 
-       /// <summary>
-       /// A method that receives how much more fuel to add, and changes the amount of fuel,
-       /// if the fuel type is correct, and the fuel tank is less than full)
-       /// </summary>
-       /// <param name="i_HowMuchMoreFuelToAdd"></param>
-       /// <param name="i_FuelTypeEnter"></param>
+
       // public override void UpdateAmountOfEnergy(float i_HowMuchMoreFuelToAdd, eFuelType i_FuelTypeEnter)
      
 
@@ -41,9 +36,32 @@ namespace Ex03.GarageLogic
            get { return m_CurrentAmountOfFuelInLiters; }
 
        }
-
-       public void refuelingOperation(float i_HowMuchMoreFuelToAdd, eFuelType i_FuelTypeEnter)
+       /// <summary>
+       /// A method that receives how much more fuel to add, and changes the amount of fuel,
+       /// if the fuel type is correct, and the fuel tank is less than full)
+       /// </summary>
+       /// <param name="i_HowMuchMoreFuelToAdd"></param>
+       /// <param name="i_FuelTypeEnter"></param>
+        public void refuelingOperation(float i_HowMuchMoreFuelToAdd, eFuelType i_FuelTypeEnter)
        {
+           if(i_FuelTypeEnter != m_FuelType)
+           {
+               throw new ArgumentException($@"{i_FuelTypeEnter} not much to the Vehicle fuel Type");
+           }
+           else
+           {
+               float wantedAmount = i_HowMuchMoreFuelToAdd + m_CurrentAmountOfFuelInLiters;
+               if (wantedAmount > m_MaxAmountOfFuelInLiters)
+               {
+                   throw new ValueOutOfRangeException(0, (m_MaxAmountOfFuelInLiters - m_CurrentAmountOfFuelInLiters), $@"{wantedAmount} is to high,");
+               }
+               else
+               {
+                   m_CurrentAmountOfFuelInLiters = wantedAmount;
+               }
+           }
+          
+
 
        }
     }

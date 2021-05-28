@@ -54,7 +54,7 @@ namespace Ex03.ConsoleUI
 
                     break;
                 case eMenuOpiton.listOfLicense:
-                    despleyListOfLicense();
+                    displayListOfLicense();
 
                     break;
                 case eMenuOpiton.ChangeVehiclesStatus:
@@ -102,9 +102,9 @@ namespace Ex03.ConsoleUI
                 Console.WriteLine($"{pair.Key} : {pair.Value}");
             }
         }
+            string licenseNumber = ConsoleUserInterface.GetValidLicenseNumberInGarage(s_Garage);
+            Dictionary<string, object> detailsDictionary = s_Garage.GetVehicleDetails(licenseNumber);
 
-        string licenseNumber = ConsoleUserInterface.GetValidLicenseNumberInGarage(s_Garage);
-        Dictionary<string, object> detailsDictionary = s_Garage.GetVehicleDetails(licenseNumber);
 
         /// <summary>
         /// OMRI
@@ -112,9 +112,26 @@ namespace Ex03.ConsoleUI
         /// (Prompting the user for the license number and number of minutes to charge)
         /// </summary>
         private void ChargeElectricVehicle()
-        {
+        { 
+            bool isElectricBased;
             string licenseNumber = ConsoleUserInterface.GetValidLicenseNumberInGarage(s_Garage);
-            s_Garage.isElectricVehicle(licenseNumber);
+            try
+            {
+                 isElectricBased = s_Garage.isElectricVehicle(licenseNumber);
+                 if(isElectricBased==true)
+                 {
+                    int howManyMoreHoursToAdd = ConsoleUserInterface.GetValidAmount();
+                    s_Garage.ChargeElectricVehicleInGarage(licenseNumber, howManyMoreHoursToAdd);
+                 }
+            }
+            catch(ArgumentException e)
+            {
+                ///Todo
+                /// we need undersnt how to define each exception here
+                /// best by ErorMessege.
+                Console.WriteLine(e);
+                throw;
+            }   
         }
 
         /// <summary>
@@ -125,36 +142,42 @@ namespace Ex03.ConsoleUI
         private void RefuelFuel()
         {
             bool isValidAmountOfFuel = false;
-            bool isFuel = false;
-            bool isSameFuelType = false;
+            bool isFuel=false;
+            bool isSameFuelType=false;
             string licenseNumber = ConsoleUserInterface.GetValidLicenseNumberInGarage(s_Garage);
-            while(isValidAmountOfFuel == false)
-            {
+            while(isValidAmountOfFuel==false)
+            { 
                 ///TODO -DEBUG
                 try
                 {
-                    int amountFuelToFill = ConsoleUserInterface.GetValidAmount();
-                    Fuel.eFuelType desaierFuelType = ConsoleUserInterface.getValideFuelType();
-                    s_Garage.isDesaireFuelTypeIsFeetToSpecificCar(
-                        licenseNumber,
-                        desaierFuelType,
-                        out isFuel,
-                        out isSameFuelType);
-                    if(isFuel == true && isSameFuelType == true)
+                    isFuel = !s_Garage.isElectricVehicle(licenseNumber); 
+                    if(isFuel == true)
                     {
+                        int amountFuelToFill = ConsoleUserInterface.GetValidAmount();
+                        Fuel.eFuelType desaierFuelType = ConsoleUserInterface.getValideFuelType();
                         s_Garage.ReFuelFuelInSpecificVehicle(licenseNumber, amountFuelToFill, desaierFuelType);
                     }
+                    else
+                    {
+                        throw new ArgumentException("this Vehicle is not fuel based");
+                    }
+
                 }
                 catch(ArgumentException e)
                 {
-                    if(isFuel == false)
+                    ///Todo
+                    /// we need undersnt how to define each exception here
+                    /// best by ErorMessege.
+                    /*
+                   if(isFuel == false)
                     {
+
                     }
-                    else if(isSameFuelType)
+                    else if (isSameFuelType)
                     {
                         /// throw no fit to fuel type.
                     }
-
+                    */
                     continue;
                 }
 
@@ -244,32 +267,28 @@ namespace Ex03.ConsoleUI
             if(s_Garage.isLicenseNumberInGarage(licenseNumber))
             {
                 //change status and show some messege
-                VehicleFactory.eVehicleType VehicleTypeInGarage = s_Garage.getVehicleType(licenseNumber);
-                if(VehicleTypeFromUser == VehicleTypeInGarage)
-                {
-                    s_Garage.ChangeVehicleStatusInTheGarage(licenseNumber, OwnerDetails.eStatus.InRepair);
-                }
-                else
-                {
-                    //todo
-                    ///enter a new Vehicle type its not feet 
-                }
+                VehicleFactory.eVehicleType VehicleTypeInGarage =  s_Garage.getVehicleType(licenseNumber); 
+                 if (VehicleTypeFromUser == VehicleTypeInGarage)
+                 {
+                     s_Garage.ChangeVehicleStatusInTheGarage(licenseNumber,OwnerDetails.eStatus.InRepair);
+                 }
+                 else
+                 {
+                     //todo
+                     ///enter a new Vehicle type its not feet 
+
+                 }
+
             }
             else
             {
                 ///build new Vehicle
-                VehicleFactory.ManufactureNewVehicle(VehicleTypeFromUser, licenseNumber);
-                // ASK THE USER:
-                // 1. details of every vehicle
-                // 2. Extra details
-
-                string q1 = "color";
-                string q2 = "numberOfDoors";
-                //Tracktor:
-                Type typeOfTractor = Car.GetType());
+                VehicleFactory.ManufactureNewVehicle(VehicleTypeFromUser,licenseNumber);
             }
-        }
-    }
-}
 
+
+        }
+
+        
+    }
 }

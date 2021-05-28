@@ -34,17 +34,17 @@ namespace Ex03.GarageLogic
         /// <param name="i_AmountAirToAdd"></param>
         internal void AddAirPressure(float i_AmountAirToAdd)
         {
-            bool lessThenMaxAirAfterAdd = (m_MaxAirPressure - (i_AmountAirToAdd + m_CurrentAirPressure)) >= 0;
-            if(lessThenMaxAirAfterAdd)
+           // bool lessThenMaxAirAfterAdd = (m_MaxAirPressure - (i_AmountAirToAdd + m_CurrentAirPressure)) >= 0;
+            float wantedAmount = i_AmountAirToAdd + m_CurrentAirPressure;
+            
+            if(wantedAmount>m_MaxAirPressure)
             {
-                m_CurrentAirPressure += i_AmountAirToAdd;
+                float maxToAdd = m_MaxAirPressure - m_CurrentAirPressure;
+                throw new ValueOutOfRangeException(0, maxToAdd,$@"{i_AmountAirToAdd} is too high ");
             }
             else
             {
-                float maxToAdd = m_MaxAirPressure - m_CurrentAirPressure;
-                float minToAdd = m_MaxAirPressure;
-
-                throw new ValueOutOfRangeException(minToAdd, maxToAdd);
+                m_CurrentAirPressure = wantedAmount;
             }
         }
 

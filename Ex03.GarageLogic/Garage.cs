@@ -93,11 +93,13 @@ namespace Ex03.GarageLogic
             return resultedDictionary;
         }
 
-        public void isElectricVehicle(string i_LicenseNumber)
+        public bool isElectricVehicle(string i_LicenseNumber)
         {
             Vehicle specificVehicle = m_VehicleInventory[i_LicenseNumber];
 
-            // if(specificVehicle.Engine.Type==
+            bool isElectricBased = specificVehicle.Engine.Type == EnergySource.eTypeOfEnegy.Battary;
+
+            return isElectricBased;
         }
 
         public bool isLicenseNumberInGarage(string i_LicenseNumber)
@@ -122,24 +124,12 @@ namespace Ex03.GarageLogic
             return currentStatus;
         }
 
-        public void ReFuelFuelInSpecificVehicle(
-            string i_LicenseNumber,
-            int i_AmountFuelToFill,
-            Fuel.eFuelType i_FuelTypeFromUser)
+        public void ReFuelFuelInSpecificVehicle(string i_LicenseNumber, int i_AmountFuelToFill, Fuel.eFuelType i_FuelTypeFromUser)
         {
-            ///need to check if is out of range, if so throw exception to the UI and it need to hendle it .
-
-            ///need to check is out of range, if so throw exception to the UI and it need to hendle it .
-
-            /// if o.k,
 
             Vehicle specificVehicle = m_VehicleInventory[i_LicenseNumber];
-
-           
-                GarageLogic.Fuel fuelEngine = (specificVehicle.Engine) as Fuel;
-
-
-                fuelEngine.refuelingOperation(i_AmountFuelToFill, i_FuelTypeFromUser);
+            GarageLogic.Fuel fuelEngine = (specificVehicle.Engine) as Fuel;
+            fuelEngine.refuelingOperation(i_AmountFuelToFill, i_FuelTypeFromUser);
         }
 
        
@@ -176,6 +166,13 @@ namespace Ex03.GarageLogic
         public VehicleFactory.eVehicleType getVehicleType(string i_LicenseNumber)
         {
             throw new NotImplementedException();
+        }
+
+        public void ChargeElectricVehicleInGarage(string i_LicenseNumber, int i_HowManyMoreHoursToAdd)
+        {
+            Vehicle specificVehicle = m_VehicleInventory[i_LicenseNumber];
+            GarageLogic.Electric electricEngine = (specificVehicle.Engine) as Electric;
+            electricEngine.rechargeOperation(i_HowManyMoreHoursToAdd);
         }
     }
 }
