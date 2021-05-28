@@ -102,9 +102,9 @@ namespace Ex03.ConsoleUI
                 Console.WriteLine($"{pair.Key} : {pair.Value}");
             }
         }
-            string licenseNumber = ConsoleUserInterface.GetValidLicenseNumberInGarage(s_Garage);
-            Dictionary<string, object> detailsDictionary = s_Garage.GetVehicleDetails(licenseNumber);
 
+        string licenseNumber = ConsoleUserInterface.GetValidLicenseNumberInGarage(s_Garage);
+        Dictionary<string, object> detailsDictionary = s_Garage.GetVehicleDetails(licenseNumber);
 
         /// <summary>
         /// OMRI
@@ -125,35 +125,37 @@ namespace Ex03.ConsoleUI
         private void RefuelFuel()
         {
             bool isValidAmountOfFuel = false;
-            bool isFuel=false;
-            bool isSameFuelType=false;
+            bool isFuel = false;
+            bool isSameFuelType = false;
             string licenseNumber = ConsoleUserInterface.GetValidLicenseNumberInGarage(s_Garage);
-            while(isValidAmountOfFuel==false)
-            { 
+            while(isValidAmountOfFuel == false)
+            {
                 ///TODO -DEBUG
                 try
                 {
                     int amountFuelToFill = ConsoleUserInterface.GetValidAmount();
                     Fuel.eFuelType desaierFuelType = ConsoleUserInterface.getValideFuelType();
-                    s_Garage.isDesaireFuelTypeIsFeetToSpecificCar(licenseNumber, desaierFuelType, out  isFuel, out  isSameFuelType);
+                    s_Garage.isDesaireFuelTypeIsFeetToSpecificCar(
+                        licenseNumber,
+                        desaierFuelType,
+                        out isFuel,
+                        out isSameFuelType);
                     if(isFuel == true && isSameFuelType == true)
                     {
                         s_Garage.ReFuelFuelInSpecificVehicle(licenseNumber, amountFuelToFill, desaierFuelType);
-
                     }
-                   
                 }
                 catch(ArgumentException e)
                 {
                     if(isFuel == false)
                     {
-
                     }
-                    else if (isSameFuelType)
+                    else if(isSameFuelType)
                     {
                         /// throw no fit to fuel type.
                     }
-continue;
+
+                    continue;
                 }
 
                 isValidAmountOfFuel = true;
@@ -242,28 +244,32 @@ continue;
             if(s_Garage.isLicenseNumberInGarage(licenseNumber))
             {
                 //change status and show some messege
-                VehicleFactory.eVehicleType VehicleTypeInGarage =  s_Garage.getVehicleType(licenseNumber); 
-                 if (VehicleTypeFromUser == VehicleTypeInGarage)
-                 {
-                     s_Garage.ChangeVehicleStatusInTheGarage(licenseNumber,OwnerDetails.eStatus.InRepair);
-                 }
-                 else
-                 {
-                     //todo
-                     ///enter a new Vehicle type its not feet 
-
-                 }
-
+                VehicleFactory.eVehicleType VehicleTypeInGarage = s_Garage.getVehicleType(licenseNumber);
+                if(VehicleTypeFromUser == VehicleTypeInGarage)
+                {
+                    s_Garage.ChangeVehicleStatusInTheGarage(licenseNumber, OwnerDetails.eStatus.InRepair);
+                }
+                else
+                {
+                    //todo
+                    ///enter a new Vehicle type its not feet 
+                }
             }
             else
             {
                 ///build new Vehicle
-                VehicleFactory.ManufactureNewVehicle(VehicleTypeFromUser,licenseNumber);
+                VehicleFactory.ManufactureNewVehicle(VehicleTypeFromUser, licenseNumber);
+                // ASK THE USER:
+                // 1. details of every vehicle
+                // 2. Extra details
+
+                string q1 = "color";
+                string q2 = "numberOfDoors";
+                //Tracktor:
+                Type typeOfTractor = Car.GetType());
             }
-
-
         }
-
-        
     }
+}
+
 }
