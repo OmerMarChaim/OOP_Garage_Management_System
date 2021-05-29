@@ -105,9 +105,6 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        string m_LicenseNumber = ConsoleUserInterface.GetValidLicenseNumberInGarage(s_Garage);
-        Dictionary<string, object> m_DetailsDictionary = s_Garage.GetVehicleDetails(m_LicenseNumber);
-
         /// <summary>
         /// OMRI
         /// 6. Charge an electric-based vehicle
@@ -157,8 +154,11 @@ namespace Ex03.ConsoleUI
                     if(isFuel == true)
                     {
                         int amountFuelToFill = ConsoleUserInterface.GetValidAmount();
-                        Fuel.eFuelType desaierFuelType = ConsoleUserInterface.GetValidFuelType();
-                        s_Garage.ReFuelFuelInSpecificVehicle(licenseNumber, amountFuelToFill, desaierFuelType);
+                       
+                            string[] fuelTypes = Fuel.GetFuelOptions();
+                        Fuel.eFuelType desireFuelType = ConsoleUserInterface.GetValidChoice<Fuel.eFuelType>(
+                            fuelTypes, "Please chose one of the following types of Fuel:");
+                        s_Garage.ReFuelFuelInSpecificVehicle(licenseNumber, amountFuelToFill, desireFuelType);
                     }
                     else
                     {
@@ -210,27 +210,31 @@ namespace Ex03.ConsoleUI
             /// get the current car status
             OwnerDetails.eStatus currentStatus = s_Garage.GetCurrentCarStatus(licenseNumber);
             Console.WriteLine($@"***Your current status is {currentStatus}***");
-            string menuOption = $@"To which status you want to change the car :
-1. In Repair,
-2. Repaired,
-3. Payed";
-            Console.WriteLine(menuOption);
-            string userInputInString = Console.ReadLine();
-            int userInputNumber = ConsoleUserInterface.GetValidLicenseNumberBetween1To3(userInputInString, menuOption);
-            OwnerDetails.eStatus desireStatus;
-            switch(userInputNumber)
+            /*
+             string menuOption = $@"To which status you want to change the car :
+ 1. In Repair,
+ 2. Repaired,
+ 3. Payed";
+             Console.WriteLine(menuOption);
+             string userInputInString = Console.ReadLine();
+             int userInputNumber = ConsoleUserInterface.GetValidLicenseNumberBetween1To3(userInputInString, menuOption);
+
+             */
+            string[] statusTypes = OwnerDetails.GetStatusOptions();
+            OwnerDetails.eStatus desireStatus = ConsoleUserInterface.GetValidChoice<OwnerDetails.eStatus>(
+                statusTypes, "Please chose one of the following types of Fuel:");
+         
+            switch(desireStatus)
             {
-                case 1:
+                case InRepair:
                     desireStatus = InRepair;
 
                     break;
-                case 2:
-                    desireStatus = Repaired;
-
-                    break;
-                default:
+                case Payed:
                     desireStatus = Payed;
-
+                    break;
+                default :
+                    desireStatus = default;
                     break;
             }
 
@@ -297,12 +301,14 @@ namespace Ex03.ConsoleUI
                 // Dictionary<string, object> vhicledetails =new Dictionary<string, object>();
                 //   = ConsoleUserInterface.GetDetailsForNewVehicle(vehicleTypeFromUser);
               
-                Console.WriteLine("Please chose Wheels Manufacturer Name:");
-                string manufacturerName = getNonEmptyInput();
-                    //newVehicle.setWheels
                         energySourceTypeFromUser = ConsoleUserInterface.GetValidChoice<eTypeOfEnergy>(
                             energyTypes, "Please chose one of the following types of energy vehicles:");
-                        newVehicle.setEnergy(energySourceTypeFromUser);
+                      ConsoleUserInterface.setEnergyUi(energySourceTypeFromUser, ref newVehicle);
+
+                Console.WriteLine("Please chose Wheels Manufacturer Name:");
+                string manufacturerName = getNonEmptyInput();
+                newVehicle.setWheels(manufacturerName);
+
                 // set all details function 
 
 

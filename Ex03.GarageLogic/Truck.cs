@@ -12,13 +12,10 @@ namespace Ex03.GarageLogic
         private bool m_ContainsDangerousMaterials;
         private float m_MaxCargoWeight;
 
-        public Truck(string i_LicenseNumber)
-            : base(i_LicenseNumber)
+        public Truck(string i_LicenseNumber, string i_ModelName)
+            : base(i_LicenseNumber, i_ModelName)
         {
-            for (int i = 0; i < numberOfWheels; i++)
-            {
-                Wheels.Add(new Wheel(maxAirPressure));
-            }
+         
         }
 
         public override void InsertExtraDetailsIntoDict(ref Dictionary<string, object> i_IoDictionaryRef)

@@ -21,11 +21,15 @@ namespace Ex03.GarageLogic
 
         public enum eFuelType
         {
+      
             Soler,
             Octane95,
             Octane96,
             Octane98
+
+
         }
+        
 
       
        public eFuelType FuelType
@@ -67,9 +71,11 @@ namespace Ex03.GarageLogic
                    m_CurrentAmountOfFuelInLiters = wantedAmount;
                }
            }
-          
-
-
+           
+       }
+       public static string[] GetFuelOptions()
+       {
+           return Enum.GetNames(typeof(eFuelType));
        }
     }
 }

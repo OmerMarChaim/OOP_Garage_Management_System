@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace Ex03.GarageLogic
 {
     public struct OwnerDetails
@@ -33,6 +35,10 @@ namespace Ex03.GarageLogic
             InRepair,
             Repaired,
             Payed
+        }
+        public static string[] GetStatusOptions()
+        {
+            return Enum.GetNames(typeof(eStatus));
         }
 
         public eStatus CarStatus

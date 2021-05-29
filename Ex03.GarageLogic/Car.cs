@@ -12,7 +12,7 @@ namespace Ex03.GarageLogic
         private eCarColor m_Color;
         private eNumberOfDoors m_NumberOfDoors;
 
-        public Car(string i_LicenseNumber) : base (i_LicenseNumber)
+        public Car(string i_LicenseNumber, string i_ModelName) : base (i_LicenseNumber, i_ModelName)
         {
            
         }
@@ -38,7 +38,7 @@ namespace Ex03.GarageLogic
             i_IoDictionaryRef.Add("Color", m_Color.ToString());
             i_IoDictionaryRef.Add("Number of doors", m_NumberOfDoors.ToString());
         }
-
+        /*
         public override List<string> GetExtraDetailsMembers()
         {
             List<string> extraMembers = new List<string>();
@@ -46,6 +46,12 @@ namespace Ex03.GarageLogic
             extraMembers.Add("Number of doors");
 
             return extraMembers;
+        }
+        */
+
+        public override Dictionary<string, object> GetExtraDetailsMembers()
+        {
+            throw new NotImplementedException();
         }
 
         public override void setEnergy(EnergySource.eTypeOfEnergy i_EnergySourceTypeFromUser)
@@ -66,10 +72,6 @@ namespace Ex03.GarageLogic
             InitWheels(i_ManufacturerName,k_MaxAirPressure,eNumberOfWheel.Four);
         }
 
-        public override void getExtraDetailsForSpecificKindOfVehicle(ref Dictionary<string, object> i_IoDictionaryRef)
-        {
-            throw new NotImplementedException();
-        }
-        
+    
     }
 }
