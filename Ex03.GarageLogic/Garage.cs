@@ -10,7 +10,7 @@ namespace Ex03.GarageLogic
 {
     public class Garage
     {
-        private readonly Dictionary<string, Vehicle> m_VehicleInventory;
+        private readonly Dictionary<string, Vehicle> r_VehicleInventory;
         private Dictionary<string, OwnerDetails> m_OwnerDetailsTickets;
 
 
@@ -78,7 +78,7 @@ namespace Ex03.GarageLogic
         public Dictionary<string, object> GetVehicleDetails(string i_InputLicenseNumber)
         {
             Dictionary<string, object> resultedDictionary = new Dictionary<string, object>();
-            Vehicle chosenVehicle = this.m_VehicleInventory[i_InputLicenseNumber];
+            Vehicle chosenVehicle = this.r_VehicleInventory[i_InputLicenseNumber];
             resultedDictionary.Add("License number", i_InputLicenseNumber);
             resultedDictionary.Add("Model Name", chosenVehicle.ModelName);
             resultedDictionary.Add("Owner Name", this.m_OwnerDetailsTickets[i_InputLicenseNumber].Name);
@@ -93,30 +93,30 @@ namespace Ex03.GarageLogic
             return resultedDictionary;
         }
 
-        public bool isElectricVehicle(string i_LicenseNumber)
+        public bool IsElectricVehicle(string i_LicenseNumber)
         {
-            Vehicle specificVehicle = m_VehicleInventory[i_LicenseNumber];
+            Vehicle specificVehicle = r_VehicleInventory[i_LicenseNumber];
 
-            bool isElectricBased = specificVehicle.Engine.Type == EnergySource.eTypeOfEnegy.Battary;
+            bool isElectricBased = specificVehicle.Engine.Type == EnergySource.eTypeOfEnergy.Electric;
 
             return isElectricBased;
         }
 
-        public bool isLicenseNumberInGarage(string i_LicenseNumber)
+        public bool IsLicenseNumberInGarage(string i_LicenseNumber)
         {
             return m_OwnerDetailsTickets.ContainsKey(i_LicenseNumber);
         }
 
-        public void inflateTiresInCarToMax(string i_LicenseNumber)
+        public void InflateTiresInCarToMax(string i_LicenseNumber)
         {
-            Vehicle specificVehicle = m_VehicleInventory[i_LicenseNumber];
+            Vehicle specificVehicle = r_VehicleInventory[i_LicenseNumber];
             foreach(Wheel wheel in specificVehicle.Wheels)
             {
                 wheel.InflateToMaximum();
             }
         }
 
-        public eStatus getCurrentCarStatus(string i_LicenseNumber)
+        public eStatus GetCurrentCarStatus(string i_LicenseNumber)
         {
             OwnerDetails specificVehicleOwner = m_OwnerDetailsTickets[i_LicenseNumber];
             eStatus currentStatus = specificVehicleOwner.CarStatus;
@@ -127,28 +127,28 @@ namespace Ex03.GarageLogic
         public void ReFuelFuelInSpecificVehicle(string i_LicenseNumber, int i_AmountFuelToFill, Fuel.eFuelType i_FuelTypeFromUser)
         {
 
-            Vehicle specificVehicle = m_VehicleInventory[i_LicenseNumber];
+            Vehicle specificVehicle = r_VehicleInventory[i_LicenseNumber];
             GarageLogic.Fuel fuelEngine = (specificVehicle.Engine) as Fuel;
-            fuelEngine.refuelingOperation(i_AmountFuelToFill, i_FuelTypeFromUser);
+            fuelEngine.RefuelingOperation(i_AmountFuelToFill, i_FuelTypeFromUser);
         }
 
        
-        public void isDesaireFuelTypeIsFeetToSpecificCar(string i_LicenseNumber, Fuel.eFuelType i_FuelTypeFromUser, out bool isFuel, out bool isSameFuelType)
+        public void IsDesaireFuelTypeIsFeetToSpecificCar(string i_LicenseNumber, Fuel.eFuelType i_FuelTypeFromUser, out bool i_IsFuel, out bool i_IsSameFuelType)
         {
 
-            isSameFuelType = false;
-            Vehicle specificVehicle = m_VehicleInventory[i_LicenseNumber];
-            if(specificVehicle.Engine.Type == EnergySource.eTypeOfEnegy.Fuel)
+            i_IsSameFuelType = false;
+            Vehicle specificVehicle = r_VehicleInventory[i_LicenseNumber];
+            if(specificVehicle.Engine.Type == EnergySource.eTypeOfEnergy.Fuel)
             {
-                isFuel = true;
+                i_IsFuel = true;
                 GarageLogic.Fuel fuelEngine = (specificVehicle.Engine) as Fuel;
-                if(isSameFuelType = fuelEngine.FuelType == i_FuelTypeFromUser)
+                if(i_IsSameFuelType = fuelEngine.FuelType == i_FuelTypeFromUser)
                 {
-                    isSameFuelType = true;
+                    i_IsSameFuelType = true;
                 }
                 else
                 {
-                    isSameFuelType = false;
+                    i_IsSameFuelType = false;
                     throw new ArgumentException(@"this Fuel Type is not fit");
                 }
 
@@ -156,23 +156,43 @@ namespace Ex03.GarageLogic
             else
             {
 
-                isFuel = false;
+                i_IsFuel = false;
                 throw new ArgumentException(@"this Vehicle is not Fuel Based");
             }
 
 
         }
 
-        public VehicleFactory.eVehicleType getVehicleType(string i_LicenseNumber)
+        public VehicleFactory.eVehicleType GetVehicleType(string i_LicenseNumber)
         {
             throw new NotImplementedException();
         }
 
         public void ChargeElectricVehicleInGarage(string i_LicenseNumber, int i_HowManyMoreHoursToAdd)
         {
-            Vehicle specificVehicle = m_VehicleInventory[i_LicenseNumber];
+            Vehicle specificVehicle = r_VehicleInventory[i_LicenseNumber];
             GarageLogic.Electric electricEngine = (specificVehicle.Engine) as Electric;
-            electricEngine.rechargeOperation(i_HowManyMoreHoursToAdd);
+            electricEngine.RechargeOperation(i_HowManyMoreHoursToAdd);
+        }
+
+        public void AddNewVehicle(Vehicle i_NewVehicle)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetMaxEnergy(string i_LicenseNumber)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static bool IsValidLicenseNumber(int i_Number)
+        {
+            if(i_Number > 999999 || i_Number < 100000)
+            {
+                throw new ArgumentException("Number is not in the valid range: 100000 - 999999");
+            }
+
+            return true;
         }
     }
 }

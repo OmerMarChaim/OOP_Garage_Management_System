@@ -42,7 +42,7 @@ namespace Ex03.GarageLogic
        /// </summary>
        /// <param name="i_HowMuchMoreFuelToAdd"></param>
        /// <param name="i_FuelTypeEnter"></param>
-        public void refuelingOperation(float i_HowMuchMoreFuelToAdd, eFuelType i_FuelTypeEnter)
+        public void RefuelingOperation(float i_HowMuchMoreFuelToAdd, eFuelType i_FuelTypeEnter)
        {
            if(i_FuelTypeEnter != m_FuelType)
            {

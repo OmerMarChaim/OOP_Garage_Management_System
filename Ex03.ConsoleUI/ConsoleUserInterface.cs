@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Ex03.GarageLogic;
+using Ex03.ConsoleUI;
+using static Ex03.GarageLogic.VehicleFactory;
+using static Ex03.GarageLogic.EnergySource;
 
 namespace Ex03.ConsoleUI
 {
@@ -13,10 +16,23 @@ namespace Ex03.ConsoleUI
         /// just check format of License NUmber
         /// </summary>
         /// <returns></returns>
-        public static string getValidLicenseNumber()
-        public static string GetValidLicenseNumber()
+        public static string GetLicenseNumber()
         {
-            throw new NotImplementedException();
+            // the valid license number is 6 digits number
+            string userInput;
+            int userInputAsNumber;
+            Console.WriteLine("Please enter License Number in range 100000 - 999999:");
+            userInput = Console.ReadLine();
+            if(userInput == String.Empty)
+            {
+                throw new FormatException("You have to enter number");
+            }
+            else if(!int.TryParse(userInput, out userInputAsNumber) || Garage.IsValidLicenseNumber(userInputAsNumber))
+            { // TODO DEBUG
+                throw new FormatException("You have you enter NUMBER in range 100000 - 999999");
+            }
+
+            return userInput;
         }
 
         public static string ListToString(List<string> i_ListOfLicenseNumbersInTheGarage)
@@ -25,14 +41,6 @@ namespace Ex03.ConsoleUI
         }
 
         /// <summary>
-        /// chack if the input is between 1-3
-        /// </summary>
-        /// <param name="i_UserInputInString"></param>
-        public static int GetValidLicenseNumberBetween1To3(string i_UserInputInString, string i_MenuOption)
-        {
-            return getValidInputInSpecifIcRange(i_UserInputInString, 1, 3, i_MenuOption);
-        }
-        /// <summary>
         /// valid + in garage License NUMBER
         ///
         /// </summary>
@@ -40,12 +48,13 @@ namespace Ex03.ConsoleUI
         /// <returns></returns>
         public static string GetValidLicenseNumberInGarage(Garage i_Garage)
         {
-           string licenseNumber= getValidLicenseNumber();
-           while (i_Garage.isLicenseNumberInGarage(licenseNumber) == false)
-           {
-               Console.WriteLine($@"the car with license number  {licenseNumber} is not in the garage , please enter a new one:");
-               licenseNumber = ConsoleUserInterface.getValidLicenseNumber();
-           }
+            string licenseNumber = GarageUiManeger.GetValidLicenseNumber();
+            while(i_Garage.IsLicenseNumberInGarage(licenseNumber) == false)
+            {
+                Console.WriteLine(
+                    $@"the car with license number  {licenseNumber} is not in the garage , please enter a new one:");
+                licenseNumber = ConsoleUserInterface.GetLicenseNumber();
+            }
 
             return licenseNumber;
         }
@@ -61,29 +70,24 @@ namespace Ex03.ConsoleUI
             throw new NotImplementedException();
         }
 
-        public static int getValidInputBetween1To7(string i_UserInPut, string i_MenuOption)
-        {
-            return getValidInputInSpecifIcRange(i_UserInPut, 1, 7, i_MenuOption)
-        }
-
-        public static flowMeneger.eMenuOpiton fromIntToeMenuOpiton(int i_IntUserInput)
+        public static GarageUiManeger.eMenuOpiton FromIntToeMenuOpiton(int i_IntUserInput)
         {
             throw new NotImplementedException();
         }
 
-        public static Fuel.eFuelType getValideFuelType()
+        public static Fuel.eFuelType GetValidFuelType()
         {
             ///importend flow
             /// ask for number between 1-4,
             /// get valid number -> turn the number to ENUM AS WE NEED -> retuen the enum
-            string MenuOption = @"which kind of fuel you want to fill in your car? 
+            string menuOption = @"which kind of fuel you want to fill in your car? 
 please enter by the number
 1. Soler
 2. Octane95,
 3. Octane96,
 4. Octane98";
             string userInputInString = Console.ReadLine();
-            int userInputInt = getValidInputBetween1To4(userInputInString, MenuOption);
+            int userInputInt = GetValidInputInRange(userInputInString,1,4,menuOption)
             Fuel.eFuelType resFuelType = fromIntToeFuelType(userInputInt);
 
             return resFuelType;
@@ -94,16 +98,8 @@ please enter by the number
             throw new NotImplementedException();
         }
 
-        private static int getValidInputBetween1To4(string i_UserInput, string i_MenuOption)
-        {
-            return getValidInputInSpecifIcRange(i_UserInput, 1, 4, i_MenuOption);
-        }
-//TODO isInRagne bool
-        private static int getValidInputInSpecifIcRange(
-            string i_UserInput,
-            int i_MinNum,
-            int i_MaxNum,
-            string i_MessageToShow)
+        //TODO isInRagne bool
+        internal static int GetValidInputInRange(string i_UserInput, int i_MinNum, int i_MaxNum, string i_MessageToShow)
         {
             bool isNumber = false;
             bool isInRange = false;
@@ -132,12 +128,126 @@ please enter by the number
             }
 
             return userInputInt;
-
         }
+
         // out of a list we ask from factory
-        public static VehicleFactory.eVehicleType getValidVehicleType()
+        public static T GetValidChoice<T>(string[] i_Options, string i_Message)
+        {
+            Console.WriteLine(i_Message);
+
+            return PrintOptionsAndGetChoice<T>(i_Options);
+        }
+
+        private static T PrintOptionsAndGetChoice<T>(string[] i_Options)
+        {
+            string userInput;
+            bool isValid = false;
+            T valueChoice = default;
+            // first build options:
+            StringBuilder options = new StringBuilder();
+            int indexOfOption = 1;
+            foreach(string option in i_Options)
+            {
+                options.AppendLine($"{indexOfOption}) {option}");
+                indexOfOption += 1;
+            }
+
+            // and print the options:
+            Console.WriteLine(options);
+            userInput = Console.ReadLine();
+
+            while(!isValid)
+            {
+                try
+                {
+                    valueChoice = getValueChoice<T>(userInput);
+                    isValid = true;
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    userInput = Console.ReadLine();
+                }
+            }
+
+            return valueChoice;
+        }
+
+        private static T getValueChoice<T>(string i_NumberOfChoice)
+        {
+            if(i_NumberOfChoice == string.Empty)
+            {
+                throw new FormatException("Cant press enter without chose number. Try again");
+            }
+
+            int choice;
+            T valueChoice = default;
+            bool isNumber = int.TryParse(i_NumberOfChoice, out choice);
+            bool isOneOfTheOptions = Enum.IsDefined(typeof(T), choice);
+
+            if(isNumber && isOneOfTheOptions)
+            {
+                valueChoice = (T)Enum.Parse(typeof(T), i_NumberOfChoice);
+            }
+            else
+            {
+                throw new FormatException("Please chose one of the options.");
+            }
+
+            return valueChoice;
+        }
+
+        public static void GetOwnerDetails(out string i_OwnersName, out string i_OwnersPhoneNumber)
         {
             throw new NotImplementedException();
+        }
+
+        public static Dictionary<string, object> GetDetailsForNewVehicle(
+            VehicleFactory.eVehicleType i_VehicleTypeFromUser)
+        {
+            Dictionary<string, object> allDetails = new Dictionary<string, string>();
+            // first get basic information for all the vehicles 
+            Console.WriteLine("Insert The Following attributes:");
+            bool isValid = false;
+            while(isValid)
+            {
+                AskForGenericVehicleDetails(allDetails);
+                AskForExtraOfVehicleDetails();
+                AskForOwnerOfVehicleDetails();
+            }
+        }
+
+        private static void AskForGenericVehicleDetails(ref Dictionary<string, object> i_AllDetailsDictionary)
+        {
+            Console.WriteLine("Please enter Model Name:");
+            
+            i_AllDetailsDictionary.Add("Model Name",Console.ReadLine());
+            Console.WriteLine("Wheels");
+            Console.WriteLine("Please chose ManufacturerName:");
+            i_AllDetailsDictionary.Add("ManufacturerName",Console.ReadLine());
+        }
+
+        // TODO NOT Imlemented
+        private string getNonEmptyInput()
+        {
+            string userInput = Console.ReadLine();
+            bool isValid = false;
+            while(isValid)
+            {
+                try
+            {
+                if(userInput == string.Empty)
+                {
+                    throw new FormatException();
+                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e);
+
+                throw;
+            }
+            
         }
     }
 }

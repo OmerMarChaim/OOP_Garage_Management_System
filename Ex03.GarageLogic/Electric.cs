@@ -16,7 +16,7 @@ namespace Ex03.GarageLogic
         /// while not crossing the max limit)
         /// </summary>
         /// <param name="i_HowManyMoreHoursToAdd"></param>
-        public void rechargeOperation(float i_HowManyMoreHoursToAdd)
+        public void RechargeOperation(float i_HowManyMoreHoursToAdd)
         {
             float wantedHours = i_HowManyMoreHoursToAdd + m_RemainingTimeOfEngineOperationInHours;
             if(wantedHours>m_MaxTimeOfEngineOperationInHours)

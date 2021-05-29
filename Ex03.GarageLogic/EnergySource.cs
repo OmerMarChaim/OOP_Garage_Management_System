@@ -6,30 +6,32 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-   public abstract class EnergySource
+    public abstract class EnergySource
     {
         private float m_RemainingEnergyPercentage;
-        private eTypeOfEnegy m_Type;
+        private eTypeOfEnergy m_Type;
 
-        public enum eTypeOfEnegy
+        public enum eTypeOfEnergy
         {
-            Battary,
+            Electric,
             Fuel
         }
 
-        public eTypeOfEnegy Type
+        public eTypeOfEnergy Type
         {
             get { return m_Type; }
-            
-            
         }
-        
+
         public float RemainingEnergyPercentage
         {
             get { return m_RemainingEnergyPercentage; }
         }
 
-    //    public abstract void UpdateAmountOfEnergy(float i_HowManyMoreHoursToAdd);
+        //    public abstract void UpdateAmountOfEnergy(float i_HowManyMoreHoursToAdd);
 
+        public static string[] GetEnergyOptions()
+        {
+            return Enum.GetNames(typeof(eTypeOfEnergy));
+        }
     }
 }

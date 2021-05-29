@@ -10,12 +10,12 @@ namespace Ex03.GarageLogic
     {
         private String m_ManufacturerName;
         private float m_CurrentAirPressure;
-        private readonly float m_MaxAirPressure;
+        private readonly float r_MaxAirPressure;
 
         public Wheel(string i_ManufacturerName, int i_MaxAirPressure)
         {
             m_ManufacturerName = i_ManufacturerName;
-            m_MaxAirPressure = i_MaxAirPressure;
+            r_MaxAirPressure = i_MaxAirPressure;
         }
 
         public string ManufacturerName
@@ -37,9 +37,9 @@ namespace Ex03.GarageLogic
            // bool lessThenMaxAirAfterAdd = (m_MaxAirPressure - (i_AmountAirToAdd + m_CurrentAirPressure)) >= 0;
             float wantedAmount = i_AmountAirToAdd + m_CurrentAirPressure;
             
-            if(wantedAmount>m_MaxAirPressure)
+            if(wantedAmount>r_MaxAirPressure)
             {
-                float maxToAdd = m_MaxAirPressure - m_CurrentAirPressure;
+                float maxToAdd = r_MaxAirPressure - m_CurrentAirPressure;
                 throw new ValueOutOfRangeException(0, maxToAdd,$@"{i_AmountAirToAdd} is too high ");
             }
             else
@@ -50,7 +50,7 @@ namespace Ex03.GarageLogic
 
         public void InflateToMaximum()
         {
-            float addToMax = m_MaxAirPressure - m_CurrentAirPressure;
+            float addToMax = r_MaxAirPressure - m_CurrentAirPressure;
             AddAirPressure(addToMax);
         }
     }

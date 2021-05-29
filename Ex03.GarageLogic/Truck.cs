@@ -16,10 +16,10 @@ namespace Ex03.GarageLogic
         {
         }
 
-        public override void InsertExtraDetailsIntoDict(ref Dictionary<string, object> io_DictionaryRef)
+        public override void InsertExtraDetailsIntoDict(ref Dictionary<string, object> i_IoDictionaryRef)
         {
-            io_DictionaryRef.Add("Contains dangerous materials", m_ContainsDangerousMaterials);
-            io_DictionaryRef.Add("Max cargo weight",m_MaxCargoWeight);
+            i_IoDictionaryRef.Add("Contains dangerous materials", m_ContainsDangerousMaterials);
+            i_IoDictionaryRef.Add("Max cargo weight",m_MaxCargoWeight);
         }
     }
 }

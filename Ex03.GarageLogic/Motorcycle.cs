@@ -21,24 +21,24 @@ namespace Ex03.GarageLogic
             A,
             B1,
             AA,
-            Bb
+            BB
         }
 
-        public override void InsertExtraDetailsIntoDict(ref Dictionary<string, object> io_DictionaryRef)
+        public override void InsertExtraDetailsIntoDict(ref Dictionary<string, object> i_IoDictionaryRef)
         {
-            io_DictionaryRef.Add("Engine Volume", m_EngineVolume.ToString());
-            io_DictionaryRef.Add("License Type", m_LicenseType.ToString());
+            i_IoDictionaryRef.Add("Engine Volume", m_EngineVolume.ToString());
+            i_IoDictionaryRef.Add("License Type", m_LicenseType.ToString());
         }
 
-        public override void getExtraDetailsForSpecificKindOfVehicle(ref Dictionary<string, object> io_DictionaryRef)
+        public override void getExtraDetailsForSpecificKindOfVehicle(ref Dictionary<string, object> i_IoDictionaryRef)
         {
             throw new NotImplementedException();
         }
         public override Dictionary<string, object> GetExtraDetailsMembers()
         {
-            Dictionary<string, object> extraMembers = new List<string>();
+            Dictionary<string, object> extraMembers = new Dictionary<string, object>();
             extraMembers.Add("EngineVolume", typeof(int));
-            extraMembers.Add("LicenseType", );
+            extraMembers.Add("LicenseType", typeof(eLicenseType));
 
             return extraMembers;
         }

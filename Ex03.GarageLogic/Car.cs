@@ -32,10 +32,10 @@ namespace Ex03.GarageLogic
             Five = 5
         }
 
-        public override void InsertExtraDetailsIntoDict(ref Dictionary<string, object> io_DictionaryRef)
+        public override void InsertExtraDetailsIntoDict(ref Dictionary<string, object> i_IoDictionaryRef)
         {
-            io_DictionaryRef.Add("Color", m_Color.ToString());
-            io_DictionaryRef.Add("Number of doors", m_NumberOfDoors.ToString());
+            i_IoDictionaryRef.Add("Color", m_Color.ToString());
+            i_IoDictionaryRef.Add("Number of doors", m_NumberOfDoors.ToString());
         }
 
         public override List<string> GetExtraDetailsMembers()
@@ -47,7 +47,7 @@ namespace Ex03.GarageLogic
             return extraMembers;
         }
 
-        public override void getExtraDetailsForSpecificKindOfVehicle(ref Dictionary<string, object> io_DictionaryRef)
+        public override void getExtraDetailsForSpecificKindOfVehicle(ref Dictionary<string, object> i_IoDictionaryRef)
         {
             throw new NotImplementedException();
         }

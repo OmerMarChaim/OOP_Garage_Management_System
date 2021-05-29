@@ -4,17 +4,19 @@ using System.Diagnostics.Eventing.Reader;
 using Ex03.GarageLogic;
 using static Ex03.ConsoleUI.ConsoleUserInterface;
 using static Ex03.GarageLogic.OwnerDetails.eStatus;
+using static Ex03.GarageLogic.VehicleFactory;
+using static Ex03.GarageLogic.EnergySource;
 
 namespace Ex03.ConsoleUI
 {
-    class flowMeneger
+    internal class GarageUiManeger
     {
         private static Garage s_Garage;
 
         public enum eMenuOpiton
         {
-            newVehicle,
-            listOfLicense,
+            NewVehicle,
+            ListOfLicense,
             ChangeVehiclesStatus,
             InflateTires,
             RefuelFuel,
@@ -22,7 +24,7 @@ namespace Ex03.ConsoleUI
             DisplayVehicleInformation
         }
 
-        void startMenu()
+        internal void StartMenu()
         {
             string helloMessage = string.Format("Welcome to Our garage");
             Console.WriteLine(helloMessage);
@@ -38,8 +40,8 @@ namespace Ex03.ConsoleUI
 ";
             Console.WriteLine(menuOption);
             string userInPut = Console.ReadLine();
-            int intUserInput = ConsoleUserInterface.getValidInputBetween1To7(userInPut, menuOption);
-            eMenuOpiton numberOfUserChoose = ConsoleUserInterface.fromIntToeMenuOpiton(intUserInput);
+            int intUserInput = ConsoleUserInterface.GetValidInputInRange(userInPut, 1, 7, menuOption);
+            eMenuOpiton numberOfUserChoose = ConsoleUserInterface.FromIntToeMenuOpiton(intUserInput);
 
             doUserChoice(numberOfUserChoose);
         }
@@ -49,32 +51,32 @@ namespace Ex03.ConsoleUI
             eMenuOpiton userChoise = i_NumberOfUserChoose;
             switch(userChoise)
             {
-                case eMenuOpiton.newVehicle:
-                    InsertNewVehicle();
+                case eMenuOpiton.NewVehicle:
+                    insertNewVehicle();
 
                     break;
-                case eMenuOpiton.listOfLicense:
+                case eMenuOpiton.ListOfLicense:
                     displayListOfLicense();
 
                     break;
                 case eMenuOpiton.ChangeVehiclesStatus:
-                    ChangeVehiclesStatus();
+                    changeVehiclesStatus();
 
                     break;
                 case eMenuOpiton.InflateTires:
-                    InflateTires();
+                    inflateTires();
 
                     break;
                 case eMenuOpiton.RefuelFuel:
-                    RefuelFuel();
+                    refuelFuel();
 
                     break;
                 case eMenuOpiton.ChargeElectricVehicle:
-                    ChargeElectricVehicle();
+                    chargeElectricVehicle();
 
                     break;
                 case eMenuOpiton.DisplayVehicleInformation:
-                    DisplayVehicleInformation();
+                    displayVehicleInformation();
 
                     break;
             }
@@ -91,7 +93,7 @@ namespace Ex03.ConsoleUI
         /// Tire specifications (manufacturer and air pressure),
         /// Fuel status + Fuel type / Battery status, other relevant information based on vehicle type)
         /// </summary>
-        private void DisplayVehicleInformation()
+        private void displayVehicleInformation()
         {
             Console.WriteLine("For displaying vehicle information, enter license number");
             string inputLicenseNumber = ConsoleUserInterface.GetValidLicenseNumberInGarage(s_Garage);
@@ -102,27 +104,27 @@ namespace Ex03.ConsoleUI
                 Console.WriteLine($"{pair.Key} : {pair.Value}");
             }
         }
-            string licenseNumber = ConsoleUserInterface.GetValidLicenseNumberInGarage(s_Garage);
-            Dictionary<string, object> detailsDictionary = s_Garage.GetVehicleDetails(licenseNumber);
 
+        string m_LicenseNumber = ConsoleUserInterface.GetValidLicenseNumberInGarage(s_Garage);
+        Dictionary<string, object> m_DetailsDictionary = s_Garage.GetVehicleDetails(m_LicenseNumber);
 
         /// <summary>
         /// OMRI
         /// 6. Charge an electric-based vehicle
         /// (Prompting the user for the license number and number of minutes to charge)
         /// </summary>
-        private void ChargeElectricVehicle()
-        { 
+        private void chargeElectricVehicle()
+        {
             bool isElectricBased;
             string licenseNumber = ConsoleUserInterface.GetValidLicenseNumberInGarage(s_Garage);
             try
             {
-                 isElectricBased = s_Garage.isElectricVehicle(licenseNumber);
-                 if(isElectricBased==true)
-                 {
+                isElectricBased = s_Garage.IsElectricVehicle(licenseNumber);
+                if(isElectricBased == true)
+                {
                     int howManyMoreHoursToAdd = ConsoleUserInterface.GetValidAmount();
                     s_Garage.ChargeElectricVehicleInGarage(licenseNumber, howManyMoreHoursToAdd);
-                 }
+                }
             }
             catch(ArgumentException e)
             {
@@ -130,8 +132,9 @@ namespace Ex03.ConsoleUI
                 /// we need undersnt how to define each exception here
                 /// best by ErorMessege.
                 Console.WriteLine(e);
+
                 throw;
-            }   
+            }
         }
 
         /// <summary>
@@ -139,29 +142,28 @@ namespace Ex03.ConsoleUI
         /// 5. Refuel a fuel-based vehicle
         /// (Prompting the user for the license number, fuel type and amount to fill)
         /// </summary>
-        private void RefuelFuel()
+        private void refuelFuel()
         {
             bool isValidAmountOfFuel = false;
-            bool isFuel=false;
-            bool isSameFuelType=false;
+            bool isFuel = false;
+            bool isSameFuelType = false;
             string licenseNumber = ConsoleUserInterface.GetValidLicenseNumberInGarage(s_Garage);
-            while(isValidAmountOfFuel==false)
-            { 
+            while(isValidAmountOfFuel == false)
+            {
                 ///TODO -DEBUG
                 try
                 {
-                    isFuel = !s_Garage.isElectricVehicle(licenseNumber); 
+                    isFuel = !s_Garage.IsElectricVehicle(licenseNumber);
                     if(isFuel == true)
                     {
                         int amountFuelToFill = ConsoleUserInterface.GetValidAmount();
-                        Fuel.eFuelType desaierFuelType = ConsoleUserInterface.getValideFuelType();
+                        Fuel.eFuelType desaierFuelType = ConsoleUserInterface.GetValidFuelType();
                         s_Garage.ReFuelFuelInSpecificVehicle(licenseNumber, amountFuelToFill, desaierFuelType);
                     }
                     else
                     {
                         throw new ArgumentException("this Vehicle is not fuel based");
                     }
-
                 }
                 catch(ArgumentException e)
                 {
@@ -189,10 +191,10 @@ namespace Ex03.ConsoleUI
         /// OMER
         /// 4. Inflate tires to maximum (Prompting the user for the license number)
         /// </summary>
-        private void InflateTires()
+        private void inflateTires()
         {
             string licenseNumber = ConsoleUserInterface.GetValidLicenseNumberInGarage(s_Garage);
-            s_Garage.inflateTiresInCarToMax(licenseNumber);
+            s_Garage.InflateTiresInCarToMax(licenseNumber);
         }
 
         /// <summary>
@@ -200,21 +202,21 @@ namespace Ex03.ConsoleUI
         /// 3. Change a certain vehicle’s status
         /// (Prompting the user for the license number and new desired status)
         /// </summary>
-        private void ChangeVehiclesStatus()
+        private void changeVehiclesStatus()
         {
             string licenseNumber = ConsoleUserInterface.GetValidLicenseNumberInGarage(s_Garage);
 
             ///todo -
             /// get the current car status
-            OwnerDetails.eStatus currentStatus = s_Garage.getCurrentCarStatus(licenseNumber);
+            OwnerDetails.eStatus currentStatus = s_Garage.GetCurrentCarStatus(licenseNumber);
             Console.WriteLine($@"***Your current status is {currentStatus}***");
-            string MenuOption = $@"To which status you want to change the car :
+            string menuOption = $@"To which status you want to change the car :
 1. In Repair,
 2. Repaired,
 3. Payed";
-            Console.WriteLine(MenuOption);
+            Console.WriteLine(menuOption);
             string userInputInString = Console.ReadLine();
-            int userInputNumber = ConsoleUserInterface.GetValidLicenseNumberBetween1To3(userInputInString, MenuOption);
+            int userInputNumber = ConsoleUserInterface.GetValidLicenseNumberBetween1To3(userInputInString, menuOption);
             OwnerDetails.eStatus desireStatus;
             switch(userInputNumber)
             {
@@ -260,35 +262,71 @@ namespace Ex03.ConsoleUI
         /// if not, a new object of that vehicle type will be created and the user will be prompted to
         /// input the values for the properties of his vehicle, according to the type of vehicle he wishes to add.
         /// </summary>
-        private void InsertNewVehicle()
+        private void insertNewVehicle()
         {
-            VehicleFactory.eVehicleType VehicleTypeFromUser = ConsoleUserInterface.getValidVehicleType();
-            string licenseNumber = ConsoleUserInterface.getValidLicenseNumber();
-            if(s_Garage.isLicenseNumberInGarage(licenseNumber))
+            string licenseNumber;
+            Vehicle newVehicle;
+            bool isValid = false;
+            eVehicleType vehicleTypeFromUser;
+            EnergySource.eTypeOfEnergy energySourceTypeFromUser;
+            
+            licenseNumber = GetValidLicenseNumber();
+
+            if(s_Garage.IsLicenseNumberInGarage(licenseNumber))
             {
-                //change status and show some messege
-                VehicleFactory.eVehicleType VehicleTypeInGarage =  s_Garage.getVehicleType(licenseNumber); 
-                 if (VehicleTypeFromUser == VehicleTypeInGarage)
-                 {
-                     s_Garage.ChangeVehicleStatusInTheGarage(licenseNumber,OwnerDetails.eStatus.InRepair);
-                 }
-                 else
-                 {
-                     //todo
-                     ///enter a new Vehicle type its not feet 
-
-                 }
-
+                // Change status and show some messege
+                s_Garage.ChangeVehicleStatusInTheGarage(licenseNumber, OwnerDetails.eStatus.InRepair);
+                Console.WriteLine("The vehicle is already in the garage, so now vehicle status is change to In Repair");
             }
             else
             {
                 ///build new Vehicle
-                VehicleFactory.ManufactureNewVehicle(VehicleTypeFromUser,licenseNumber);
+                string[] vehicleTypes = VehicleFactory.GetVehicleOptions();
+                vehicleTypeFromUser =
+                    ConsoleUserInterface.GetValidChoice<eVehicleType>(
+                        vehicleTypes,
+                        "Please chose one of the following types of vehicles:");
+                string[] energyTypes = EnergySource.GetEnergyOptions();
+                energySourceTypeFromUser = ConsoleUserInterface.GetValidChoice<eTypeOfEnergy>(
+                    energyTypes,
+                    "Please chose one of the following types of energy vehicles:");
+                newVehicle = VehicleFactory.CreateNewVehicle(vehicleTypeFromUser, licenseNumber);
+                // get all the require details from the given type after validation.
+                Dictionary<string, string> details = ConsoleUserInterface.GetDetailsForNewVehicle(vehicleTypeFromUser);
+               // set all details function 
+              
+                s_Garage.AddNewVehicle(newVehicle);
+                s_Garage.InflateTiresInCarToMax(licenseNumber);
+                s_Garage.SetMaxEnergy(licenseNumber);
             }
-
-
         }
 
-        
+        // This method using GETLicenseNumber and Continues to request inputs according to the type of errors it receives
+        public static string GetValidLicenseNumber()
+        {
+            bool isValid = false;
+            string licenseNumber = "";
+            while(!isValid)
+            {
+                try
+                {
+                    licenseNumber = ConsoleUserInterface.GetLicenseNumber();
+                    isValid = true;
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+            }
+
+            return licenseNumber;
+        }
+
+        // private Vehicle CreatNewVehicle(
+        //     Dictionary<string, string> i_Details,
+        //     VehicleFactory.eVehicleType i_VehicleTypeFromUser)
+        // {
+        //     throw new NotImplementedException();
+        // }
     }
 }

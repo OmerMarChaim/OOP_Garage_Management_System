@@ -7,15 +7,14 @@ namespace Ex03.GarageLogic
 {
     public abstract class Vehicle
     {
-        protected String m_ModelName;
+        private String m_ModelName;
         private String m_LicenseNumber;
         private readonly List<Wheel> r_Wheels;
         private EnergySource m_Engine;
         private readonly eNumberOfWheel r_NumberOfWheels;
-
+        
         protected Vehicle(string i_LicenseNumber)
         {
-             
             m_LicenseNumber = i_LicenseNumber;
             r_Wheels = new List<Wheel>();
         }
@@ -85,6 +84,6 @@ namespace Ex03.GarageLogic
             io_DictionaryRef.Add($"{typeOfEnergy} Status", $"{this.Engine.RemainingEnergyPercentage}%");
         }
 
-        public abstract List<string> GetExtraDetailsMembers();
+        public abstract Dictionary<string,object> GetExtraDetailsMembers();
     }
 }
