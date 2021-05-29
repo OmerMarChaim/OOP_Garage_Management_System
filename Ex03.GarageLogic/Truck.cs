@@ -9,6 +9,8 @@ namespace Ex03.GarageLogic
     internal class Truck : Vehicle
     {
         private const float k_MaxAirPressure = 28;
+        private const eNumberOfWheel k_NumberOfWheel = eNumberOfWheel.Sixteen;
+
         private bool m_ContainsDangerousMaterials;
         private float m_MaxCargoWeight;
 
@@ -44,7 +46,7 @@ namespace Ex03.GarageLogic
         public override void setWheels(string i_ManufacturerName)
         {
      
-            InitWheels(i_ManufacturerName, k_MaxAirPressure,eNumberOfWheel.Sixteen);
+            InitWheels(i_ManufacturerName, k_MaxAirPressure, k_NumberOfWheel);
         }
     }
 }

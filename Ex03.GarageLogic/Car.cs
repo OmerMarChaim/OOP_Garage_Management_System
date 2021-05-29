@@ -8,7 +8,8 @@ namespace Ex03.GarageLogic
     public class Car : Vehicle
     {
         private const float k_MaxAirPressure = 30;
-        
+        private const eNumberOfWheel k_NumberOfWheel = eNumberOfWheel.Four;
+
         private eCarColor m_Color;
         private eNumberOfDoors m_NumberOfDoors;
 
@@ -58,18 +59,18 @@ namespace Ex03.GarageLogic
         {
             if(i_EnergySourceTypeFromUser == EnergySource.eTypeOfEnergy.Fuel)
             {
-                InitFuelEngine(Fuel.eFuelType.Octane95,45);
+                this.InitFuelEngine(Fuel.eFuelType.Octane95,45);
             }
             else
             {
-                InitElectricEngine(3.2f);
+                this.InitElectricEngine(3.2f);
             }
           
         }
 
         public override void setWheels(string i_ManufacturerName)
         {
-            InitWheels(i_ManufacturerName,k_MaxAirPressure,eNumberOfWheel.Four);
+            InitWheels(i_ManufacturerName,k_MaxAirPressure, k_NumberOfWheel);
         }
 
     

@@ -8,11 +8,10 @@ namespace Ex03.ConsoleUI
 {
     class program
     {
-        public static void Main(string[] args)
+        public static void Main()
         {
             GarageUiManager Garage = new GarageUiManager();
             Garage.StartMenu();
-            
         }
     }
 }

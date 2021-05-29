@@ -15,7 +15,7 @@ namespace Ex03.ConsoleUI
 
         public enum eMenuOpiton
         {
-            NewVehicle,
+            NewVehicle = 1 ,
             ListOfLicense,
             ChangeVehiclesStatus,
             InflateTires,
@@ -41,8 +41,8 @@ namespace Ex03.ConsoleUI
             Console.WriteLine(menuOption);
             string userInPut = Console.ReadLine();
             int intUserInput = ConsoleUserInterface.GetValidInputInRange(userInPut, 1, 7, menuOption);
-            eMenuOpiton numberOfUserChoose = ConsoleUserInterface.FromIntToeMenuOpiton(intUserInput);
-
+            //eMenuOpiton numberOfUserChoose = ConsoleUserInterface.FromIntToeMenuOpiton(intUserInput);
+            eMenuOpiton numberOfUserChoose = (eMenuOpiton)intUserInput;
             doUserChoice(numberOfUserChoose);
         }
 
@@ -285,14 +285,11 @@ namespace Ex03.ConsoleUI
             {
                 ///build new Vehicle
                 string[] vehicleTypes = VehicleFactory.GetVehicleOptions();
-                vehicleTypeFromUser =
-                    ConsoleUserInterface.GetValidChoice<eVehicleType>(
-                        vehicleTypes,
-                        "Please chose one of the following types of vehicles:");
+                vehicleTypeFromUser = ConsoleUserInterface.GetValidChoice<eVehicleType>(
+                        vehicleTypes, "Please chose one of the following types of vehicles:");
                 string[] energyTypes = EnergySource.GetEnergyOptions();
                 EnergySource.eTypeOfEnergy energySourceTypeFromUser;
-                energySourceTypeFromUser = ConsoleUserInterface.GetValidChoice<eTypeOfEnergy>(
-                    energyTypes, "Please chose one of the following types of energy vehicles:");
+          
                 Console.WriteLine("Please enter Model Name:");
                 string modelName = ConsoleUserInterface.getNonEmptyInput();
                 newVehicle = VehicleFactory.CreateNewVehicle(vehicleTypeFromUser, licenseNumber, modelName);
@@ -301,9 +298,9 @@ namespace Ex03.ConsoleUI
                 // Dictionary<string, object> vhicledetails =new Dictionary<string, object>();
                 //   = ConsoleUserInterface.GetDetailsForNewVehicle(vehicleTypeFromUser);
               
-                        energySourceTypeFromUser = ConsoleUserInterface.GetValidChoice<eTypeOfEnergy>(
+                energySourceTypeFromUser = ConsoleUserInterface.GetValidChoice<eTypeOfEnergy>(
                             energyTypes, "Please chose one of the following types of energy vehicles:");
-                      ConsoleUserInterface.setEnergyUi(energySourceTypeFromUser, ref newVehicle);
+                ConsoleUserInterface.setEnergyUi(energySourceTypeFromUser, ref newVehicle);
 
                 Console.WriteLine("Please chose Wheels Manufacturer Name:");
                 string manufacturerName = getNonEmptyInput();

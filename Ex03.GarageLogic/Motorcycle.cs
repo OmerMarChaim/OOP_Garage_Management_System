@@ -9,6 +9,8 @@ namespace Ex03.GarageLogic
     class Motorcycle : Vehicle
     {
         private const int k_MaxAirPressure = 30;
+        private const eNumberOfWheel k_NumberOfWheel = eNumberOfWheel.Two;
+
         private int m_EngineVolume;
         private eLicenseType m_LicenseType;
 
@@ -58,7 +60,7 @@ namespace Ex03.GarageLogic
 
         public override void setWheels(string i_ManufacturerName)
         {
-            InitWheels(i_ManufacturerName, k_MaxAirPressure, eNumberOfWheel.Two);
+            InitWheels(i_ManufacturerName, k_MaxAirPressure, k_NumberOfWheel);
         }
     }
 }

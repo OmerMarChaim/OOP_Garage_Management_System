@@ -73,20 +73,13 @@ namespace Ex03.ConsoleUI
 
         public static GarageUiManager.eMenuOpiton FromIntToeMenuOpiton(int i_IntUserInput)
         {
-            ///1. “Insert” a new vehicle into the garage.
-            //   2.Display a list of license numbers currently in the garage
-            //3.Change a certain vehicle’s status
-            //4.Inflate your car tires to maximum
-            //5.Refuel a fuel-based vehicle
-            //6.Charge an electric-based vehicle
-            //7.Display specific vehicle information
+
 
             GarageUiManager.eMenuOpiton userResult = default;
             switch(i_IntUserInput)
             {
                 case 1:
                     userResult = GarageUiManager.eMenuOpiton.NewVehicle;
-
 
                     break;
                 case 2:
