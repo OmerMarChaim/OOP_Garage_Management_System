@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace Ex03.GarageLogic
 {
     public class Car : Vehicle
     {
+        private const float k_MaxAirPressure = 30;
+        
         private eCarColor m_Color;
         private eNumberOfDoors m_NumberOfDoors;
 
         public Car(string i_LicenseNumber) : base (i_LicenseNumber)
         {
-
+           
         }
 
         private enum eCarColor
@@ -45,6 +46,24 @@ namespace Ex03.GarageLogic
             extraMembers.Add("Number of doors");
 
             return extraMembers;
+        }
+
+        public override void setEnergy(EnergySource.eTypeOfEnergy i_EnergySourceTypeFromUser)
+        {
+            if(i_EnergySourceTypeFromUser == EnergySource.eTypeOfEnergy.Fuel)
+            {
+                InitFuelEngine(Fuel.eFuelType.Octane95,45);
+            }
+            else
+            {
+                InitElectricEngine(3.2f);
+            }
+          
+        }
+
+        public override void setWheels(string i_ManufacturerName)
+        {
+            InitWheels(i_ManufacturerName,k_MaxAirPressure,eNumberOfWheel.Four);
         }
 
         public override void getExtraDetailsForSpecificKindOfVehicle(ref Dictionary<string, object> i_IoDictionaryRef)

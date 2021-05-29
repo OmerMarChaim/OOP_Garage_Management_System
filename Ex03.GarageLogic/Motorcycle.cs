@@ -8,12 +8,17 @@ namespace Ex03.GarageLogic
 {
     class Motorcycle : Vehicle
     {
+        private const int k_MaxAirPressure = 30;
         private int m_EngineVolume;
         private eLicenseType m_LicenseType;
 
         public Motorcycle(string i_LicenseNumber)
             : base(i_LicenseNumber)
         {
+            for (int i = 0; i < numberOfWheels; i++)
+            {
+                Wheels.Add(new Wheel(maxAirPressure));
+            }
         }
 
         private enum eLicenseType
@@ -41,6 +46,23 @@ namespace Ex03.GarageLogic
             extraMembers.Add("LicenseType", typeof(eLicenseType));
 
             return extraMembers;
+        }
+
+        public override void setEnergy(EnergySource.eTypeOfEnergy i_EnergySourceTypeFromUser)
+        {
+            if (i_EnergySourceTypeFromUser == EnergySource.eTypeOfEnergy.Fuel)
+            {
+                InitFuelEngine(Fuel.eFuelType.Octane98, 6);
+            }
+            else
+            {
+                InitElectricEngine(1.8f);
+            }
+        }
+
+        public override void setWheels(string i_ManufacturerName)
+        {
+            InitWheels(i_ManufacturerName, k_MaxAirPressure, eNumberOfWheel.Two);
         }
     }
 }

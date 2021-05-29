@@ -19,14 +19,22 @@ namespace Ex03.GarageLogic
             r_Wheels = new List<Wheel>();
         }
 
-        internal void SetElectricEngine()
+        internal void InitElectricEngine(float i_MaxTimeOfEngineOperationInHours)
         {
-            m_Engine = new Electric();
+            m_Engine = new Electric(i_MaxTimeOfEngineOperationInHours);
         }
         
-        internal void SetFuelEngine()
+        internal void InitFuelEngine(Fuel.eFuelType i_WantedFuelType, float i_MaxAmountOfFuelInLiters)
         {
-            m_Engine = new Fuel();
+            m_Engine = new Fuel(i_WantedFuelType, i_MaxAmountOfFuelInLiters);
+        }
+
+        internal void InitWheels(string i_ManufacturerName, float i_MaxAirPressure, eNumberOfWheel i_NumberOfWheel)
+        {
+            for(int i = 0; i < (int)i_NumberOfWheel ; i++)
+            {
+                Wheels.Add(new Wheel(i_ManufacturerName,i_MaxAirPressure));
+            }
         }
 
         internal enum eNumberOfWheel
@@ -85,5 +93,9 @@ namespace Ex03.GarageLogic
         }
 
         public abstract Dictionary<string,object> GetExtraDetailsMembers();
+
+        public abstract void setEnergy(EnergySource.eTypeOfEnergy i_EnergySourceTypeFromUser);
+        public abstract void setWheels(string i_ManufacturerName);
+
     }
 }

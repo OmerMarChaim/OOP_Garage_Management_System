@@ -8,8 +8,18 @@ namespace Ex03.GarageLogic
 {
     public class Fuel :EnergySource
     {
+        
         private eFuelType m_FuelType;
-       public enum eFuelType
+        private float m_CurrentAmountOfFuelInLiters;
+        private float m_MaxAmountOfFuelInLiters;
+
+        public Fuel(eFuelType i_WantedFuelType, float i_MaxAmountOfFuelInLiters)
+        {
+            m_FuelType = i_WantedFuelType;
+            m_MaxAmountOfFuelInLiters = i_MaxAmountOfFuelInLiters;
+        }
+
+        public enum eFuelType
         {
             Soler,
             Octane95,
@@ -22,9 +32,6 @@ namespace Ex03.GarageLogic
        {
            get { return m_FuelType; }
         }
-
-       private float m_CurrentAmountOfFuelInLiters;
-       private float m_MaxAmountOfFuelInLiters;
 
 
       // public override void UpdateAmountOfEnergy(float i_HowMuchMoreFuelToAdd, eFuelType i_FuelTypeEnter)

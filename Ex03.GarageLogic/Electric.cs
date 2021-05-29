@@ -11,6 +11,11 @@ namespace Ex03.GarageLogic
         private float m_RemainingTimeOfEngineOperationInHours;
         private float m_MaxTimeOfEngineOperationInHours;
 
+        public Electric(float i_MaxTimeOfEngineOperationInHours)
+        {
+            m_MaxTimeOfEngineOperationInHours = i_MaxTimeOfEngineOperationInHours;
+        }
+
         /// <summary>
         /// method that receives how many more hours to add, and charges the battery,
         /// while not crossing the max limit)

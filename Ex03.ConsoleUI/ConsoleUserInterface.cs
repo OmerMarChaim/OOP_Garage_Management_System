@@ -28,7 +28,8 @@ namespace Ex03.ConsoleUI
                 throw new FormatException("You have to enter number");
             }
             else if(!int.TryParse(userInput, out userInputAsNumber) || Garage.IsValidLicenseNumber(userInputAsNumber))
-            { // TODO DEBUG
+            {
+                // TODO DEBUG
                 throw new FormatException("You have you enter NUMBER in range 100000 - 999999");
             }
 
@@ -48,7 +49,7 @@ namespace Ex03.ConsoleUI
         /// <returns></returns>
         public static string GetValidLicenseNumberInGarage(Garage i_Garage)
         {
-            string licenseNumber = GarageUiManeger.GetValidLicenseNumber();
+            string licenseNumber = GarageUiManager.GetValidLicenseNumber();
             while(i_Garage.IsLicenseNumberInGarage(licenseNumber) == false)
             {
                 Console.WriteLine(
@@ -70,7 +71,7 @@ namespace Ex03.ConsoleUI
             throw new NotImplementedException();
         }
 
-        public static GarageUiManeger.eMenuOpiton FromIntToeMenuOpiton(int i_IntUserInput)
+        public static GarageUiManager.eMenuOpiton FromIntToeMenuOpiton(int i_IntUserInput)
         {
             throw new NotImplementedException();
         }
@@ -87,7 +88,7 @@ please enter by the number
 3. Octane96,
 4. Octane98";
             string userInputInString = Console.ReadLine();
-            int userInputInt = GetValidInputInRange(userInputInString,1,4,menuOption)
+            int userInputInt = GetValidInputInRange(userInputInString, 1, 4, menuOption)
             Fuel.eFuelType resFuelType = fromIntToeFuelType(userInputInt);
 
             return resFuelType;
@@ -205,49 +206,68 @@ please enter by the number
         public static Dictionary<string, object> GetDetailsForNewVehicle(
             VehicleFactory.eVehicleType i_VehicleTypeFromUser)
         {
-            Dictionary<string, object> allDetails = new Dictionary<string, string>();
+            Dictionary<string, object> allDetails = new Dictionary<string, object>();
             // first get basic information for all the vehicles 
             Console.WriteLine("Insert The Following attributes:");
             bool isValid = false;
             while(isValid)
             {
-                AskForGenericVehicleDetails(allDetails);
+                AskForGenericVehicleDetails(ref allDetails);
+                //need to enter constant by nedded
+
                 AskForExtraOfVehicleDetails();
                 AskForOwnerOfVehicleDetails();
             }
+
+            return allDetails;
         }
 
-        private static void AskForGenericVehicleDetails(ref Dictionary<string, object> i_AllDetailsDictionary)
+        private static void AskForGenericVehicleDetails(ref Dictionary<object, object> i_AllDetailsDictionary)
         {
-            Console.WriteLine("Please enter Model Name:");
-            
-            i_AllDetailsDictionary.Add("Model Name",Console.ReadLine());
-            Console.WriteLine("Wheels");
-            Console.WriteLine("Please chose ManufacturerName:");
-            i_AllDetailsDictionary.Add("ManufacturerName",Console.ReadLine());
+            /// private String m_ModelName;
+           /// private String m_LicenseNumber - we have;
+            ///private readonly List<Wheel> r_Wheels ;
+           /// private EnergySource m_Engine;
+           /// private readonly eNumberOfWheel r_NumberOfWheels - depend on type.;
+        Console.WriteLine("Please enter Model Name:");
+            string modelName = getNonEmptyInput();
+            i_AllDetailsDictionary.Add("Model Name", modelName);
+            string[] energyTypes = EnergySource.GetEnergyOptions();
+          
+            i_AllDetailsDictionary.Add(typeof(eTypeOfEnergy), energySourceTypeFromUser);
+            Console.WriteLine("Please chose Wheels Manufacturer Name:");
+            string manufacturerName = getNonEmptyInput();
+            i_AllDetailsDictionary.Add("Manufacturer Name", manufacturerName);
         }
 
-        // TODO NOT Imlemented
-        private string getNonEmptyInput()
+        internal static string getNonEmptyInput()
         {
             string userInput = Console.ReadLine();
             bool isValid = false;
-            while(isValid)
+            while(isValid == false)
             {
                 try
-            {
-                if(userInput == string.Empty)
                 {
-                    throw new FormatException();
-                }
-            }
-            catch(Exception e)
-            {
-                Console.WriteLine(e);
+                    if(userInput == string.Empty)
+                    {
+                        throw new FormatException();
+                    }
+                    else
+                    {
+                        isValid = true;
+                    }
 
-                throw;
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine(@"You enterd empty Word, please insert new one");
+                    userInput = Console.ReadLine();
+                    isValid = false;
+                }
+
             }
-            
+
+            return userInput;
         }
     }
 }

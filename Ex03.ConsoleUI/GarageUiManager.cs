@@ -9,7 +9,7 @@ using static Ex03.GarageLogic.EnergySource;
 
 namespace Ex03.ConsoleUI
 {
-    internal class GarageUiManeger
+    internal class GarageUiManager
     {
         private static Garage s_Garage;
 
@@ -268,7 +268,6 @@ namespace Ex03.ConsoleUI
             Vehicle newVehicle;
             bool isValid = false;
             eVehicleType vehicleTypeFromUser;
-            EnergySource.eTypeOfEnergy energySourceTypeFromUser;
             
             licenseNumber = GetValidLicenseNumber();
 
@@ -287,14 +286,26 @@ namespace Ex03.ConsoleUI
                         vehicleTypes,
                         "Please chose one of the following types of vehicles:");
                 string[] energyTypes = EnergySource.GetEnergyOptions();
+                EnergySource.eTypeOfEnergy energySourceTypeFromUser;
                 energySourceTypeFromUser = ConsoleUserInterface.GetValidChoice<eTypeOfEnergy>(
-                    energyTypes,
-                    "Please chose one of the following types of energy vehicles:");
-                newVehicle = VehicleFactory.CreateNewVehicle(vehicleTypeFromUser, licenseNumber);
+                    energyTypes, "Please chose one of the following types of energy vehicles:");
+                Console.WriteLine("Please enter Model Name:");
+                string modelName = ConsoleUserInterface.getNonEmptyInput();
+                newVehicle = VehicleFactory.CreateNewVehicle(vehicleTypeFromUser, licenseNumber, modelName);
                 // get all the require details from the given type after validation.
-                Dictionary<string, string> details = ConsoleUserInterface.GetDetailsForNewVehicle(vehicleTypeFromUser);
-               // set all details function 
+
+                // Dictionary<string, object> vhicledetails =new Dictionary<string, object>();
+                //   = ConsoleUserInterface.GetDetailsForNewVehicle(vehicleTypeFromUser);
               
+                Console.WriteLine("Please chose Wheels Manufacturer Name:");
+                string manufacturerName = getNonEmptyInput();
+                    //newVehicle.setWheels
+                        energySourceTypeFromUser = ConsoleUserInterface.GetValidChoice<eTypeOfEnergy>(
+                            energyTypes, "Please chose one of the following types of energy vehicles:");
+                        newVehicle.setEnergy(energySourceTypeFromUser);
+                // set all details function 
+
+
                 s_Garage.AddNewVehicle(newVehicle);
                 s_Garage.InflateTiresInCarToMax(licenseNumber);
                 s_Garage.SetMaxEnergy(licenseNumber);
