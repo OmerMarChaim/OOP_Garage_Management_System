@@ -73,27 +73,75 @@ namespace Ex03.ConsoleUI
 
         public static GarageUiManager.eMenuOpiton FromIntToeMenuOpiton(int i_IntUserInput)
         {
-            throw new NotImplementedException();
+            ///1. “Insert” a new vehicle into the garage.
+            //   2.Display a list of license numbers currently in the garage
+            //3.Change a certain vehicle’s status
+            //4.Inflate your car tires to maximum
+            //5.Refuel a fuel-based vehicle
+            //6.Charge an electric-based vehicle
+            //7.Display specific vehicle information
+
+            GarageUiManager.eMenuOpiton userResult=default;
+            switch(i_IntUserInput)
+            {
+                case 1:
+                    userResult = GarageUiManager.eMenuOpiton.NewVehicle;
+
+
+                    break;
+                case 2:
+                    userResult = GarageUiManager.eMenuOpiton.ListOfLicense;
+
+
+                    break;
+                case 3:
+                    userResult = GarageUiManager.eMenuOpiton.ChangeVehiclesStatus;
+
+                    break;
+                case 4:
+                    userResult = GarageUiManager.eMenuOpiton.InflateTires;
+
+
+                    break;
+                case 5:
+                    userResult = GarageUiManager.eMenuOpiton.RefuelFuel;
+
+                    break;
+                case 6:
+                    userResult = GarageUiManager.eMenuOpiton.ChargeElectricVehicle;
+
+                    break;
+                case 7:
+                    userResult = GarageUiManager.eMenuOpiton.DisplayVehicleInformation;
+                    break;
+
+
+            }
+
+            return userResult;
         }
 
-        public static Fuel.eFuelType GetValidFuelType()
-        {
-            ///importend flow
-            /// ask for number between 1-4,
-            /// get valid number -> turn the number to ENUM AS WE NEED -> retuen the enum
-            string menuOption = @"which kind of fuel you want to fill in your car? 
-please enter by the number
-1. Soler
-2. Octane95,
-3. Octane96,
-4. Octane98";
-            string userInputInString = Console.ReadLine();
-            int userInputInt = GetValidInputInRange(userInputInString, 1, 4, menuOption)
-            Fuel.eFuelType resFuelType = fromIntToeFuelType(userInputInt);
+        /*
+                public static Fuel.eFuelType GetValidFuelType()
+                {
+                    ///importend flow
+                    /// ask for number between 1-4,
+                    /// get valid number -> turn the number to ENUM AS WE NEED -> retuen the enum
+                    ///  string[] energyTypes = EnergySource.GetEnergyOptions();
 
-            return resFuelType;
-        }
+                    string menuOption = @"which kind of fuel you want to fill in your car? 
+        please enter by the number
+        1. Soler
+        2. Octane95,
+        3. Octane96,
+        4. Octane98";
+                    string userInputInString = Console.ReadLine();
+                    int userInputInt = GetValidInputInRange(userInputInString, 1, 4, menuOption)
+                    Fuel.eFuelType resFuelType = fromIntToeFuelType(userInputInt);
 
+                    return resFuelType;
+                }
+        */
         private static Fuel.eFuelType fromIntToeFuelType(int i_UserInputInt)
         {
             throw new NotImplementedException();
@@ -212,16 +260,16 @@ please enter by the number
             bool isValid = false;
             while(isValid)
             {
-                AskForGenericVehicleDetails(ref allDetails);
+              //  AskForGenericVehicleDetails(ref allDetails);
                 //need to enter constant by nedded
 
-                AskForExtraOfVehicleDetails();
-                AskForOwnerOfVehicleDetails();
+              //  AskForExtraOfVehicleDetails();
+               // AskForOwnerOfVehicleDetails();
             }
 
             return allDetails;
         }
-
+        /*
         private static void AskForGenericVehicleDetails(ref Dictionary<object, object> i_AllDetailsDictionary)
         {
             /// private String m_ModelName;
@@ -239,7 +287,7 @@ please enter by the number
             string manufacturerName = getNonEmptyInput();
             i_AllDetailsDictionary.Add("Manufacturer Name", manufacturerName);
         }
-
+        */
         internal static string getNonEmptyInput()
         {
             string userInput = Console.ReadLine();
@@ -269,5 +317,27 @@ please enter by the number
 
             return userInput;
         }
+
+        public static void setEnergyUi(eTypeOfEnergy i_EnergySourceTypeFromUser,ref Vehicle i_NewVehicle)
+        {
+            bool isValid = false;
+            while(isValid==false)
+                try
+                {
+                    i_NewVehicle.setEnergy(i_EnergySourceTypeFromUser);
+                    isValid = true;
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine(e);
+                    string[] energyTypes = EnergySource.GetEnergyOptions();
+                    EnergySource.eTypeOfEnergy energySourceTypeFromUser;
+                    energySourceTypeFromUser = ConsoleUserInterface.GetValidChoice<eTypeOfEnergy>(
+                        energyTypes, "Please chose one of the following types of energy vehicles:");
+
+                }
+        }
+    
+
+  
     }
-}

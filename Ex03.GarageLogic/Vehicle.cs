@@ -13,9 +13,10 @@ namespace Ex03.GarageLogic
         private EnergySource m_Engine;
         private readonly eNumberOfWheel r_NumberOfWheels;
         
-        protected Vehicle(string i_LicenseNumber)
+        protected Vehicle(string i_LicenseNumber, string i_ModelName)
         {
             m_LicenseNumber = i_LicenseNumber;
+            m_ModelName = i_ModelName;
             r_Wheels = new List<Wheel>();
         }
 

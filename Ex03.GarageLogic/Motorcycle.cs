@@ -12,13 +12,9 @@ namespace Ex03.GarageLogic
         private int m_EngineVolume;
         private eLicenseType m_LicenseType;
 
-        public Motorcycle(string i_LicenseNumber)
-            : base(i_LicenseNumber)
+        public Motorcycle(string i_LicenseNumber, string i_ModelName)
+            : base(i_LicenseNumber, i_ModelName)
         {
-            for (int i = 0; i < numberOfWheels; i++)
-            {
-                Wheels.Add(new Wheel(maxAirPressure));
-            }
         }
 
         private enum eLicenseType
@@ -35,10 +31,10 @@ namespace Ex03.GarageLogic
             i_IoDictionaryRef.Add("License Type", m_LicenseType.ToString());
         }
 
-        public override void getExtraDetailsForSpecificKindOfVehicle(ref Dictionary<string, object> i_IoDictionaryRef)
-        {
-            throw new NotImplementedException();
-        }
+        //public void getExtraDetailsForSpecificKindOfVehicle(ref Dictionary<string, object> i_IoDictionaryRef)
+        //{
+          //  throw new NotImplementedException();
+        //}
         public override Dictionary<string, object> GetExtraDetailsMembers()
         {
             Dictionary<string, object> extraMembers = new Dictionary<string, object>();
