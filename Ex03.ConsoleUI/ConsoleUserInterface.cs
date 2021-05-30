@@ -75,6 +75,10 @@ namespace Ex03.ConsoleUI
         {
 
 
+            GarageUiManager.eMenuOpiton userResult=default;
+=========
+            GarageUiManager.eMenuOpiton userResult=default;
+=========
             GarageUiManager.eMenuOpiton userResult = default;
             switch(i_IntUserInput)
             {
