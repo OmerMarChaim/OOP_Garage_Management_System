@@ -25,11 +25,14 @@ namespace Ex03.GarageLogic
         internal void InitElectricEngine(float i_MaxTimeOfEngineOperationInHours)
         {
             m_Engine = new Electric(i_MaxTimeOfEngineOperationInHours);
+            m_Engine.Type = EnergySource.eTypeOfEnergy.Electric;
         }
         
         internal void InitFuelEngine(Fuel.eFuelType i_WantedFuelType, float i_MaxAmountOfFuelInLiters)
         {
             m_Engine = new Fuel(i_WantedFuelType, i_MaxAmountOfFuelInLiters);
+            m_Engine.Type = EnergySource.eTypeOfEnergy.Fuel;
+
         }
 
         internal void InitWheels(string i_ManufacturerName, float i_MaxAirPressure, eNumberOfWheel i_NumberOfWheel)

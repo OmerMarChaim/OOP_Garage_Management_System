@@ -20,7 +20,8 @@ namespace Ex03.ConsoleUI
             InflateTires,
             RefuelFuel,
             ChargeElectricVehicle,
-            DisplayVehicleInformation
+            DisplayVehicleInformation,
+            Exit
         }
 
         internal GarageUiManager()
@@ -46,6 +47,7 @@ namespace Ex03.ConsoleUI
 5. Refuel a fuel-based vehicle
 6. Charge an electric-based vehicle
 7. Display specific vehicle information
+8. Exit
 ";
                 Console.WriteLine(menuOption);
                 string userInPut = Console.ReadLine();
@@ -127,10 +129,18 @@ namespace Ex03.ConsoleUI
                     s_Garage.ChargeElectricVehicleInGarage(licenseNumber, howManyMoreHoursToAdd);
                     isValid = true;
                 }
-                catch(Exception e)
+                catch(AggregateException e)
                 {
-                    Console.WriteLine(e);
+                    Console.WriteLine(e.Message);
+                    Console.WriteLine("Return to Menu");
+                    break;
                 }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                   
+                }
+
             }
         }
 
@@ -166,7 +176,7 @@ namespace Ex03.ConsoleUI
                         throw new ArgumentException("this Vehicle is not fuel based");
                     }
                 }
-                catch(ArgumentException e)
+                catch (Exception e)
                 {
                     ///Todo
                     /// we need undersnt how to define each exception here
@@ -181,7 +191,9 @@ namespace Ex03.ConsoleUI
                         /// throw no fit to fuel type.
                     }
                     */
-                    continue;
+                    
+                    Console.WriteLine(e.Message);
+                    
                 }
 
                 isValidAmountOfFuel = true;
@@ -341,17 +353,20 @@ namespace Ex03.ConsoleUI
 
             bool isValid = false;
             {
-                try
-                {
-                    io_NewVehicle.SetExtraDetailsMembers(ref attributeFromUser);
-                    isValid = true;
-                }
-                catch(Exception e)
-                {
-                    Console.WriteLine(e);
-                    isValid = false;
-                    setExtraDetailsMembersUI(ref io_NewVehicle);
-                }
+                
+                    try
+                    {
+                        io_NewVehicle.SetExtraDetailsMembers(ref attributeFromUser);
+                        isValid = true;
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                        setExtraDetailsMembersUI(ref io_NewVehicle);
+                    }
+
+
+
             }
         }
 

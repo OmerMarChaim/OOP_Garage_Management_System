@@ -10,7 +10,7 @@ namespace Ex03.GarageLogic
     {
         public enum eVehicleType
         {
-            Car,
+            Car=1,
             Motorcycle,
             Truck
         }

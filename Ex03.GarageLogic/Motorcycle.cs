@@ -46,7 +46,7 @@ namespace Ex03.GarageLogic
             {
                 throw new FormatException("You didn't enter a Number");
             }
-            else if (OptioninInt < 1 && OptioninInt > 4)
+            else if (OptioninInt < 1 || OptioninInt > 4)
             {
                 throw new ValueOutOfRangeException(1, 4, "You enterd Number Out of Range");
             }
@@ -64,7 +64,7 @@ namespace Ex03.GarageLogic
             {
                 throw new FormatException("You didn't enter a Number");
             }
-            else if (optionEngineVolumeInt < 0 && optionEngineVolumeInt > k_MaxEngineVolume)
+            else if (optionEngineVolumeInt < 0 || optionEngineVolumeInt > k_MaxEngineVolume)
             {
                 throw new ValueOutOfRangeException(0, k_MaxEngineVolume, "You enter Number Out of Range");
             }
@@ -79,7 +79,7 @@ namespace Ex03.GarageLogic
         {
             Dictionary<string, string> extraMembers = new Dictionary<string, string>();
             extraMembers.Add("Engine Volume", $"Number between 0-{k_MaxEngineVolume}");
-            extraMembers.Add("License Type", " Number as '1' for A, '2' for B1 , 'AA' , 'BB' ");
+            extraMembers.Add("License Type", " Number as '1' for A, '2' for B1 , '3' for AA ,'4' for BB ");
 
             return extraMembers;
         }

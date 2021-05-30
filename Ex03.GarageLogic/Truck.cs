@@ -41,7 +41,7 @@ namespace Ex03.GarageLogic
             {
                 throw new FormatException("You didnt enter a Number");
             }
-            else if (optionInt < 1 && optionInt > 2)
+            else if (optionInt < 1 || optionInt > 2)
             {
                 throw new ValueOutOfRangeException(1, 2, "You enterd Number Out of Range");
             }
@@ -59,7 +59,7 @@ namespace Ex03.GarageLogic
             {
                 throw new FormatException("You didnt enter a Number");
             }
-            else if (optionFloat < 0 && optionFloat > k_MaxAllowCargoInCountry)
+            else if (optionFloat < 0 || optionFloat > k_MaxAllowCargoInCountry)
             {
                 throw new ValueOutOfRangeException(0, k_MaxAllowCargoInCountry, "You enterd Number Out of Range");
             }

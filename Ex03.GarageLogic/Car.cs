@@ -65,7 +65,7 @@ namespace Ex03.GarageLogic
             {
                 throw new FormatException("You didn't enter a Number");
             }
-            else if (OptionNumberOfDoorsSInt < 2 && OptionNumberOfDoorsSInt > 5)
+            else if (OptionNumberOfDoorsSInt < 2 || OptionNumberOfDoorsSInt > 5)
             {
                 throw new ValueOutOfRangeException(1, 4, "You enterd Number Out of Range");
             }
@@ -83,7 +83,7 @@ namespace Ex03.GarageLogic
             {
                 throw new FormatException("You didnt enter a Number");
             }
-            else if (optionCarColorInt < 1 && optionCarColorInt > 4)
+            else if (optionCarColorInt < 1 || optionCarColorInt > 4)
             {
                 throw new ValueOutOfRangeException(1, 4, "You enterd Number Out of Range");
             }
