@@ -20,15 +20,19 @@ namespace Ex03.GarageLogic
          
         }
 
-        public override void InsertExtraDetailsIntoDict(ref Dictionary<string, object> i_IoDictionaryRef)
-        {
-            i_IoDictionaryRef.Add("Contains dangerous materials", m_ContainsDangerousMaterials);
-            i_IoDictionaryRef.Add("Max cargo weight",m_MaxCargoWeight);
-        }
+   
 
-        public override Dictionary<string, object> GetExtraDetailsMembers()
+        public override void InsertExtraDetailsIntoDict(ref Dictionary<string, string> io_DictionaryRef)
         {
             throw new NotImplementedException();
+        }
+
+        public override Dictionary<string, string> GetExtraDetailsMembers()
+        {
+            Dictionary<string, string> extraDetailsMembers = new Dictionary<string, string>();
+            extraDetailsMembers.Add("Max Cargo Weight", "Number big then Zero");
+            extraDetailsMembers.Add("Contains Dangerous Materials", "'Yes','No'");
+            return extraDetailsMembers;
         }
 
         public override void setEnergy(EnergySource.eTypeOfEnergy i_EnergySourceTypeFromUser)

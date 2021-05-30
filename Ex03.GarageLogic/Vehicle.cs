@@ -75,9 +75,11 @@ namespace Ex03.GarageLogic
                 wheel.InflateToMaximum();
             }
         }
-        // ReSharper disable once InconsistentNaming
-        public abstract void InsertExtraDetailsIntoDict(ref Dictionary<string, object> io_DictionaryRef);
-        // ReSharper disable once InconsistentNaming
+
+        public abstract void InsertExtraDetailsIntoDict(ref Dictionary<string , string > io_DictionaryRef);
+
+        public abstract Dictionary<string , string> GetExtraDetailsMembers();
+
         public void GetWheelsDetails(ref Dictionary<string, object> io_DictionaryRef)
         {
             foreach(Wheel wheel in Wheels)
@@ -93,7 +95,7 @@ namespace Ex03.GarageLogic
             io_DictionaryRef.Add($"{typeOfEnergy} Status", $"{this.Engine.RemainingEnergyPercentage}%");
         }
 
-        public abstract Dictionary<string,object> GetExtraDetailsMembers();
+      
 
         public abstract void setEnergy(EnergySource.eTypeOfEnergy i_EnergySourceTypeFromUser);
         public abstract void setWheels(string i_ManufacturerName);

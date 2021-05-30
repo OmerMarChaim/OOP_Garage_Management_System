@@ -20,7 +20,7 @@ namespace Ex03.GarageLogic
 
         private enum eCarColor
         {
-            Red,
+            Red =1,
             Silver,
             White,
             Black
@@ -50,9 +50,12 @@ namespace Ex03.GarageLogic
         }
         */
 
-        public override Dictionary<string, object> GetExtraDetailsMembers()
+        public override Dictionary<string, string> GetExtraDetailsMembers()
         {
-            throw new NotImplementedException();
+            Dictionary<string, string> extraDetailsMembers = new Dictionary<string, string>();
+            extraDetailsMembers.Add("Car Color","'Red', 'Silver' ,'White' ,'Black' ");
+            extraDetailsMembers.Add("Number Of Doors", "'2','3','4','5'");
+            return extraDetailsMembers;
         }
 
         public override void setEnergy(EnergySource.eTypeOfEnergy i_EnergySourceTypeFromUser)
