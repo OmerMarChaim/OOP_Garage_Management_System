@@ -24,16 +24,12 @@ namespace Ex03.ConsoleUI
             }
 
             int userInputAsNumber;
-            bool isNumber = int.TryParse(userInput, out  userInputAsNumber);
+            bool isNumber = int.TryParse(userInput, out userInputAsNumber);
             if(isNumber == true)
             {
-
                 Garage.IsValidLicenseNumber(userInputAsNumber);
-
-
-
             }
-            else 
+            else
             {
                 throw new FormatException("you didn't enter a number");
             }
@@ -44,12 +40,18 @@ namespace Ex03.ConsoleUI
         public static string ListToString(List<string> i_ListOfLicenseNumbersInTheGarage)
         {
             StringBuilder result = new StringBuilder();
-            foreach(string str in i_ListOfLicenseNumbersInTheGarage)
+            if(i_ListOfLicenseNumbersInTheGarage.Count > 0)
             {
-                result.AppendLine(str);
-                result.AppendLine();
+                foreach(string str in i_ListOfLicenseNumbersInTheGarage)
+                {
+                    result.AppendLine(str);
+                    result.AppendLine();
+                }
             }
-
+            else
+            {
+                result.AppendLine("The Garage is empty");
+            }
             return result.ToString();
         }
 

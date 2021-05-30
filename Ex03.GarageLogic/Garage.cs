@@ -42,7 +42,7 @@ namespace Ex03.GarageLogic
         /// <returns></returns>
         public List<string> ListOfLicenseNumbersInTheGarage()
         {
-            return null;
+            return m_OwnerDetailsTickets.Keys.ToList();
         }
 
         /// <summary>
@@ -181,7 +181,7 @@ namespace Ex03.GarageLogic
 
             Vehicle specificVehicle = r_VehicleInventory[i_LicenseNumber];
             Electric electricEngine = (specificVehicle.Engine) as Electric;
-            if(electricEngine != null && i_HowManyMoreHoursToAdd > electricEngine.RemainingEnergyPercentage)
+            if(i_HowManyMoreHoursToAdd > electricEngine.RemainingEnergyPercentage)
             {
                 throw new ValueOutOfRangeException(0, electricEngine.RemainingEnergyPercentage, "Out of range!");
             }
