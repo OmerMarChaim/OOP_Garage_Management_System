@@ -181,7 +181,7 @@ namespace Ex03.GarageLogic
         public void ChargeElectricVehicleInGarage(string i_LicenseNumber, float i_HowManyMoreHoursToAdd)
         {
             bool isElectricBased = IsElectricVehicle(i_LicenseNumber);
-            if(!isElectricBased)
+            if(isElectricBased==false)
             {
                 throw new ArgumentException("This License Number is not belongs to Electric Vehicle. ");
             }

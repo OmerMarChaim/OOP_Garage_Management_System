@@ -8,13 +8,17 @@ namespace Ex03.GarageLogic
 {
     public abstract class EnergySource
     {
-        private float m_RemainingEnergyPercentage;
+        protected float m_RemainingEnergy;
         private eTypeOfEnergy m_Type;
 
         public enum eTypeOfEnergy
         {
             Electric=1,
             Fuel
+        }
+        public float RemainingEnergy
+        {
+            get { return m_RemainingEnergy; }
         }
 
         public eTypeOfEnergy Type
@@ -23,11 +27,7 @@ namespace Ex03.GarageLogic
             set { m_Type = value; }
         }
 
-        public float RemainingEnergyPercentage
-        {
-            get { return m_RemainingEnergyPercentage; }
-        }
-
+      
         //    public abstract void UpdateAmountOfEnergy(float i_HowManyMoreHoursToAdd);
 
         public static string[] GetEnergyOptions()
