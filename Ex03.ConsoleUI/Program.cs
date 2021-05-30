@@ -10,7 +10,7 @@ namespace Ex03.ConsoleUI
     {
         public static void Main()
         {
-            GarageUiManager Garage = new GarageUiManager();
+            GarageUiManager garage = new GarageUiManager();
           
         }
     }

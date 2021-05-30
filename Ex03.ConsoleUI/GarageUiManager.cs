@@ -32,10 +32,13 @@ namespace Ex03.ConsoleUI
 
         internal void StartMenu()
         {
-            string helloMessage = string.Format("Welcome to Our garage");
-            Console.WriteLine(helloMessage);
+            int intUserInput;
+            do
+            {
+                string helloMessage = string.Format("Welcome to Our garage");
+                Console.WriteLine(helloMessage);
 
-            string menuOption = @"Which service do you need ? please write the number :
+                string menuOption = @"Which service do you need ? please write the number :
 1. “Insert” a new vehicle into the garage.
 2. Display a list of license numbers currently in the garage
 3. Change a certain vehicle’s status
@@ -44,11 +47,13 @@ namespace Ex03.ConsoleUI
 6. Charge an electric-based vehicle
 7. Display specific vehicle information
 ";
-            Console.WriteLine(menuOption);
-            string userInPut = Console.ReadLine();
-            int intUserInput = ConsoleUserInterface.GetValidInputInRange(userInPut, 1, 7, menuOption);
-            eMenuOpiton numberOfUserChoose = (eMenuOpiton)intUserInput;
-            doUserChoice(numberOfUserChoose);
+                Console.WriteLine(menuOption);
+                string userInPut = Console.ReadLine();
+                intUserInput = ConsoleUserInterface.GetValidInputInRange(userInPut, 1, 7, menuOption);
+                eMenuOpiton numberOfUserChoose = (eMenuOpiton)intUserInput;
+                doUserChoice(numberOfUserChoose);
+            }
+            while(intUserInput != 8);
         }
 
         private void doUserChoice(eMenuOpiton i_NumberOfUserChoose)
@@ -249,10 +254,10 @@ namespace Ex03.ConsoleUI
         {
             List<string> listOfLicenseNumbersInTheGarage = s_Garage.ListOfLicenseNumbersInTheGarage();
             string listOfLicenseNumberString = ConsoleUserInterface.ListToString(listOfLicenseNumbersInTheGarage);
-            string displayMessage = string.Format("this is the list of the License Numbers in The Garage");
+            string displayMessage = string.Format("This is the list of the License Numbers in The Garage:");
             Console.WriteLine(
                 $@"{displayMessage}
-{listOfLicenseNumbersInTheGarage}");
+{listOfLicenseNumberString}");
         }
 
         /// <summary>
