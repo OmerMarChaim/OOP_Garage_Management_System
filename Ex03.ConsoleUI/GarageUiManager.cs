@@ -305,14 +305,19 @@ namespace Ex03.ConsoleUI
                 string manufacturerName = getNonEmptyInput();
                 newVehicle.setWheels(manufacturerName);
 
-                // set all details function 
-              
-
+                
                 setExtraDetailsMembersUI(ref newVehicle);
-         
-                s_Garage.AddNewVehicle(newVehicle);
+
+                Console.WriteLine("Please enter Car owner Name:");
+                string ownerName = getNonEmptyInput();
+                Console.WriteLine("Please enter owner Phone Number:");
+                string phoneNumber =  getNonEmptyInput();
+                
+                s_Garage.AddNewVehicle(newVehicle ,ownerName,phoneNumber);
                 s_Garage.InflateTiresInCarToMax(licenseNumber);
                 s_Garage.SetMaxEnergy(licenseNumber);
+                Console.WriteLine("We enter your car :)");
+
             }
         }
 
@@ -326,16 +331,20 @@ namespace Ex03.ConsoleUI
                 attributeFromUser.Add(member.Key, Console.ReadLine());
             }
 
-            try
+            bool isValid = false;
             {
-                io_NewVehicle.SetExtraDetailsMembers(ref attributeFromUser);
+                try
+                {
+                    io_NewVehicle.SetExtraDetailsMembers(ref attributeFromUser);
+                    isValid = true;
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine(e);
+                    isValid = false;
+                    setExtraDetailsMembersUI(ref io_NewVehicle);
+                }
             }
-            catch(Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-
         }
 
         // This method using GETLicenseNumber and Continues to request inputs according to the type of errors it receives

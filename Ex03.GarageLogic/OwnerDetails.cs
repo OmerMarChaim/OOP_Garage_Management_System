@@ -10,14 +10,24 @@ namespace Ex03.GarageLogic
         private eStatus m_CurrentStatus;
         private string m_VehicleLicenseNumber;
 
+        public OwnerDetails(string i_Name, string i_Phone,string i_VehicleLicenseNumber)
+        {
+            m_Name = i_Name;
+            m_PhoneNumer = i_Phone;
+            m_CurrentStatus = eStatus.InRepair;
+            m_VehicleLicenseNumber = i_VehicleLicenseNumber;
+        }
+
         public string Name
         {
             get { return m_Name; }
+            set { m_Name = value; }
         }
         
         public string PhoneNumer
         {
             get { return m_PhoneNumer; }
+            set { m_PhoneNumer = value; }
         }
         
         public eStatus CurrentStatus

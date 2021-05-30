@@ -50,24 +50,46 @@ namespace Ex03.GarageLogic
 
         public override void SetExtraDetailsMembers(ref Dictionary<string, string> io_DictionaryRef)
         {
-            setCarColor(io_DictionaryRef);
+            ///we send by this order
+           string optionCarColor = io_DictionaryRef.ElementAt(0).Value;
+           string optionNumberOfDoors= io_DictionaryRef.ElementAt(1).Value;
+           setCarColor(optionCarColor);
+           setNumberOfDoors(optionNumberOfDoors);
         }
 
-        private void setCarColor(Dictionary<string, string> i_DictionaryRef)
+        private void setNumberOfDoors(string i_OptionNumberOfDoorsString)
         {
-            int optionColor;
-            bool isNumber = int.TryParse(i_DictionaryRef.ElementAt(0).Value, out optionColor);
+            int OptionNumberOfDoorsSInt;
+            bool isNumber = int.TryParse(i_OptionNumberOfDoorsString, out OptionNumberOfDoorsSInt);
             if (isNumber == false)
             {
-                throw new FormatException("You didnt enter a Number");
+                throw new FormatException("You didn't enter a Number");
             }
-            else if (optionColor < 1 && optionColor > 4)
+            else if (OptionNumberOfDoorsSInt < 2 && OptionNumberOfDoorsSInt > 5)
             {
                 throw new ValueOutOfRangeException(1, 4, "You enterd Number Out of Range");
             }
             else
             {
-                m_Color = (eCarColor)optionColor;
+                m_NumberOfDoors = (eNumberOfDoors)OptionNumberOfDoorsSInt;
+            }
+        }
+
+        private void setCarColor(string i_OptionCarColorString)
+        {
+            int optionCarColorInt;
+            bool isNumber = int.TryParse(i_OptionCarColorString, out optionCarColorInt);
+            if (isNumber == false)
+            {
+                throw new FormatException("You didnt enter a Number");
+            }
+            else if (optionCarColorInt < 1 && optionCarColorInt > 4)
+            {
+                throw new ValueOutOfRangeException(1, 4, "You enterd Number Out of Range");
+            }
+            else
+            {
+                m_Color = (eCarColor)optionCarColorInt;
             }
         }
 

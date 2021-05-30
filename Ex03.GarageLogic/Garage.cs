@@ -175,11 +175,13 @@ namespace Ex03.GarageLogic
             electricEngine.RechargeOperation(i_HowManyMoreHoursToAdd);
         }
 
-        public void AddNewVehicle(Vehicle i_NewVehicle)
+        public void AddNewVehicle(Vehicle i_NewVehicle, string i_OwnerName, string i_PhoneNumber)
         {
-            throw new NotImplementedException();
+            string newLicenseNumber = i_NewVehicle.LicenseNumber;
+            OwnerDetails newOwner = new OwnerDetails(i_OwnerName, i_PhoneNumber, newLicenseNumber);
+            m_OwnerDetailsTickets.Add(newLicenseNumber,newOwner);
+            r_VehicleInventory.Add(newLicenseNumber,i_NewVehicle);
         }
-
         public void SetMaxEnergy(string i_LicenseNumber)
         {
             throw new NotImplementedException();

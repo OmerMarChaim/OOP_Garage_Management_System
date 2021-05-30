@@ -10,6 +10,8 @@ namespace Ex03.GarageLogic
     {
         private const float k_MaxAirPressure = 28;
         private const eNumberOfWheel k_NumberOfWheel = eNumberOfWheel.Sixteen;
+        private const float k_MaxAllowCargoInCountry = 100000;
+
 
         private bool m_ContainsDangerousMaterials;
         private float m_MaxCargoWeight;
@@ -19,20 +21,65 @@ namespace Ex03.GarageLogic
         {
          
         }
-
+        
    
 
         public override void SetExtraDetailsMembers(ref Dictionary<string, string> io_DictionaryRef)
         {
-            throw new NotImplementedException();
+           string maxCargoWeight = io_DictionaryRef.ElementAt(0).Value;
+           string ContainsDangerousMaterials = io_DictionaryRef.ElementAt(1).Value;
+           setMaxCargo(maxCargoWeight);
+           setContainsDangerousMaterials(ContainsDangerousMaterials);
+
+        }
+
+        private void setContainsDangerousMaterials(string i_ContainsDangerousMaterials)
+        {
+            int optionInt;
+            bool isNumber = int.TryParse(i_ContainsDangerousMaterials, out optionInt);
+            if (isNumber == false)
+            {
+                throw new FormatException("You didnt enter a Number");
+            }
+            else if (optionInt < 1 && optionInt > 2)
+            {
+                throw new ValueOutOfRangeException(1, 2, "You enterd Number Out of Range");
+            }
+            else
+            {
+               m_ContainsDangerousMaterials= optionInt==1 ? true : false;
+            }
+        }
+
+        private void setMaxCargo(string i_MaxCargoWeight)
+        {
+            float optionFloat;
+            bool isNumber = float.TryParse(i_MaxCargoWeight, out optionFloat);
+            if (isNumber == false)
+            {
+                throw new FormatException("You didnt enter a Number");
+            }
+            else if (optionFloat < 0 && optionFloat > k_MaxAllowCargoInCountry)
+            {
+                throw new ValueOutOfRangeException(0, k_MaxAllowCargoInCountry, "You enterd Number Out of Range");
+            }
+            else
+            {
+                m_MaxCargoWeight = optionFloat;
+            }
         }
 
         public override Dictionary<string, string> GetExtraMembersNamesAndConditions()
         {
             Dictionary<string, string> extraDetailsMembers = new Dictionary<string, string>();
-            extraDetailsMembers.Add("Max Cargo Weight", "Number big then Zero");
-            extraDetailsMembers.Add("Contains Dangerous Materials", "'Yes','No'");
+            extraDetailsMembers.Add("Max Cargo Weight", $"Number between 0-{k_MaxAllowCargoInCountry}");
+            extraDetailsMembers.Add("Contains Dangerous Materials", "'1' for Yes,'2' for No");
             return extraDetailsMembers;
+        }
+
+        public override void GetExtraMembersContent(ref Dictionary<string, object> i_MembersDictionary)
+        {
+            throw new NotImplementedException();
         }
 
         public override void setEnergy(EnergySource.eTypeOfEnergy i_EnergySourceTypeFromUser)

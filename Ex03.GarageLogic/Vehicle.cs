@@ -78,10 +78,12 @@ namespace Ex03.GarageLogic
             }
         }
 
+       // public abstract void setSpecificMemberAttribute(string i_OptionInString,ref object i_Attribute, int i_MinValue, int i_Maxvalue);
+
         public abstract void SetExtraDetailsMembers(ref Dictionary<string , string > io_DictionaryRef);
 
         public abstract Dictionary<string , string> GetExtraMembersNamesAndConditions();
-        public abstract void GetExtraMembersContent(ref Dictionary<string , object>);
+        public abstract void GetExtraMembersContent(ref Dictionary<string , object> i_MembersDictionary);
 
         public void GetWheelsDetails(ref Dictionary<string, object> io_DictionaryRef)
         {
