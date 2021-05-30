@@ -79,7 +79,7 @@ namespace Ex03.GarageLogic
         {
             Dictionary<string, string> extraMembers = new Dictionary<string, string>();
             extraMembers.Add("Engine Volume", $"Number between 0-{k_MaxEngineVolume}");
-            extraMembers.Add("License Type", " Number as '1' for A, '2' for B1 , 'AA' , 'BB' ");
+            extraMembers.Add("License Type", " Number as '1' for A, '2' for B1 , '3' for AA ,'4' for BB ");
 
             return extraMembers;
         }

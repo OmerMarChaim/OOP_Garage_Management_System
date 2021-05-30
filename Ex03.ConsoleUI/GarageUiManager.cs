@@ -336,17 +336,20 @@ namespace Ex03.ConsoleUI
 
             bool isValid = false;
             {
-                try
-                {
-                    io_NewVehicle.SetExtraDetailsMembers(ref attributeFromUser);
-                    isValid = true;
-                }
-                catch(Exception e)
-                {
-                    Console.WriteLine(e);
-                    isValid = false;
-                    setExtraDetailsMembersUI(ref io_NewVehicle);
-                }
+                
+                    try
+                    {
+                        io_NewVehicle.SetExtraDetailsMembers(ref attributeFromUser);
+                        isValid = true;
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                        setExtraDetailsMembersUI(ref io_NewVehicle);
+                    }
+
+
+
             }
         }
 
