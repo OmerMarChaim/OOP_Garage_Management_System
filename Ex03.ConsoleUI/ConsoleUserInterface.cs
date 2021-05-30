@@ -6,6 +6,7 @@ using static Ex03.GarageLogic.EnergySource;
 
 namespace Ex03.ConsoleUI
 {
+    // ReSharper disable once ClassNeverInstantiated.Global
     internal class ConsoleUserInterface
     {
         /// <summary>
@@ -21,11 +22,20 @@ namespace Ex03.ConsoleUI
             {
                 throw new FormatException("You have to enter number");
             }
-            else if(!int.TryParse(userInput, out int userInputAsNumber)
-                    || Garage.IsValidLicenseNumber(userInputAsNumber))
+
+            int userInputAsNumber;
+            bool isNumber = int.TryParse(userInput, out  userInputAsNumber);
+            if(isNumber == true)
             {
-                // TODO DEBUG
-                throw new FormatException("You have you enter NUMBER in range 100000 - 999999");
+
+                Garage.IsValidLicenseNumber(userInputAsNumber);
+
+
+
+            }
+            else 
+            {
+                throw new FormatException("you didn't enter a number");
             }
 
             return userInput;
@@ -62,7 +72,7 @@ namespace Ex03.ConsoleUI
             return licenseNumber;
         }
 
-        /// give me just valid int of amount of fuel between 0-whathever
+        /// give me just valid int of amount of fuel between 0- what over
         /// the logic check if its out of range.
         public static int GetValidAmount()
         {
@@ -120,7 +130,7 @@ namespace Ex03.ConsoleUI
                 {
                     ///importend flow
                     /// ask for number between 1-4,
-                    /// get valid number -> turn the number to ENUM AS WE NEED -> retuen the enum
+                    /// get valid number -> turn the number to ENUM AS WE NEED -> return the enum
                     ///  string[] energyTypes = EnergySource.GetEnergyOptions();
 
                     string menuOption = @"which kind of fuel you want to fill in your car? 
@@ -136,10 +146,6 @@ namespace Ex03.ConsoleUI
                     return resFuelType;
                 }
         */
-        private static Fuel.eFuelType fromIntToeFuelType(int i_UserInputInt)
-        {
-            throw new NotImplementedException();
-        }
 
         //TODO isInRagne bool
         internal static int GetValidInputInRange(string i_UserInput, int i_MinNum, int i_MaxNum, string i_MessageToShow)

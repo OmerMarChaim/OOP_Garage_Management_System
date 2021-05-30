@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Ex03.ConsoleUI
 {
-    class program
+    public class Program
     {
         public static void Main()
         {
             GarageUiManager Garage = new GarageUiManager();
-            Garage.StartMenu();
+          
         }
     }
 }

@@ -119,13 +119,11 @@ namespace Ex03.GarageLogic
             InitWheels(i_ManufacturerName,k_MaxAirPressure, k_NumberOfWheel);
         }
 
-        public override void GetExtraMembersContent(ref Dictionary<string, object> missing_name)
+        public override void GetExtraMembersContent(ref Dictionary<string, object> io_Dictionary)
         {
-            List<string> extraMembers = new List<string>();
-            extraMembers.Add("Color");
-            extraMembers.Add("Number of doors");
+            io_Dictionary.Add("Color", m_Color.ToString());
+            io_Dictionary.Add("Number of doors", m_NumberOfDoors.ToString());
 
-            return extraMembers;
         }
     }
 }

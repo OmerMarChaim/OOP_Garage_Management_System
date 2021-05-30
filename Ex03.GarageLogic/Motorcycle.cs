@@ -84,10 +84,7 @@ namespace Ex03.GarageLogic
             return extraMembers;
         }
 
-        public override void GetExtraMembersContent(ref Dictionary<string, object> missing_name)
-        {
-            throw new NotImplementedException();
-        }
+   
 
         public override void setEnergy(EnergySource.eTypeOfEnergy i_EnergySourceTypeFromUser)
         {
@@ -104,6 +101,12 @@ namespace Ex03.GarageLogic
         public override void setWheels(string i_ManufacturerName)
         {
             InitWheels(i_ManufacturerName, k_MaxAirPressure, k_NumberOfWheel);
+        }
+
+        public override void GetExtraMembersContent(ref Dictionary<string, object> io_Dictionary)
+        {
+            io_Dictionary.Add("Engine Volume", m_EngineVolume.ToString());
+            io_Dictionary.Add("License Type", m_LicenseType.ToString());
         }
     }
 }

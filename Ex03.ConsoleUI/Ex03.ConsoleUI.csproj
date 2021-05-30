@@ -40,7 +40,7 @@
   <ItemGroup>
     <Compile Include="ConsoleUserInterface.cs" />
     <Compile Include="GarageUiManager.cs" />
-    <Compile Include="program.cs" />
+    <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

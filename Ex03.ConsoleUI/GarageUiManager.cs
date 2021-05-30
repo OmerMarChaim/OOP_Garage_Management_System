@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
 using Ex03.GarageLogic;
 using static Ex03.ConsoleUI.ConsoleUserInterface;
 using static Ex03.GarageLogic.OwnerDetails.eStatus;
@@ -15,13 +14,20 @@ namespace Ex03.ConsoleUI
 
         public enum eMenuOpiton
         {
-            NewVehicle = 1 ,
+            NewVehicle = 1,
             ListOfLicense,
             ChangeVehiclesStatus,
             InflateTires,
             RefuelFuel,
             ChargeElectricVehicle,
             DisplayVehicleInformation
+        }
+
+        internal GarageUiManager()
+        {
+            s_Garage =new Garage();
+            StartMenu();
+
         }
 
         internal void StartMenu()
@@ -41,7 +47,6 @@ namespace Ex03.ConsoleUI
             Console.WriteLine(menuOption);
             string userInPut = Console.ReadLine();
             int intUserInput = ConsoleUserInterface.GetValidInputInRange(userInPut, 1, 7, menuOption);
-            //eMenuOpiton numberOfUserChoose = ConsoleUserInterface.FromIntToeMenuOpiton(intUserInput);
             eMenuOpiton numberOfUserChoose = (eMenuOpiton)intUserInput;
             doUserChoice(numberOfUserChoose);
         }
@@ -82,18 +87,13 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        private void despleyListOfLicense()
-        {
-            throw new NotImplementedException();
-        }
-
         /// <summary>
         /// OMRI
         /// Display vehicle information (License number, Model name, Owner name, Status in garage,
         /// Tire specifications (manufacturer and air pressure),
         /// Fuel status + Fuel type / Battery status, other relevant information based on vehicle type)
         /// </summary>
-        private void displayVehicleInformation()
+        private static void displayVehicleInformation()
         {
             Console.WriteLine("For displaying vehicle information, enter license number");
             string inputLicenseNumber = ConsoleUserInterface.GetValidLicenseNumberInGarage(s_Garage);
@@ -110,27 +110,22 @@ namespace Ex03.ConsoleUI
         /// 6. Charge an electric-based vehicle
         /// (Prompting the user for the license number and number of minutes to charge)
         /// </summary>
-        private void chargeElectricVehicle()
+        private static void chargeElectricVehicle()
         {
-            bool isElectricBased;
             string licenseNumber = ConsoleUserInterface.GetValidLicenseNumberInGarage(s_Garage);
-            try
+            bool isValid = false;
+            while(!isValid)
             {
-                isElectricBased = s_Garage.IsElectricVehicle(licenseNumber);
-                if(isElectricBased == true)
+                try
                 {
                     int howManyMoreHoursToAdd = ConsoleUserInterface.GetValidAmount();
                     s_Garage.ChargeElectricVehicleInGarage(licenseNumber, howManyMoreHoursToAdd);
+                    isValid = true;
                 }
-            }
-            catch(ArgumentException e)
-            {
-                ///Todo
-                /// we need undersnt how to define each exception here
-                /// best by ErorMessege.
-                Console.WriteLine(e);
-
-                throw;
+                catch(Exception e)
+                {
+                    Console.WriteLine(e);
+                }
             }
         }
 
@@ -154,10 +149,11 @@ namespace Ex03.ConsoleUI
                     if(isFuel == true)
                     {
                         int amountFuelToFill = ConsoleUserInterface.GetValidAmount();
-                       
-                            string[] fuelTypes = Fuel.GetFuelOptions();
+
+                        string[] fuelTypes = Fuel.GetFuelOptions();
                         Fuel.eFuelType desireFuelType = ConsoleUserInterface.GetValidChoice<Fuel.eFuelType>(
-                            fuelTypes, "Please chose one of the following types of Fuel:");
+                            fuelTypes,
+                            "Please chose one of the following types of Fuel:");
                         s_Garage.ReFuelFuelInSpecificVehicle(licenseNumber, amountFuelToFill, desireFuelType);
                     }
                     else
@@ -222,8 +218,9 @@ namespace Ex03.ConsoleUI
              */
             string[] statusTypes = OwnerDetails.GetStatusOptions();
             OwnerDetails.eStatus desireStatus = ConsoleUserInterface.GetValidChoice<OwnerDetails.eStatus>(
-                statusTypes, "Please chose one of the following types of Fuel:");
-         
+                statusTypes,
+                "Please chose one of the following types of Fuel:");
+
             switch(desireStatus)
             {
                 case InRepair:
@@ -232,9 +229,11 @@ namespace Ex03.ConsoleUI
                     break;
                 case Payed:
                     desireStatus = Payed;
+
                     break;
-                default :
+                default:
                     desireStatus = default;
+
                     break;
             }
 
@@ -255,6 +254,7 @@ namespace Ex03.ConsoleUI
                 $@"{displayMessage}
 {listOfLicenseNumbersInTheGarage}");
         }
+
         /// <summary>
         /// 1. “Insert” a new vehicle into the garage.
         /// The user will be asked to select a vehicle type out of the supported vehicle types,
@@ -271,7 +271,7 @@ namespace Ex03.ConsoleUI
             Vehicle newVehicle;
             bool isValid = false;
             eVehicleType vehicleTypeFromUser;
-            
+
             licenseNumber = GetValidLicenseNumber();
 
             if(s_Garage.IsLicenseNumberInGarage(licenseNumber))
@@ -285,10 +285,11 @@ namespace Ex03.ConsoleUI
                 ///build new Vehicle
                 string[] vehicleTypes = VehicleFactory.GetVehicleOptions();
                 vehicleTypeFromUser = ConsoleUserInterface.GetValidChoice<eVehicleType>(
-                        vehicleTypes, "Please chose one of the following types of vehicles:");
+                    vehicleTypes,
+                    "Please chose one of the following types of vehicles:");
                 string[] energyTypes = EnergySource.GetEnergyOptions();
                 EnergySource.eTypeOfEnergy energySourceTypeFromUser;
-          
+
                 Console.WriteLine("Please enter Model Name:");
                 string modelName = ConsoleUserInterface.getNonEmptyInput();
                 newVehicle = VehicleFactory.CreateNewVehicle(vehicleTypeFromUser, licenseNumber, modelName);
@@ -296,16 +297,18 @@ namespace Ex03.ConsoleUI
 
                 // Dictionary<string, object> vhicledetails =new Dictionary<string, object>();
                 //   = ConsoleUserInterface.GetDetailsForNewVehicle(vehicleTypeFromUser);
-              
+
                 energySourceTypeFromUser = ConsoleUserInterface.GetValidChoice<eTypeOfEnergy>(
-                            energyTypes, "Please chose one of the following types of energy vehicles:");
+                    energyTypes,
+                    "Please chose one of the following types of energy vehicles:");
                 ConsoleUserInterface.setEnergyUi(energySourceTypeFromUser, ref newVehicle);
 
                 Console.WriteLine("Please chose Wheels Manufacturer Name:");
                 string manufacturerName = getNonEmptyInput();
                 newVehicle.setWheels(manufacturerName);
 
-                
+                // set all details function 
+
                 setExtraDetailsMembersUI(ref newVehicle);
 
                 Console.WriteLine("Please enter Car owner Name:");
@@ -315,7 +318,7 @@ namespace Ex03.ConsoleUI
                 
                 s_Garage.AddNewVehicle(newVehicle ,ownerName,phoneNumber);
                 s_Garage.InflateTiresInCarToMax(licenseNumber);
-                s_Garage.SetMaxEnergy(licenseNumber);
+              //  s_Garage.SetMaxEnergy(licenseNumber);
                 Console.WriteLine("We enter your car :)");
 
             }
@@ -325,7 +328,7 @@ namespace Ex03.ConsoleUI
         {
             Dictionary<string, string> extraDetails = io_NewVehicle.GetExtraMembersNamesAndConditions();
             Dictionary<string, string> attributeFromUser = new Dictionary<string, string>();
-            foreach (KeyValuePair<string, string> member in extraDetails)
+            foreach(KeyValuePair<string, string> member in extraDetails)
             {
                 Console.WriteLine($"Please enter {member.Key} ,Please insert by the following : {member.Value}");
                 attributeFromUser.Add(member.Key, Console.ReadLine());
@@ -361,7 +364,7 @@ namespace Ex03.ConsoleUI
                 }
                 catch(Exception e)
                 {
-                    Console.WriteLine(e);
+                    Console.WriteLine(e.Message);
                 }
             }
 
