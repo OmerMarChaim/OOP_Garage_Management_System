@@ -321,19 +321,19 @@ namespace Ex03.ConsoleUI
 
         public static void setEnergyUi(eTypeOfEnergy i_EnergySourceTypeFromUser, ref Vehicle i_NewVehicle)
         {
+            eTypeOfEnergy energySourceTypeFromUser = i_EnergySourceTypeFromUser;
             bool isValid = false;
             while(isValid == false)
             {
                 try
                 {
-                    i_NewVehicle.setEnergy(i_EnergySourceTypeFromUser);
+                    i_NewVehicle.setEnergy(energySourceTypeFromUser);
                     isValid = true;
                 }
                 catch(Exception e)
                 {
                     Console.WriteLine(e.Message);
                     string[] energyTypes = EnergySource.GetEnergyOptions();
-                    EnergySource.eTypeOfEnergy energySourceTypeFromUser;
                     energySourceTypeFromUser = ConsoleUserInterface.GetValidChoice<eTypeOfEnergy>(
                         energyTypes,
                         "Please chose one of the following types of energy vehicles:");

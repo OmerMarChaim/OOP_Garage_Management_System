@@ -39,11 +39,11 @@ namespace Ex03.GarageLogic
             bool isNumber = int.TryParse(i_ContainsDangerousMaterials, out optionInt);
             if (isNumber == false)
             {
-                throw new FormatException("You didnt enter a Number");
+                throw new FormatException("You didnt enter a Number at Contains Dangerous Materials");
             }
             else if (optionInt < 1 || optionInt > 2)
             {
-                throw new ValueOutOfRangeException(1, 2, "You enterd Number Out of Range");
+                throw new ValueOutOfRangeException(1, 2, "You entered Number Out of Range at Contains Dangerous Materials");
             }
             else
             {
@@ -57,11 +57,11 @@ namespace Ex03.GarageLogic
             bool isNumber = float.TryParse(i_MaxCargoWeight, out optionFloat);
             if (isNumber == false)
             {
-                throw new FormatException("You didnt enter a Number");
+                throw new FormatException("You didnt enter a Number at Max Cargo");
             }
             else if (optionFloat < 0 || optionFloat > k_MaxAllowCargoInCountry)
             {
-                throw new ValueOutOfRangeException(0, k_MaxAllowCargoInCountry, "You enterd Number Out of Range");
+                throw new ValueOutOfRangeException(0, k_MaxAllowCargoInCountry, "You entered Number Out of Range at Max Cargo");
             }
             else
             {
@@ -73,7 +73,10 @@ namespace Ex03.GarageLogic
         {
             Dictionary<string, string> extraDetailsMembers = new Dictionary<string, string>();
             extraDetailsMembers.Add("Max Cargo Weight", $"Number between 0-{k_MaxAllowCargoInCountry}");
-            extraDetailsMembers.Add("Contains Dangerous Materials", "'1' for Yes,'2' for No");
+            string options = @"
+1) Yes
+2) No";
+            extraDetailsMembers.Add("Contains Dangerous Materials",options);
             return extraDetailsMembers;
         }
 

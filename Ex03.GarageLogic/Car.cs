@@ -81,11 +81,11 @@ namespace Ex03.GarageLogic
             bool isNumber = int.TryParse(i_OptionCarColorString, out optionCarColorInt);
             if (isNumber == false)
             {
-                throw new FormatException("You didnt enter a Number");
+                throw new FormatException("You didnt entered a Number at Car Color");
             }
             else if (optionCarColorInt < 1 || optionCarColorInt > 4)
             {
-                throw new ValueOutOfRangeException(1, 4, "You enterd Number Out of Range");
+                throw new ValueOutOfRangeException(1, 4, "You entered Number Out of Range at Car Color");
             }
             else
             {

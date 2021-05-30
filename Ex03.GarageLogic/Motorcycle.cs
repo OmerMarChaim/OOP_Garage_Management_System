@@ -44,11 +44,11 @@ namespace Ex03.GarageLogic
             bool isNumber = int.TryParse(i_OptionLicenseType, out OptioninInt);
             if (isNumber == false)
             {
-                throw new FormatException("You didn't enter a Number");
+                throw new FormatException("You didn't enter a Number in License Type");
             }
             else if (OptioninInt < 1 || OptioninInt > 4)
             {
-                throw new ValueOutOfRangeException(1, 4, "You enterd Number Out of Range");
+                throw new ValueOutOfRangeException(1, 4, "You enterd Number Out of Range of License Type");
             }
             else
             {
@@ -62,11 +62,11 @@ namespace Ex03.GarageLogic
             bool isNumber = int.TryParse(i_OptionEngineVolume, out optionEngineVolumeInt);
             if(isNumber == false)
             {
-                throw new FormatException("You didn't enter a Number");
+                throw new FormatException("You didn't enter a Number at Engine Volume");
             }
             else if (optionEngineVolumeInt < 0 || optionEngineVolumeInt > k_MaxEngineVolume)
             {
-                throw new ValueOutOfRangeException(0, k_MaxEngineVolume, "You enter Number Out of Range");
+                throw new ValueOutOfRangeException(0, k_MaxEngineVolume, "You enter Number Out of Range at Engine Volume");
             }
             else
             {

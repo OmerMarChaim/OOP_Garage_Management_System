@@ -103,7 +103,8 @@ namespace Ex03.GarageLogic
         {
             string typeOfEnergy = this.Engine.Type.ToString();
             io_DictionaryRef.Add("Type", this.Engine.Type);
-            io_DictionaryRef.Add($"{typeOfEnergy} Status", $"{this.Engine.RemainingEnergyPercentage}%");
+            string unit = this.Engine.Type == EnergySource.eTypeOfEnergy.Electric ? "Hours" : "Liters";
+            io_DictionaryRef.Add($"{typeOfEnergy} Status", $"{this.Engine.RemainingEnergyPercentage} {unit}");
         }
 
       
