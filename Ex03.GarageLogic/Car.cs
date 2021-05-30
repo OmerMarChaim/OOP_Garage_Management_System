@@ -96,8 +96,12 @@ namespace Ex03.GarageLogic
         public override Dictionary<string, string> GetExtraMembersNamesAndConditions()
         {
             Dictionary<string, string> extraDetailsMembers = new Dictionary<string, string>();
-            extraDetailsMembers.Add("Car Color","Number as '1. Red', '2. Silver' ,'3. White' ,'4. Black' ");
-            extraDetailsMembers.Add("Number Of Doors", "'2','3','4','5'");
+            string optionsOfColors = @"1) Red 
+2) Silver
+3) White
+4) Black";
+            extraDetailsMembers.Add(@"Car Color",optionsOfColors);
+            extraDetailsMembers.Add("Number Of Doors", "'2', '3', '4', '5'");
             return extraDetailsMembers;
         }
 
