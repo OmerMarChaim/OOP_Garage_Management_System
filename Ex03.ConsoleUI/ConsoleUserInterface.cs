@@ -38,7 +38,14 @@ namespace Ex03.ConsoleUI
 
         public static string ListToString(List<string> i_ListOfLicenseNumbersInTheGarage)
         {
-            throw new NotImplementedException();
+            StringBuilder result = new StringBuilder();
+            foreach(string str in i_ListOfLicenseNumbersInTheGarage)
+            {
+                result.AppendLine(str);
+                result.AppendLine();
+            }
+
+            return result.ToString();
         }
 
         /// <summary>
@@ -68,17 +75,19 @@ namespace Ex03.ConsoleUI
         /// <returns></returns>
         public static int GetValidAmount()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("How much fuel do you want to put in?");
+            string userInput = Console.ReadLine();
+            bool isValidPositiveNumber = int.TryParse(userInput, out int userInputInNumber);
+            if(!isValidPositiveNumber)
+            {
+                throw new FormatException();
+            }
+
+            return userInputInNumber;
         }
 
         public static GarageUiManager.eMenuOpiton FromIntToeMenuOpiton(int i_IntUserInput)
         {
-
-
-            GarageUiManager.eMenuOpiton userResult=default;
-=========
-            GarageUiManager.eMenuOpiton userResult=default;
-=========
             GarageUiManager.eMenuOpiton userResult = default;
             switch(i_IntUserInput)
             {
@@ -89,7 +98,6 @@ namespace Ex03.ConsoleUI
                 case 2:
                     userResult = GarageUiManager.eMenuOpiton.ListOfLicense;
 
-
                     break;
                 case 3:
                     userResult = GarageUiManager.eMenuOpiton.ChangeVehiclesStatus;
@@ -97,7 +105,6 @@ namespace Ex03.ConsoleUI
                     break;
                 case 4:
                     userResult = GarageUiManager.eMenuOpiton.InflateTires;
-
 
                     break;
                 case 5:
@@ -110,9 +117,8 @@ namespace Ex03.ConsoleUI
                     break;
                 case 7:
                     userResult = GarageUiManager.eMenuOpiton.DisplayVehicleInformation;
+
                     break;
-
-
             }
 
             return userResult;
@@ -302,7 +308,6 @@ namespace Ex03.ConsoleUI
                     {
                         isValid = true;
                     }
-
                 }
                 catch(Exception e)
                 {
@@ -310,7 +315,6 @@ namespace Ex03.ConsoleUI
                     userInput = Console.ReadLine();
                     isValid = false;
                 }
-
             }
 
             return userInput;
@@ -333,11 +337,7 @@ namespace Ex03.ConsoleUI
                     energySourceTypeFromUser = ConsoleUserInterface.GetValidChoice<eTypeOfEnergy>(
                         energyTypes,
                         "Please chose one of the following types of energy vehicles:");
-
                 }
         }
-
-
-
     }
 }
