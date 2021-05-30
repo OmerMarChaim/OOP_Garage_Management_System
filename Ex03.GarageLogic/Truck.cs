@@ -22,7 +22,7 @@ namespace Ex03.GarageLogic
 
    
 
-        public override void InsertExtraDetailsIntoDict(ref Dictionary<string, string> io_DictionaryRef)
+        public override void SetExtraDetailsMembers(ref Dictionary<string, string> io_DictionaryRef)
         {
             throw new NotImplementedException();
         }

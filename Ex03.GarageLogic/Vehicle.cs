@@ -12,7 +12,9 @@ namespace Ex03.GarageLogic
         private readonly List<Wheel> r_Wheels;
         private EnergySource m_Engine;
         private readonly eNumberOfWheel r_NumberOfWheels;
-        
+        private List<object> ExtraDetailsMembers;
+
+
         protected Vehicle(string i_LicenseNumber, string i_ModelName)
         {
             m_LicenseNumber = i_LicenseNumber;
@@ -76,7 +78,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public abstract void InsertExtraDetailsIntoDict(ref Dictionary<string , string > io_DictionaryRef);
+        public abstract void SetExtraDetailsMembers(ref Dictionary<string , string > io_DictionaryRef);
 
         public abstract Dictionary<string , string> GetExtraDetailsMembers();
 

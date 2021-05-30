@@ -21,7 +21,7 @@ namespace Ex03.GarageLogic
 
         private enum eLicenseType
         {
-            A,
+            A= 1,
             B1,
             AA,
             BB
@@ -40,7 +40,7 @@ namespace Ex03.GarageLogic
         {
             Dictionary<string, string> extraMembers = new Dictionary<string, string>();
             extraMembers.Add("Engine Volume", "Number big then 0");
-            extraMembers.Add("License Type", "'A', 'B1' , 'AA' , 'BB' ");
+            extraMembers.Add("License Type", " Number as '1' for A, '2' for B1 , 'AA' , 'BB' ");
 
             return extraMembers;
         }

@@ -13,12 +13,14 @@ namespace Ex03.GarageLogic
         private eCarColor m_Color;
         private eNumberOfDoors m_NumberOfDoors;
 
-        public Car(string i_LicenseNumber, string i_ModelName) : base (i_LicenseNumber, i_ModelName)
+        public Car(string i_LicenseNumber, string i_ModelName)
+            : base(i_LicenseNumber, i_ModelName)
         {
-           
+
         }
 
-        private enum eCarColor
+
+    private enum eCarColor
         {
             Red =1,
             Silver,
@@ -34,11 +36,7 @@ namespace Ex03.GarageLogic
             Five = 5
         }
 
-        public override void InsertExtraDetailsIntoDict(ref Dictionary<string, object> i_IoDictionaryRef)
-        {
-            i_IoDictionaryRef.Add("Color", m_Color.ToString());
-            i_IoDictionaryRef.Add("Number of doors", m_NumberOfDoors.ToString());
-        }
+     
         /*
         public override List<string> GetExtraDetailsMembers()
         {
@@ -50,10 +48,33 @@ namespace Ex03.GarageLogic
         }
         */
 
+        public override void SetExtraDetailsMembers(ref Dictionary<string, string> io_DictionaryRef)
+        {
+            setCarColor(io_DictionaryRef);
+        }
+
+        private void setCarColor(Dictionary<string, string> i_DictionaryRef)
+        {
+            int optionColor;
+            bool isNumber = int.TryParse(i_DictionaryRef.ElementAt(0).Value, out optionColor);
+            if (isNumber == false)
+            {
+                throw new FormatException("You didnt enter a Number");
+            }
+            else if (optionColor < 1 && optionColor > 4)
+            {
+                throw new ValueOutOfRangeException(1, 4, "You enterd Number Out of Range");
+            }
+            else
+            {
+                m_Color = (eCarColor)optionColor;
+            }
+        }
+
         public override Dictionary<string, string> GetExtraDetailsMembers()
         {
             Dictionary<string, string> extraDetailsMembers = new Dictionary<string, string>();
-            extraDetailsMembers.Add("Car Color","'Red', 'Silver' ,'White' ,'Black' ");
+            extraDetailsMembers.Add("Car Color","Number as '1. Red', '2. Silver' ,'3. White' ,'4. Black' ");
             extraDetailsMembers.Add("Number Of Doors", "'2','3','4','5'");
             return extraDetailsMembers;
         }

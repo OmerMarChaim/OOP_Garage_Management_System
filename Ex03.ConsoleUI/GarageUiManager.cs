@@ -307,12 +307,36 @@ namespace Ex03.ConsoleUI
                 newVehicle.setWheels(manufacturerName);
 
                 // set all details function 
+              
 
-
+                setExtraDetailsMembersUI(ref newVehicle);
+         
                 s_Garage.AddNewVehicle(newVehicle);
                 s_Garage.InflateTiresInCarToMax(licenseNumber);
                 s_Garage.SetMaxEnergy(licenseNumber);
             }
+        }
+
+        private void setExtraDetailsMembersUI(ref Vehicle io_NewVehicle)
+        {
+            Dictionary<string, string> extraDetails = io_NewVehicle.GetExtraDetailsMembers();
+            Dictionary<string, string> attributeFromUser = new Dictionary<string, string>();
+            foreach (KeyValuePair<string, string> member in extraDetails)
+            {
+                Console.WriteLine($"Please enter {member.Key} ,Please insert by the following : {member.Value}");
+                attributeFromUser.Add(member.Key, Console.ReadLine());
+            }
+
+            try
+            {
+                io_NewVehicle.SetExtraDetailsMembers(ref attributeFromUser);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
         }
 
         // This method using GETLicenseNumber and Continues to request inputs according to the type of errors it receives
