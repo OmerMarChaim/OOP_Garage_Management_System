@@ -40,7 +40,7 @@ namespace Ex03.ConsoleUI
                 Console.WriteLine(helloMessage);
 
                 string menuOption = @"Which service do you need ? please write the number :
-1. “Insert” a new vehicle into the garage.
+1. Insert a new vehicle into the garage.
 2. Display a list of license numbers currently in the garage
 3. Change a certain vehicle’s status
 4. Inflate your car tires to maximum
@@ -339,7 +339,7 @@ namespace Ex03.ConsoleUI
             Dictionary<string, string> attributeFromUser = new Dictionary<string, string>();
             foreach(KeyValuePair<string, string> member in extraDetails)
             {
-                Console.WriteLine($"Please enter {member.Key} ,Please insert by the following : {member.Value}");
+                Console.WriteLine($"Please enter {member.Key}. insert from the following : {member.Value}");
                 attributeFromUser.Add(member.Key, Console.ReadLine());
             }
 

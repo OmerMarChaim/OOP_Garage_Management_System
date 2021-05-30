@@ -93,11 +93,8 @@ namespace Ex03.GarageLogic
             int indexOfWheel = 1;
             foreach(Wheel wheel in r_Wheels)
             {
-                if(indexOfWheel == 1)
-                {
-                    io_DictionaryRef.Add($"Manufacturer Name of wheels {indexOfWheel}",wheel.ManufacturerName);
-                }
-                io_DictionaryRef.Add($"Current Air Pressure of wheel {indexOfWheel}",wheel.CurrentAirPressure);
+                io_DictionaryRef.Add($"Manufacturer Name of wheel number {indexOfWheel}:",wheel.ManufacturerName);
+                io_DictionaryRef.Add($"Current Air Pressure of wheel number {indexOfWheel}",wheel.CurrentAirPressure);
                 indexOfWheel += 1;
             }
         }

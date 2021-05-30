@@ -323,6 +323,7 @@ namespace Ex03.ConsoleUI
         {
             bool isValid = false;
             while(isValid == false)
+            {
                 try
                 {
                     i_NewVehicle.setEnergy(i_EnergySourceTypeFromUser);
@@ -330,13 +331,14 @@ namespace Ex03.ConsoleUI
                 }
                 catch(Exception e)
                 {
-                    Console.WriteLine(e);
+                    Console.WriteLine(e.Message);
                     string[] energyTypes = EnergySource.GetEnergyOptions();
                     EnergySource.eTypeOfEnergy energySourceTypeFromUser;
                     energySourceTypeFromUser = ConsoleUserInterface.GetValidChoice<eTypeOfEnergy>(
                         energyTypes,
                         "Please chose one of the following types of energy vehicles:");
                 }
+            }
         }
     }
 }
