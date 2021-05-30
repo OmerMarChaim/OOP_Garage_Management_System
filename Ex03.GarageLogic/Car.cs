@@ -67,7 +67,7 @@ namespace Ex03.GarageLogic
             }
             else if (OptionNumberOfDoorsSInt < 2 || OptionNumberOfDoorsSInt > 5)
             {
-                throw new ValueOutOfRangeException(1, 4, "You enterd Number Out of Range");
+                throw new ValueOutOfRangeException(2, 5, "You enterd Number Out of Range");
             }
             else
             {

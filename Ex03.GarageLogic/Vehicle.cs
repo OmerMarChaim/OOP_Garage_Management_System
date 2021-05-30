@@ -95,9 +95,9 @@ namespace Ex03.GarageLogic
             {
                 if(indexOfWheel == 1)
                 {
-                    io_DictionaryRef.Add($"Manufacturer Name of wheels {NumberOfWheel}",wheel.ManufacturerName);
+                    io_DictionaryRef.Add($"Manufacturer Name of wheels {indexOfWheel}",wheel.ManufacturerName);
                 }
-                io_DictionaryRef.Add($"Current Air Pressure of wheel {NumberOfWheel}",wheel.CurrentAirPressure);
+                io_DictionaryRef.Add($"Current Air Pressure of wheel {indexOfWheel}",wheel.CurrentAirPressure);
                 indexOfWheel += 1;
             }
         }
