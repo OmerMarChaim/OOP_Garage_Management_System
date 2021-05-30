@@ -36,7 +36,7 @@ namespace Ex03.GarageLogic
         //{
           //  throw new NotImplementedException();
         //}
-        public override Dictionary<string, string> GetExtraDetailsMembers()
+        public override Dictionary<string, string> GetExtraMembersNamesAndConditions()
         {
             Dictionary<string, string> extraMembers = new Dictionary<string, string>();
             extraMembers.Add("Engine Volume", "Number big then 0");

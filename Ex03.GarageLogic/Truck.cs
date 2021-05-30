@@ -27,7 +27,7 @@ namespace Ex03.GarageLogic
             throw new NotImplementedException();
         }
 
-        public override Dictionary<string, string> GetExtraDetailsMembers()
+        public override Dictionary<string, string> GetExtraMembersNamesAndConditions()
         {
             Dictionary<string, string> extraDetailsMembers = new Dictionary<string, string>();
             extraDetailsMembers.Add("Max Cargo Weight", "Number big then Zero");

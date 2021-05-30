@@ -80,7 +80,8 @@ namespace Ex03.GarageLogic
 
         public abstract void SetExtraDetailsMembers(ref Dictionary<string , string > io_DictionaryRef);
 
-        public abstract Dictionary<string , string> GetExtraDetailsMembers();
+        public abstract Dictionary<string , string> GetExtraMembersNamesAndConditions();
+        public abstract void GetExtraMembersContent(ref Dictionary<string , object>);
 
         public void GetWheelsDetails(ref Dictionary<string, object> io_DictionaryRef)
         {

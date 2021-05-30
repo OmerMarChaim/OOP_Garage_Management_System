@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Ex03.GarageLogic;
-using Ex03.ConsoleUI;
-using static Ex03.GarageLogic.VehicleFactory;
 using static Ex03.GarageLogic.EnergySource;
 
 namespace Ex03.ConsoleUI
 {
-    class ConsoleUserInterface
+    internal class ConsoleUserInterface
     {
         /// <summary>
         /// just check format of License NUmber
@@ -19,15 +15,14 @@ namespace Ex03.ConsoleUI
         public static string GetLicenseNumber()
         {
             // the valid license number is 6 digits number
-            string userInput;
-            int userInputAsNumber;
             Console.WriteLine("Please enter License Number in range 100000 - 999999:");
-            userInput = Console.ReadLine();
+            string userInput = Console.ReadLine();
             if(userInput == String.Empty)
             {
                 throw new FormatException("You have to enter number");
             }
-            else if(!int.TryParse(userInput, out userInputAsNumber) || Garage.IsValidLicenseNumber(userInputAsNumber))
+            else if(!int.TryParse(userInput, out int userInputAsNumber)
+                    || Garage.IsValidLicenseNumber(userInputAsNumber))
             {
                 // TODO DEBUG
                 throw new FormatException("You have you enter NUMBER in range 100000 - 999999");
@@ -67,12 +62,8 @@ namespace Ex03.ConsoleUI
             return licenseNumber;
         }
 
-        /// <summary>
         /// give me just valid int of amount of fuel between 0-whathever
         /// the logic check if its out of range.
-        /// </summary>
-        /// <param name="i_LicenseNumber"></param>
-        /// <returns></returns>
         public static int GetValidAmount()
         {
             Console.WriteLine("How much fuel do you want to put in?");

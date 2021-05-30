@@ -88,7 +88,7 @@ namespace Ex03.GarageLogic
 
             chosenVehicle.GetWheelsDetails(ref resultedDictionary);
             chosenVehicle.GetEngineDetails(ref resultedDictionary);
-            chosenVehicle.SetExtraDetailsMembers(ref resultedDictionary);
+            chosenVehicle.GetExtraMembersNamesAndConditions(ref resultedDictionary);
 
             return resultedDictionary;
         }

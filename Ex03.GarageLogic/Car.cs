@@ -71,7 +71,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public override Dictionary<string, string> GetExtraDetailsMembers()
+        public override Dictionary<string, string> GetExtraMembersNamesAndConditions()
         {
             Dictionary<string, string> extraDetailsMembers = new Dictionary<string, string>();
             extraDetailsMembers.Add("Car Color","Number as '1. Red', '2. Silver' ,'3. White' ,'4. Black' ");
@@ -97,6 +97,13 @@ namespace Ex03.GarageLogic
             InitWheels(i_ManufacturerName,k_MaxAirPressure, k_NumberOfWheel);
         }
 
-    
+        public override void GetExtraMembersContent(ref Dictionary<string, object> missing_name)
+        {
+            List<string> extraMembers = new List<string>();
+            extraMembers.Add("Color");
+            extraMembers.Add("Number of doors");
+
+            return extraMembers;
+        }
     }
 }

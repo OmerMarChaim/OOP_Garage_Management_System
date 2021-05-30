@@ -318,7 +318,7 @@ namespace Ex03.ConsoleUI
 
         private void setExtraDetailsMembersUI(ref Vehicle io_NewVehicle)
         {
-            Dictionary<string, string> extraDetails = io_NewVehicle.GetExtraDetailsMembers();
+            Dictionary<string, string> extraDetails = io_NewVehicle.GetExtraMembersNamesAndConditions();
             Dictionary<string, string> attributeFromUser = new Dictionary<string, string>();
             foreach (KeyValuePair<string, string> member in extraDetails)
             {
