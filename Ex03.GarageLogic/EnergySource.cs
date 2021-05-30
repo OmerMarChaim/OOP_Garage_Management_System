@@ -13,7 +13,7 @@ namespace Ex03.GarageLogic
 
         public enum eTypeOfEnergy
         {
-            Electric,
+            Electric=1,
             Fuel
         }
 

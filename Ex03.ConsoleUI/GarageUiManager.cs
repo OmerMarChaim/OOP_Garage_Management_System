@@ -20,7 +20,8 @@ namespace Ex03.ConsoleUI
             InflateTires,
             RefuelFuel,
             ChargeElectricVehicle,
-            DisplayVehicleInformation
+            DisplayVehicleInformation,
+            Exit
         }
 
         internal GarageUiManager()
@@ -46,6 +47,7 @@ namespace Ex03.ConsoleUI
 5. Refuel a fuel-based vehicle
 6. Charge an electric-based vehicle
 7. Display specific vehicle information
+8. Exit
 ";
                 Console.WriteLine(menuOption);
                 string userInPut = Console.ReadLine();
@@ -341,17 +343,20 @@ namespace Ex03.ConsoleUI
 
             bool isValid = false;
             {
-                try
-                {
-                    io_NewVehicle.SetExtraDetailsMembers(ref attributeFromUser);
-                    isValid = true;
-                }
-                catch(Exception e)
-                {
-                    Console.WriteLine(e);
-                    isValid = false;
-                    setExtraDetailsMembersUI(ref io_NewVehicle);
-                }
+                
+                    try
+                    {
+                        io_NewVehicle.SetExtraDetailsMembers(ref attributeFromUser);
+                        isValid = true;
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                        setExtraDetailsMembersUI(ref io_NewVehicle);
+                    }
+
+
+
             }
         }
 
