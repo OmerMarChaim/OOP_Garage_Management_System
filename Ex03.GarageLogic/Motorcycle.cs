@@ -105,5 +105,11 @@ namespace Ex03.GarageLogic
         {
             InitWheels(i_ManufacturerName, k_MaxAirPressure, k_NumberOfWheel);
         }
+
+        public override void GetExtraMembersContent(ref Dictionary<string, object> io_Dictionary)
+        {
+            io_Dictionary.Add("Engine Volume", m_EngineVolume.ToString());
+            io_Dictionary.Add("License Type", m_LicenseType.ToString());
+        }
     }
 }
