@@ -255,7 +255,6 @@ namespace Ex03.ConsoleUI
                 $@"{displayMessage}
 {listOfLicenseNumbersInTheGarage}");
         }
-
         /// <summary>
         /// 1. “Insert” a new vehicle into the garage.
         /// The user will be asked to select a vehicle type out of the supported vehicle types,
