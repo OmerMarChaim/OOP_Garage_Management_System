@@ -47,9 +47,9 @@ namespace Ex03.GarageLogic
             Sixteen = 16 
         }
 
-        internal eNumberOfWheel NumberOfWheel
+        internal int NumberOfWheel
         {
-            get { return NumberOfWheel;  }
+            get { return r_Wheels.Count; }
         }
         internal String ModelName
         {
@@ -87,9 +87,15 @@ namespace Ex03.GarageLogic
 
         public void GetWheelsDetails(ref Dictionary<string, object> io_DictionaryRef)
         {
-            foreach(Wheel wheel in Wheels)
+            int indexOfWheel = 1;
+            foreach(Wheel wheel in r_Wheels)
             {
-                io_DictionaryRef.Add(wheel.ManufacturerName,wheel.CurrentAirPressure);
+                if(indexOfWheel == 1)
+                {
+                    io_DictionaryRef.Add($"Manufacturer Name of wheels {NumberOfWheel}",wheel.ManufacturerName);
+                }
+                io_DictionaryRef.Add($"Current Air Pressure of wheel {NumberOfWheel}",wheel.CurrentAirPressure);
+                indexOfWheel += 1;
             }
         }
         // ReSharper disable once InconsistentNaming
