@@ -76,11 +76,11 @@ namespace Ex03.ConsoleUI
 
         /// give me just valid int of amount of fuel between 0- what over
         /// the logic check if its out of range.
-        public static int GetValidAmount()
+        public static float GetValidAmount()
         {
             Console.WriteLine("How much fuel do you want to put in?");
             string userInput = Console.ReadLine();
-            bool isValidPositiveNumber = int.TryParse(userInput, out int userInputInNumber);
+            bool isValidPositiveNumber = float.TryParse(userInput, out float userInputInNumber);
             if(!isValidPositiveNumber)
             {
                 throw new FormatException();

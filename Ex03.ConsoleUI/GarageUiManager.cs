@@ -125,7 +125,7 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
-                    int howManyMoreHoursToAdd = ConsoleUserInterface.GetValidAmount();
+                    float howManyMoreHoursToAdd = ConsoleUserInterface.GetValidAmount();
                     s_Garage.ChargeElectricVehicleInGarage(licenseNumber, howManyMoreHoursToAdd);
                     isValid = true;
                 }
@@ -163,7 +163,7 @@ namespace Ex03.ConsoleUI
                     isFuel = !s_Garage.IsElectricVehicle(licenseNumber);
                     if(isFuel == true)
                     {
-                        int amountFuelToFill = ConsoleUserInterface.GetValidAmount();
+                        float amountFuelToFill = ConsoleUserInterface.GetValidAmount();
 
                         string[] fuelTypes = Fuel.GetFuelOptions();
                         Fuel.eFuelType desireFuelType = ConsoleUserInterface.GetValidChoice<Fuel.eFuelType>(
@@ -171,26 +171,18 @@ namespace Ex03.ConsoleUI
                             "Please chose one of the following types of Fuel:");
                         s_Garage.ReFuelFuelInSpecificVehicle(licenseNumber, amountFuelToFill, desireFuelType);
                     }
-                    else
-                    {
-                        throw new ArgumentException("this Vehicle is not fuel based");
-                    }
+                 
                 }
+
+                catch (ArgumentException e)
+                {
+                    Console.WriteLine(e.Message);
+                    Console.WriteLine("Return to Menu");
+                    break;
+                }
+
                 catch (Exception e)
                 {
-                    ///Todo
-                    /// we need undersnt how to define each exception here
-                    /// best by ErorMessege.
-                    /*
-                   if(isFuel == false)
-                    {
-
-                    }
-                    else if (isSameFuelType)
-                    {
-                        /// throw no fit to fuel type.
-                    }
-                    */
                     
                     Console.WriteLine(e.Message);
                     

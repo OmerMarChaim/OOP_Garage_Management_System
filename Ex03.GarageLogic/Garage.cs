@@ -127,12 +127,19 @@ namespace Ex03.GarageLogic
 
         public void ReFuelFuelInSpecificVehicle(
             string i_LicenseNumber,
-            int i_AmountFuelToFill,
+            float i_AmountFuelToFill,
             Fuel.eFuelType i_FuelTypeFromUser)
         {
             Vehicle specificVehicle = r_VehicleInventory[i_LicenseNumber];
-            GarageLogic.Fuel fuelEngine = (specificVehicle.Engine) as Fuel;
-            fuelEngine.RefuelingOperation(i_AmountFuelToFill, i_FuelTypeFromUser);
+            if(IsElectricVehicle(i_LicenseNumber) == false)
+            {
+                GarageLogic.Fuel fuelEngine = (specificVehicle.Engine) as Fuel;
+                fuelEngine.RefuelingOperation(i_AmountFuelToFill, i_FuelTypeFromUser);
+            }
+            else
+            {
+                throw new ArgumentException("this vehicle is not Fuel based");
+            }
         }
 
         public void IsDesaireFuelTypeIsFeetToSpecificCar(
@@ -171,7 +178,7 @@ namespace Ex03.GarageLogic
             throw new NotImplementedException();
         }
 
-        public void ChargeElectricVehicleInGarage(string i_LicenseNumber, int i_HowManyMoreHoursToAdd)
+        public void ChargeElectricVehicleInGarage(string i_LicenseNumber, float i_HowManyMoreHoursToAdd)
         {
             bool isElectricBased = IsElectricVehicle(i_LicenseNumber);
             if(!isElectricBased)
@@ -181,11 +188,7 @@ namespace Ex03.GarageLogic
 
             Vehicle specificVehicle = r_VehicleInventory[i_LicenseNumber];
             Electric electricEngine = (specificVehicle.Engine) as Electric;
-            if(i_HowManyMoreHoursToAdd > electricEngine.RemainingEnergyPercentage)
-            {
-                throw new ValueOutOfRangeException(0, electricEngine.RemainingEnergyPercentage, "Out of range!");
-            }
-
+            
             electricEngine.RechargeOperation(i_HowManyMoreHoursToAdd);
         }
 
