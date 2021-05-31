@@ -154,7 +154,7 @@ namespace Ex03.ConsoleUI
             bool isNumber = false;
             bool inRange = false;
             int userInputInt = -1;
-            while(isNumber == false && inRange==false)
+            while(isNumber == false || inRange==false)
             {
                 isNumber = int.TryParse(i_UserInput, out userInputInt);
                 if(isNumber == true)
