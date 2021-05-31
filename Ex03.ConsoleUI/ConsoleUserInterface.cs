@@ -152,17 +152,16 @@ namespace Ex03.ConsoleUI
         internal static int GetValidInputInRange(string i_UserInput, int i_MinNum, int i_MaxNum, string i_MessageToShow)
         {
             bool isNumber = false;
-            bool isInRange = false;
+            bool inRange = false;
             int userInputInt = -1;
-            while(isNumber == false && isInRange == false)
+            while(isNumber == false && inRange==false)
             {
                 isNumber = int.TryParse(i_UserInput, out userInputInt);
                 if(isNumber == true)
                 {
-                    if(userInputInt >= i_MinNum && userInputInt <= i_MaxNum)
+                    inRange = userInputInt >= i_MinNum && userInputInt <= i_MaxNum;
+                    if (inRange==true)
                     {
-                        isNumber = true;
-
                         break;
                     }
 
@@ -176,7 +175,6 @@ namespace Ex03.ConsoleUI
                 ///the original text that we asked from user
                 Console.WriteLine(i_MessageToShow);
             }
-
             return userInputInt;
         }
 
