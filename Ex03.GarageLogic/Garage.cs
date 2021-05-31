@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
-using System.Threading.Tasks;
 using static Ex03.GarageLogic.OwnerDetails;
 
 namespace Ex03.GarageLogic
@@ -94,7 +91,7 @@ namespace Ex03.GarageLogic
             return resultedDictionary;
         }
 
-        public bool IsElectricVehicle(string i_LicenseNumber)
+        private bool isElectricVehicle(string i_LicenseNumber)
         {
             Vehicle specificVehicle = r_VehicleInventory[i_LicenseNumber];
 
@@ -131,9 +128,10 @@ namespace Ex03.GarageLogic
             Fuel.eFuelType i_FuelTypeFromUser)
         {
             Vehicle specificVehicle = r_VehicleInventory[i_LicenseNumber];
-            if(IsElectricVehicle(i_LicenseNumber) == false)
+            if(isElectricVehicle(i_LicenseNumber) == false)
             {
-                GarageLogic.Fuel fuelEngine = (specificVehicle.Engine) as Fuel;
+                Fuel fuelEngine = (specificVehicle.Engine) as Fuel;
+                // ReSharper disable once PossibleNullReferenceException
                 fuelEngine.RefuelingOperation(i_AmountFuelToFill, i_FuelTypeFromUser);
             }
             else
@@ -142,45 +140,9 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public void IsDesaireFuelTypeIsFeetToSpecificCar(
-            string i_LicenseNumber,
-            Fuel.eFuelType i_FuelTypeFromUser,
-            out bool i_IsFuel,
-            out bool i_IsSameFuelType)
-        {
-            i_IsSameFuelType = false;
-            Vehicle specificVehicle = r_VehicleInventory[i_LicenseNumber];
-            if(specificVehicle.Engine.Type == EnergySource.eTypeOfEnergy.Fuel)
-            {
-                i_IsFuel = true;
-                GarageLogic.Fuel fuelEngine = (specificVehicle.Engine) as Fuel;
-                if(i_IsSameFuelType = fuelEngine.FuelType == i_FuelTypeFromUser)
-                {
-                    i_IsSameFuelType = true;
-                }
-                else
-                {
-                    i_IsSameFuelType = false;
-
-                    throw new ArgumentException(@"this Fuel Type is not fit");
-                }
-            }
-            else
-            {
-                i_IsFuel = false;
-
-                throw new ArgumentException(@"this Vehicle is not Fuel Based");
-            }
-        }
-
-        public VehicleFactory.eVehicleType GetVehicleType(string i_LicenseNumber)
-        {
-            throw new NotImplementedException();
-        }
-
         public void ChargeElectricVehicleInGarage(string i_LicenseNumber, float i_HowManyMoreHoursToAdd)
         {
-            bool isElectricBased = IsElectricVehicle(i_LicenseNumber);
+            bool isElectricBased = isElectricVehicle(i_LicenseNumber);
             if(isElectricBased==false)
             {
                 throw new ArgumentException("This License Number is not belongs to Electric Vehicle. ");

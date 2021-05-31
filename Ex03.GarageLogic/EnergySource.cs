@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
@@ -13,9 +9,10 @@ namespace Ex03.GarageLogic
 
         public enum eTypeOfEnergy
         {
-            Electric=1,
+            Electric = 1,
             Fuel
         }
+
         public float RemainingEnergy
         {
             get { return m_RemainingEnergy; }
@@ -26,9 +23,6 @@ namespace Ex03.GarageLogic
             get { return m_Type; }
             set { m_Type = value; }
         }
-
-      
-        //    public abstract void UpdateAmountOfEnergy(float i_HowManyMoreHoursToAdd);
 
         public static string[] GetEnergyOptions()
         {

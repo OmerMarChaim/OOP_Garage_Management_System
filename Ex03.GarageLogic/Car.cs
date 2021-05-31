@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 namespace Ex03.GarageLogic
 {
     public class Car : Vehicle
@@ -16,13 +15,11 @@ namespace Ex03.GarageLogic
         public Car(string i_LicenseNumber, string i_ModelName)
             : base(i_LicenseNumber, i_ModelName)
         {
-
         }
 
-
-    private enum eCarColor
+        private enum eCarColor
         {
-            Red =1,
+            Red = 1,
             Silver,
             White,
             Black
@@ -36,7 +33,6 @@ namespace Ex03.GarageLogic
             Five = 5
         }
 
-     
         /*
         public override List<string> GetExtraDetailsMembers()
         {
@@ -48,42 +44,39 @@ namespace Ex03.GarageLogic
         }
         */
 
-        public override void SetExtraDetailsMembers(ref Dictionary<string, string> io_DictionaryRef)
+        public override void SetExtraDetailsMembers(ref Dictionary<string, string> i_IoDictionaryRef)
         {
-            ///we send by this order
-           string optionCarColor = io_DictionaryRef.ElementAt(0).Value;
-           string optionNumberOfDoors= io_DictionaryRef.ElementAt(1).Value;
-           setCarColor(optionCarColor);
-           setNumberOfDoors(optionNumberOfDoors);
+            string optionCarColor = i_IoDictionaryRef.ElementAt(0).Value;
+            string optionNumberOfDoors = i_IoDictionaryRef.ElementAt(1).Value;
+            setCarColor(optionCarColor);
+            setNumberOfDoors(optionNumberOfDoors);
         }
 
         private void setNumberOfDoors(string i_OptionNumberOfDoorsString)
         {
-            int OptionNumberOfDoorsSInt;
-            bool isNumber = int.TryParse(i_OptionNumberOfDoorsString, out OptionNumberOfDoorsSInt);
-            if (isNumber == false)
+            bool isNumber = int.TryParse(i_OptionNumberOfDoorsString, out int optionNumberOfDoorsSInt);
+            if(isNumber == false)
             {
                 throw new FormatException("You didn't enter a Number");
             }
-            else if (OptionNumberOfDoorsSInt < 2 || OptionNumberOfDoorsSInt > 5)
+            else if(optionNumberOfDoorsSInt < 2 || optionNumberOfDoorsSInt > 5)
             {
-                throw new ValueOutOfRangeException(2, 5, "You enterd Number Out of Range");
+                throw new ValueOutOfRangeException(2, 5, "You entered Number Out of Range");
             }
             else
             {
-                m_NumberOfDoors = (eNumberOfDoors)OptionNumberOfDoorsSInt;
+                m_NumberOfDoors = (eNumberOfDoors)optionNumberOfDoorsSInt;
             }
         }
 
         private void setCarColor(string i_OptionCarColorString)
         {
-            int optionCarColorInt;
-            bool isNumber = int.TryParse(i_OptionCarColorString, out optionCarColorInt);
-            if (isNumber == false)
+            bool isNumber = int.TryParse(i_OptionCarColorString, out int optionCarColorInt);
+            if(isNumber == false)
             {
                 throw new FormatException("You didnt entered a Number at Car Color");
             }
-            else if (optionCarColorInt < 1 || optionCarColorInt > 4)
+            else if(optionCarColorInt < 1 || optionCarColorInt > 4)
             {
                 throw new ValueOutOfRangeException(1, 4, "You entered Number Out of Range at Car Color");
             }
@@ -101,34 +94,33 @@ namespace Ex03.GarageLogic
 2) Silver
 3) White
 4) Black";
-            extraDetailsMembers.Add(@"Car Color",optionsOfColors);
+            extraDetailsMembers.Add(@"Car Color", optionsOfColors);
             extraDetailsMembers.Add("Number Of Doors", "'2', '3', '4', '5'");
+
             return extraDetailsMembers;
         }
 
-        public override void setEnergy(EnergySource.eTypeOfEnergy i_EnergySourceTypeFromUser)
+        public override void SetEnergy(EnergySource.eTypeOfEnergy i_EnergySourceTypeFromUser)
         {
             if(i_EnergySourceTypeFromUser == EnergySource.eTypeOfEnergy.Fuel)
             {
-                this.InitFuelEngine(Fuel.eFuelType.Octane95,45);
+                this.InitFuelEngine(Fuel.eFuelType.Octane95, 45);
             }
             else
             {
                 this.InitElectricEngine(3.2f);
             }
-          
         }
 
-        public override void setWheels(string i_ManufacturerName)
+        public override void SetWheels(string i_ManufacturerName)
         {
-            InitWheels(i_ManufacturerName,k_MaxAirPressure, k_NumberOfWheel);
+            InitWheels(i_ManufacturerName, k_MaxAirPressure, k_NumberOfWheel);
         }
 
-        public override void GetExtraMembersContent(ref Dictionary<string, object> io_Dictionary)
+        public override void GetExtraMembersContent(ref Dictionary<string, object> i_IoDictionary)
         {
-            io_Dictionary.Add("Color", m_Color.ToString());
-            io_Dictionary.Add("Number of doors", m_NumberOfDoors.ToString());
-
+            i_IoDictionary.Add("Color", m_Color.ToString());
+            i_IoDictionary.Add("Number of doors", m_NumberOfDoors.ToString());
         }
     }
 }

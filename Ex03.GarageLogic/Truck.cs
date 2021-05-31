@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
@@ -24,12 +22,12 @@ namespace Ex03.GarageLogic
         
    
 
-        public override void SetExtraDetailsMembers(ref Dictionary<string, string> io_DictionaryRef)
+        public override void SetExtraDetailsMembers(ref Dictionary<string, string> i_IoDictionaryRef)
         {
-           string maxCargoWeight = io_DictionaryRef.ElementAt(0).Value;
-           string ContainsDangerousMaterials = io_DictionaryRef.ElementAt(1).Value;
+           string maxCargoWeight = i_IoDictionaryRef.ElementAt(0).Value;
+           string containsDangerousMaterials = i_IoDictionaryRef.ElementAt(1).Value;
            setMaxCargo(maxCargoWeight);
-           setContainsDangerousMaterials(ContainsDangerousMaterials);
+           setContainsDangerousMaterials(containsDangerousMaterials);
 
         }
 
@@ -53,8 +51,7 @@ namespace Ex03.GarageLogic
 
         private void setMaxCargo(string i_MaxCargoWeight)
         {
-            float optionFloat;
-            bool isNumber = float.TryParse(i_MaxCargoWeight, out optionFloat);
+            bool isNumber = float.TryParse(i_MaxCargoWeight, out float optionFloat);
             if (isNumber == false)
             {
                 throw new FormatException("You didnt enter a Number at Max Cargo");
@@ -81,7 +78,7 @@ namespace Ex03.GarageLogic
         }
 
     
-        public override void setEnergy(EnergySource.eTypeOfEnergy i_EnergySourceTypeFromUser)
+        public override void SetEnergy(EnergySource.eTypeOfEnergy i_EnergySourceTypeFromUser)
         {
             if (i_EnergySourceTypeFromUser == EnergySource.eTypeOfEnergy.Fuel)
             {
@@ -93,16 +90,16 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public override void setWheels(string i_ManufacturerName)
+        public override void SetWheels(string i_ManufacturerName)
         {
      
             InitWheels(i_ManufacturerName, k_MaxAirPressure, k_NumberOfWheel);
         }
 
-        public override void GetExtraMembersContent(ref Dictionary<string, object> io_Dictionary)
+        public override void GetExtraMembersContent(ref Dictionary<string, object> i_IoDictionary)
         {
-            io_Dictionary.Add("Contains dangerous materials", m_ContainsDangerousMaterials);
-            io_Dictionary.Add("Max cargo weight",m_MaxCargoWeight);
+            i_IoDictionary.Add("Contains dangerous materials", m_ContainsDangerousMaterials);
+            i_IoDictionary.Add("Max cargo weight",m_MaxCargoWeight);
         }
     }
 }

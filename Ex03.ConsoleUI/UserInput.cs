@@ -7,7 +7,7 @@ using static Ex03.GarageLogic.EnergySource;
 namespace Ex03.ConsoleUI
 {
     // ReSharper disable once ClassNeverInstantiated.Global
-    internal class ConsoleUserInterface
+    internal class UserInput
     {
         /// <summary>
         /// just check format of License NUmber
@@ -23,8 +23,7 @@ namespace Ex03.ConsoleUI
                 throw new FormatException("You have to enter number");
             }
 
-            int userInputAsNumber;
-            bool isNumber = int.TryParse(userInput, out userInputAsNumber);
+            bool isNumber = int.TryParse(userInput, out int userInputAsNumber);
             if(isNumber == true)
             {
                 Garage.IsValidLicenseNumber(userInputAsNumber);
@@ -52,6 +51,7 @@ namespace Ex03.ConsoleUI
             {
                 result.AppendLine("The Garage is empty");
             }
+
             return result.ToString();
         }
 
@@ -68,7 +68,7 @@ namespace Ex03.ConsoleUI
             {
                 Console.WriteLine(
                     $@"the car with license number  {licenseNumber} is not in the garage , please enter a new one:");
-                licenseNumber = ConsoleUserInterface.GetLicenseNumber();
+                licenseNumber = UserInput.GetLicenseNumber();
             }
 
             return licenseNumber;
@@ -88,67 +88,6 @@ namespace Ex03.ConsoleUI
             return userInputInNumber;
         }
 
-        public static GarageUiManager.eMenuOpiton FromIntToeMenuOpiton(int i_IntUserInput)
-        {
-            GarageUiManager.eMenuOpiton userResult = default;
-            switch(i_IntUserInput)
-            {
-                case 1:
-                    userResult = GarageUiManager.eMenuOpiton.NewVehicle;
-
-                    break;
-                case 2:
-                    userResult = GarageUiManager.eMenuOpiton.ListOfLicense;
-
-                    break;
-                case 3:
-                    userResult = GarageUiManager.eMenuOpiton.ChangeVehiclesStatus;
-
-                    break;
-                case 4:
-                    userResult = GarageUiManager.eMenuOpiton.InflateTires;
-
-                    break;
-                case 5:
-                    userResult = GarageUiManager.eMenuOpiton.RefuelFuel;
-
-                    break;
-                case 6:
-                    userResult = GarageUiManager.eMenuOpiton.ChargeElectricVehicle;
-
-                    break;
-                case 7:
-                    userResult = GarageUiManager.eMenuOpiton.DisplayVehicleInformation;
-
-                    break;
-            }
-
-            return userResult;
-        }
-
-        /*
-                public static Fuel.eFuelType GetValidFuelType()
-                {
-                    ///importend flow
-                    /// ask for number between 1-4,
-                    /// get valid number -> turn the number to ENUM AS WE NEED -> return the enum
-                    ///  string[] energyTypes = EnergySource.GetEnergyOptions();
-
-                    string menuOption = @"which kind of fuel you want to fill in your car? 
-        please enter by the number
-        1. Soler
-        2. Octane95,
-        3. Octane96,
-        4. Octane98";
-                    string userInputInString = Console.ReadLine();
-                    int userInputInt = GetValidInputInRange(userInputInString, 1, 4, menuOption)
-                    Fuel.eFuelType resFuelType = fromIntToeFuelType(userInputInt);
-
-                    return resFuelType;
-                }
-        */
-
-        //TODO isInRagne bool
         internal static int GetValidInputInRange(string i_UserInput, int i_MinNum, int i_MaxNum, string i_MessageToShow)
         {
             bool isNumber = false;
@@ -172,9 +111,10 @@ namespace Ex03.ConsoleUI
                     Console.WriteLine($@"You didnt enter a number, please enter one");
                 }
 
-                ///the original text that we asked from user
+                
                 Console.WriteLine(i_MessageToShow);
             }
+
             return userInputInt;
         }
 
@@ -183,12 +123,11 @@ namespace Ex03.ConsoleUI
         {
             Console.WriteLine(i_Message);
 
-            return PrintOptionsAndGetChoice<T>(i_Options);
+            return printOptionsAndGetChoice<T>(i_Options);
         }
 
-        private static T PrintOptionsAndGetChoice<T>(string[] i_Options)
+        private static T printOptionsAndGetChoice<T>(string[] i_Options)
         {
-            string userInput;
             bool isValid = false;
             T valueChoice = default;
             // first build options:
@@ -202,7 +141,7 @@ namespace Ex03.ConsoleUI
 
             // and print the options:
             Console.WriteLine(options);
-            userInput = Console.ReadLine();
+            string userInput = Console.ReadLine();
 
             while(!isValid)
             {
@@ -228,9 +167,8 @@ namespace Ex03.ConsoleUI
                 throw new FormatException("Cant press enter without chose number. Try again");
             }
 
-            int choice;
             T valueChoice = default;
-            bool isNumber = int.TryParse(i_NumberOfChoice, out choice);
+            bool isNumber = int.TryParse(i_NumberOfChoice, out int choice);
             bool isOneOfTheOptions = Enum.IsDefined(typeof(T), choice);
 
             if(isNumber && isOneOfTheOptions)
@@ -288,7 +226,7 @@ namespace Ex03.ConsoleUI
             i_AllDetailsDictionary.Add("Manufacturer Name", manufacturerName);
         }
         */
-        internal static string getNonEmptyInput()
+        internal static string GetNonEmptyInput()
         {
             string userInput = Console.ReadLine();
             bool isValid = false;
@@ -316,7 +254,7 @@ namespace Ex03.ConsoleUI
             return userInput;
         }
 
-        public static void setEnergyUi(eTypeOfEnergy i_EnergySourceTypeFromUser, ref Vehicle i_NewVehicle)
+        public static void SetEnergyUi(eTypeOfEnergy i_EnergySourceTypeFromUser, ref Vehicle i_NewVehicle)
         {
             eTypeOfEnergy energySourceTypeFromUser = i_EnergySourceTypeFromUser;
             bool isValid = false;
@@ -324,14 +262,14 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
-                    i_NewVehicle.setEnergy(energySourceTypeFromUser);
+                    i_NewVehicle.SetEnergy(energySourceTypeFromUser);
                     isValid = true;
                 }
                 catch(Exception e)
                 {
                     Console.WriteLine(e.Message);
                     string[] energyTypes = EnergySource.GetEnergyOptions();
-                    energySourceTypeFromUser = ConsoleUserInterface.GetValidChoice<eTypeOfEnergy>(
+                    energySourceTypeFromUser = UserInput.GetValidChoice<eTypeOfEnergy>(
                         energyTypes,
                         "Please chose one of the following types of energy vehicles:");
                 }

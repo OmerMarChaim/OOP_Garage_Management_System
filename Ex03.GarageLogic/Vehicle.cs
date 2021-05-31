@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Ex03.GarageLogic
 {
@@ -12,8 +10,6 @@ namespace Ex03.GarageLogic
         private readonly List<Wheel> r_Wheels;
         private EnergySource m_Engine;
         private readonly eNumberOfWheel r_NumberOfWheels;
-        private List<object> ExtraDetailsMembers;
-
 
         protected Vehicle(string i_LicenseNumber, string i_ModelName)
         {
@@ -83,18 +79,18 @@ namespace Ex03.GarageLogic
 
        // public abstract void setSpecificMemberAttribute(string i_OptionInString,ref object i_Attribute, int i_MinValue, int i_Maxvalue);
 
-        public abstract void SetExtraDetailsMembers(ref Dictionary<string , string > io_DictionaryRef);
+        public abstract void SetExtraDetailsMembers(ref Dictionary<string , string > i_IoDictionaryRef);
 
         public abstract Dictionary<string , string> GetExtraMembersNamesAndConditions();
         public abstract void GetExtraMembersContent(ref Dictionary<string , object> i_MembersDictionary);
 
-        public void GetWheelsDetails(ref Dictionary<string, object> io_DictionaryRef)
+        public void GetWheelsDetails(ref Dictionary<string, object> i_IoDictionaryRef)
         {
             int indexOfWheel = 1;
             foreach(Wheel wheel in r_Wheels)
             {
-                io_DictionaryRef.Add($"Manufacturer Name of wheel number {indexOfWheel}:",wheel.ManufacturerName);
-                io_DictionaryRef.Add($"Current Air Pressure of wheel number {indexOfWheel}",wheel.CurrentAirPressure);
+                i_IoDictionaryRef.Add($"Manufacturer Name of wheel number {indexOfWheel}:",wheel.ManufacturerName);
+                i_IoDictionaryRef.Add($"Current Air Pressure of wheel number {indexOfWheel}",wheel.CurrentAirPressure);
                 indexOfWheel += 1;
             }
         }
@@ -109,8 +105,8 @@ namespace Ex03.GarageLogic
 
       
 
-        public abstract void setEnergy(EnergySource.eTypeOfEnergy i_EnergySourceTypeFromUser);
-        public abstract void setWheels(string i_ManufacturerName);
+        public abstract void SetEnergy(EnergySource.eTypeOfEnergy i_EnergySourceTypeFromUser);
+        public abstract void SetWheels(string i_ManufacturerName);
 
     }
 }

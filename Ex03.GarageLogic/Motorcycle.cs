@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
@@ -22,51 +20,50 @@ namespace Ex03.GarageLogic
 
         private enum eLicenseType
         {
-            A= 1,
+            A = 1,
             B1,
-            AA,
-            BB
+            Aa,
+            Bb
         }
 
- 
-
-        public override void SetExtraDetailsMembers(ref Dictionary<string, string> io_IoDictionaryRef)
+        public override void SetExtraDetailsMembers(ref Dictionary<string, string> i_IoIoDictionaryRef)
         {
-            string optionEngineVolume = io_IoDictionaryRef.ElementAt(0).Value;
-            string optionLicenseType = io_IoDictionaryRef.ElementAt(1).Value;
+            string optionEngineVolume = i_IoIoDictionaryRef.ElementAt(0).Value;
+            string optionLicenseType = i_IoIoDictionaryRef.ElementAt(1).Value;
             setEngineVolume(optionEngineVolume);
             setLicenseType(optionLicenseType);
         }
 
         private void setLicenseType(string i_OptionLicenseType)
         {
-            int OptioninInt;
-            bool isNumber = int.TryParse(i_OptionLicenseType, out OptioninInt);
-            if (isNumber == false)
+            bool isNumber = int.TryParse(i_OptionLicenseType, out int optionInt);
+            if(isNumber == false)
             {
                 throw new FormatException("You didn't enter a Number in License Type");
             }
-            else if (OptioninInt < 1 || OptioninInt > 4)
+            else if(optionInt < 1 || optionInt > 4)
             {
-                throw new ValueOutOfRangeException(1, 4, "You enterd Number Out of Range of License Type");
+                throw new ValueOutOfRangeException(1, 4, "You entered Number Out of Range of License Type");
             }
             else
             {
-                m_LicenseType = (eLicenseType)OptioninInt;
+                m_LicenseType = (eLicenseType)optionInt;
             }
         }
 
         private void setEngineVolume(string i_OptionEngineVolume)
         {
-            int optionEngineVolumeInt;
-            bool isNumber = int.TryParse(i_OptionEngineVolume, out optionEngineVolumeInt);
+            bool isNumber = int.TryParse(i_OptionEngineVolume, out int optionEngineVolumeInt);
             if(isNumber == false)
             {
                 throw new FormatException("You didn't enter a Number at Engine Volume");
             }
-            else if (optionEngineVolumeInt < 0 || optionEngineVolumeInt > k_MaxEngineVolume)
+            else if(optionEngineVolumeInt < 0 || optionEngineVolumeInt > k_MaxEngineVolume)
             {
-                throw new ValueOutOfRangeException(0, k_MaxEngineVolume, "You enter Number Out of Range at Engine Volume");
+                throw new ValueOutOfRangeException(
+                    0,
+                    k_MaxEngineVolume,
+                    "You enter Number Out of Range at Engine Volume");
             }
             else
             {
@@ -74,12 +71,13 @@ namespace Ex03.GarageLogic
             }
         }
 
-    
         public override Dictionary<string, string> GetExtraMembersNamesAndConditions()
         {
             Dictionary<string, string> extraMembers = new Dictionary<string, string>();
             extraMembers.Add("Engine Volume", $"Number between 0-{k_MaxEngineVolume}");
-            extraMembers.Add("License Type", @" Number as 
+            extraMembers.Add(
+                "License Type",
+                @" Number as 
 1)  A
 2)  B1 
 3)  AA 
@@ -88,11 +86,9 @@ namespace Ex03.GarageLogic
             return extraMembers;
         }
 
-   
-
-        public override void setEnergy(EnergySource.eTypeOfEnergy i_EnergySourceTypeFromUser)
+        public override void SetEnergy(EnergySource.eTypeOfEnergy i_EnergySourceTypeFromUser)
         {
-            if (i_EnergySourceTypeFromUser == EnergySource.eTypeOfEnergy.Fuel)
+            if(i_EnergySourceTypeFromUser == EnergySource.eTypeOfEnergy.Fuel)
             {
                 InitFuelEngine(Fuel.eFuelType.Octane98, 6);
             }
@@ -102,15 +98,15 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public override void setWheels(string i_ManufacturerName)
+        public override void SetWheels(string i_ManufacturerName)
         {
             InitWheels(i_ManufacturerName, k_MaxAirPressure, k_NumberOfWheel);
         }
 
-        public override void GetExtraMembersContent(ref Dictionary<string, object> io_Dictionary)
+        public override void GetExtraMembersContent(ref Dictionary<string, object> i_IoDictionary)
         {
-            io_Dictionary.Add("Engine Volume", m_EngineVolume.ToString());
-            io_Dictionary.Add("License Type", m_LicenseType.ToString());
+            i_IoDictionary.Add("Engine Volume", m_EngineVolume.ToString());
+            i_IoDictionary.Add("License Type", m_LicenseType.ToString());
         }
     }
 }

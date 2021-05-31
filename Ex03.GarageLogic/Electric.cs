@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ex03.GarageLogic
+﻿namespace Ex03.GarageLogic
 {
    public class Electric : EnergySource
     {
-      //  private float m_RemainingTimeOfEngineOperationInHours;
         private float m_MaxTimeOfEngineOperationInHours;
 
         public Electric(float i_MaxTimeOfEngineOperationInHours)

@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
 using Ex03.GarageLogic;
-using static Ex03.ConsoleUI.ConsoleUserInterface;
+using static Ex03.ConsoleUI.UserInput;
 using static Ex03.GarageLogic.OwnerDetails.eStatus;
 using static Ex03.GarageLogic.VehicleFactory;
 using static Ex03.GarageLogic.EnergySource;
@@ -13,7 +12,7 @@ namespace Ex03.ConsoleUI
     {
         private static Garage s_Garage;
 
-        public enum eMenuOpiton
+        public enum eMenuOption
         {
             NewVehicle = 1,
             ListOfLicense,
@@ -27,19 +26,16 @@ namespace Ex03.ConsoleUI
 
         internal GarageUiManager()
         {
-            s_Garage =new Garage();
-            StartMenu();
-
+            s_Garage = new Garage();
+            startMenu();
         }
 
-        internal void StartMenu()
+        private void startMenu()
         {
             int intUserInput;
-            eMenuOpiton numberOfUserChoose;
+            eMenuOption numberOfUserChoose;
             do
             {
-               
-
                 string menuOption = @"
 =================       Welcome to Our garage       ====================
 Which service do you need ? please write the number :
@@ -55,48 +51,49 @@ Which service do you need ? please write the number :
 ";
                 Console.WriteLine(menuOption);
                 string userInPut = Console.ReadLine();
-                intUserInput = ConsoleUserInterface.GetValidInputInRange(userInPut, 1, 8, menuOption);
-                 numberOfUserChoose = (eMenuOpiton)intUserInput;
+                intUserInput = UserInput.GetValidInputInRange(userInPut, 1, 8, menuOption);
+                numberOfUserChoose = (eMenuOption)intUserInput;
                 doUserChoice(numberOfUserChoose);
             }
-            while(numberOfUserChoose != eMenuOpiton.Exit);
+            while(numberOfUserChoose != eMenuOption.Exit);
         }
 
-        private void doUserChoice(eMenuOpiton i_NumberOfUserChoose)
+        private void doUserChoice(eMenuOption i_NumberOfUserChoose)
         {
-            eMenuOpiton userChoise = i_NumberOfUserChoose;
-            switch(userChoise)
+            eMenuOption userChoice = i_NumberOfUserChoose;
+            switch(userChoice)
             {
-                case eMenuOpiton.NewVehicle:
+                case eMenuOption.NewVehicle:
                     insertNewVehicle();
 
                     break;
-                case eMenuOpiton.ListOfLicense:
+                case eMenuOption.ListOfLicense:
                     displayListOfLicense();
 
                     break;
-                case eMenuOpiton.ChangeVehiclesStatus:
+                case eMenuOption.ChangeVehiclesStatus:
                     changeVehiclesStatus();
 
                     break;
-                case eMenuOpiton.InflateTires:
+                case eMenuOption.InflateTires:
                     inflateTires();
 
                     break;
-                case eMenuOpiton.RefuelFuel:
+                case eMenuOption.RefuelFuel:
                     refuelFuel();
 
                     break;
-                case eMenuOpiton.ChargeElectricVehicle:
+                case eMenuOption.ChargeElectricVehicle:
                     chargeElectricVehicle();
 
                     break;
-                case eMenuOpiton.DisplayVehicleInformation:
+                case eMenuOption.DisplayVehicleInformation:
                     displayVehicleInformation();
 
                     break;
-                case eMenuOpiton.Exit:
+                case eMenuOption.Exit:
                     Console.WriteLine("See You in EX 4");
+
                     break;
             }
         }
@@ -109,7 +106,7 @@ Which service do you need ? please write the number :
         private static void displayVehicleInformation()
         {
             Console.WriteLine("For displaying vehicle information, enter license number");
-            string inputLicenseNumber = ConsoleUserInterface.GetValidLicenseNumberInGarage(s_Garage);
+            string inputLicenseNumber = UserInput.GetValidLicenseNumberInGarage(s_Garage);
             Dictionary<string, object> detailsToPrint = s_Garage.GetVehicleDetails(inputLicenseNumber);
             Console.WriteLine("The details of the requested vehicle:");
             foreach(KeyValuePair<string, object> pair in detailsToPrint)
@@ -124,30 +121,28 @@ Which service do you need ? please write the number :
         /// </summary>
         private static void chargeElectricVehicle()
         {
-            string licenseNumber = ConsoleUserInterface.GetValidLicenseNumberInGarage(s_Garage);
+            string licenseNumber = UserInput.GetValidLicenseNumberInGarage(s_Garage);
             bool isValid = false;
             while(!isValid)
             {
                 try
                 {
                     Console.WriteLine("How much hours do you want to add to your battery?");
-                        float howManyMoreHoursToAdd = ConsoleUserInterface.GetValidAmount();
-                        s_Garage.ChargeElectricVehicleInGarage(licenseNumber, howManyMoreHoursToAdd);
-                        isValid = true;
-
+                    float howManyMoreHoursToAdd = UserInput.GetValidAmount();
+                    s_Garage.ChargeElectricVehicleInGarage(licenseNumber, howManyMoreHoursToAdd);
+                    isValid = true;
                 }
                 catch(ArgumentException e)
                 {
                     Console.WriteLine(e.Message);
                     Console.WriteLine("Return to Menu");
+
                     break;
                 }
-                catch (Exception e)
+                catch(Exception e)
                 {
                     Console.WriteLine(e.Message);
-                   
                 }
-
             }
         }
 
@@ -158,40 +153,34 @@ Which service do you need ? please write the number :
         private void refuelFuel()
         {
             bool isValidAmountOfFuel = false;
-            bool isFuel = false;
-            bool isSameFuelType = false;
-            string licenseNumber = ConsoleUserInterface.GetValidLicenseNumberInGarage(s_Garage);
+            string licenseNumber = UserInput.GetValidLicenseNumberInGarage(s_Garage);
             while(isValidAmountOfFuel == false)
             {
-                ///TODO -DEBUG
                 try
                 {
-                    
-                        Console.WriteLine("How much fuel do you want to put in?");
-                        float amountFuelToFill = ConsoleUserInterface.GetValidAmount();
+                    Console.WriteLine("How much fuel do you want to put in?");
+                    float amountFuelToFill = UserInput.GetValidAmount();
 
-                        string[] fuelTypes = Fuel.GetFuelOptions();
-                        Fuel.eFuelType desireFuelType = ConsoleUserInterface.GetValidChoice<Fuel.eFuelType>(
-                            fuelTypes,
-                            "Please chose one of the following types of Fuel:");
-                        s_Garage.ReFuelFuelInSpecificVehicle(licenseNumber, amountFuelToFill, desireFuelType);
-                        isValidAmountOfFuel = true;
-
+                    string[] fuelTypes = Fuel.GetFuelOptions();
+                    Fuel.eFuelType desireFuelType = UserInput.GetValidChoice<Fuel.eFuelType>(
+                        fuelTypes,
+                        "Please chose one of the following types of Fuel:");
+                    s_Garage.ReFuelFuelInSpecificVehicle(licenseNumber, amountFuelToFill, desireFuelType);
+                    isValidAmountOfFuel = true;
                 }
 
-                catch (ArgumentException e)
+                catch(ArgumentException e)
                 {
                     Console.WriteLine(e.Message);
                     Console.WriteLine("Return to Menu");
+
                     break;
                 }
 
-                catch (Exception e)
+                catch(Exception e)
                 {
-                    
                     Console.WriteLine(e.Message);
                 }
-
             }
         }
 
@@ -200,7 +189,7 @@ Which service do you need ? please write the number :
         /// </summary>
         private void inflateTires()
         {
-            string licenseNumber = ConsoleUserInterface.GetValidLicenseNumberInGarage(s_Garage);
+            string licenseNumber = UserInput.GetValidLicenseNumberInGarage(s_Garage);
             s_Garage.InflateTiresInCarToMax(licenseNumber);
         }
 
@@ -210,14 +199,13 @@ Which service do you need ? please write the number :
         /// </summary>
         private void changeVehiclesStatus()
         {
-            string licenseNumber = ConsoleUserInterface.GetValidLicenseNumberInGarage(s_Garage);
+            string licenseNumber = UserInput.GetValidLicenseNumberInGarage(s_Garage);
 
-            /// get the current car status
             OwnerDetails.eStatus currentStatus = s_Garage.GetCurrentCarStatus(licenseNumber);
             Console.WriteLine($@"***Your current status is {currentStatus}***");
-   
+
             string[] statusTypes = OwnerDetails.GetStatusOptions();
-            OwnerDetails.eStatus desireStatus = ConsoleUserInterface.GetValidChoice<OwnerDetails.eStatus>(
+            OwnerDetails.eStatus desireStatus = UserInput.GetValidChoice<OwnerDetails.eStatus>(
                 statusTypes,
                 "Please chose one of the following types of Fuel:");
 
@@ -248,7 +236,7 @@ Which service do you need ? please write the number :
         private void displayListOfLicense()
         {
             List<string> listOfLicenseNumbersInTheGarage = s_Garage.ListOfLicenseNumbersInTheGarage();
-            string listOfLicenseNumberString = ConsoleUserInterface.ListToString(listOfLicenseNumbersInTheGarage);
+            string listOfLicenseNumberString = UserInput.ListToString(listOfLicenseNumbersInTheGarage);
             string displayMessage = string.Format("This is the list of the License Numbers in The Garage:");
             Console.WriteLine(
                 $@"{displayMessage}
@@ -267,66 +255,56 @@ Which service do you need ? please write the number :
         /// </summary>
         private void insertNewVehicle()
         {
-            string licenseNumber;
             Vehicle newVehicle;
-            bool isValid = false;
             eVehicleType vehicleTypeFromUser;
 
-            licenseNumber = GetValidLicenseNumber();
+            string licenseNumber = GetValidLicenseNumber();
 
             if(s_Garage.IsLicenseNumberInGarage(licenseNumber))
             {
-                // Change status and show some messege
                 s_Garage.ChangeVehicleStatusInTheGarage(licenseNumber, OwnerDetails.eStatus.InRepair);
                 Console.WriteLine("The vehicle is already in the garage, so now vehicle status is change to In Repair");
             }
             else
             {
-                ///build new Vehicle
                 string[] vehicleTypes = VehicleFactory.GetVehicleOptions();
-                vehicleTypeFromUser = ConsoleUserInterface.GetValidChoice<eVehicleType>(
+                vehicleTypeFromUser = UserInput.GetValidChoice<eVehicleType>(
                     vehicleTypes,
                     "Please chose one of the following types of vehicles:");
                 string[] energyTypes = EnergySource.GetEnergyOptions();
-                EnergySource.eTypeOfEnergy energySourceTypeFromUser;
 
                 Console.WriteLine("Please enter Model Name:");
-                string modelName = ConsoleUserInterface.getNonEmptyInput();
+                string modelName = UserInput.GetNonEmptyInput();
                 newVehicle = VehicleFactory.CreateNewVehicle(vehicleTypeFromUser, licenseNumber, modelName);
-                // get all the require details from the given type after validation.
 
-                // Dictionary<string, object> vhicledetails =new Dictionary<string, object>();
-                //   = ConsoleUserInterface.GetDetailsForNewVehicle(vehicleTypeFromUser);
-
-                energySourceTypeFromUser = ConsoleUserInterface.GetValidChoice<eTypeOfEnergy>(
+                eTypeOfEnergy energySourceTypeFromUser = UserInput.GetValidChoice<eTypeOfEnergy>(
                     energyTypes,
                     "Please chose one of the following types of energy vehicles:");
-                ConsoleUserInterface.setEnergyUi(energySourceTypeFromUser, ref newVehicle);
+                UserInput.SetEnergyUi(energySourceTypeFromUser, ref newVehicle);
 
                 Console.WriteLine("Please chose Wheels Manufacturer Name:");
-                string manufacturerName = getNonEmptyInput();
-                newVehicle.setWheels(manufacturerName);
+                string manufacturerName = GetNonEmptyInput();
+                newVehicle.SetWheels(manufacturerName);
 
                 // set all details function 
 
-                setExtraDetailsMembersUI(ref newVehicle);
+                setExtraDetailsMembersUi(ref newVehicle);
 
                 Console.WriteLine("Please enter Car owner Name:");
-                string ownerName = getNonEmptyInput();
+                string ownerName = GetNonEmptyInput();
                 Console.WriteLine("Please enter owner Phone Number:");
-                string phoneNumber =  getNonEmptyInput();
-                
-                s_Garage.AddNewVehicle(newVehicle ,ownerName,phoneNumber);
-                s_Garage.InflateTiresInCarToMax(licenseNumber);
-              //  s_Garage.SetMaxEnergy(licenseNumber);
-                Console.WriteLine("We enter your car :)");
+                string phoneNumber = GetNonEmptyInput();
 
+                s_Garage.AddNewVehicle(newVehicle, ownerName, phoneNumber);
+                s_Garage.InflateTiresInCarToMax(licenseNumber);
+                //  s_Garage.SetMaxEnergy(licenseNumber);
+                Console.WriteLine("We enter your car :)");
             }
         }
 
-        private void setExtraDetailsMembersUI(ref Vehicle io_NewVehicle)
+        private void setExtraDetailsMembersUi(ref Vehicle i_IoNewVehicle)
         {
-            Dictionary<string, string> extraDetails = io_NewVehicle.GetExtraMembersNamesAndConditions();
+            Dictionary<string, string> extraDetails = i_IoNewVehicle.GetExtraMembersNamesAndConditions();
             Dictionary<string, string> attributeFromUser = new Dictionary<string, string>();
             foreach(KeyValuePair<string, string> member in extraDetails)
             {
@@ -334,22 +312,16 @@ Which service do you need ? please write the number :
                 attributeFromUser.Add(member.Key, Console.ReadLine());
             }
 
-            bool isValid = false;
             {
-                
-                    try
-                    {
-                        io_NewVehicle.SetExtraDetailsMembers(ref attributeFromUser);
-                        isValid = true;
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e.Message);
-                        setExtraDetailsMembersUI(ref io_NewVehicle);
-                    }
-
-
-
+                try
+                {
+                    i_IoNewVehicle.SetExtraDetailsMembers(ref attributeFromUser);
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    setExtraDetailsMembersUi(ref i_IoNewVehicle);
+                }
             }
         }
 
@@ -362,7 +334,7 @@ Which service do you need ? please write the number :
             {
                 try
                 {
-                    licenseNumber = ConsoleUserInterface.GetLicenseNumber();
+                    licenseNumber = UserInput.GetLicenseNumber();
                     isValid = true;
                 }
                 catch(Exception e)
