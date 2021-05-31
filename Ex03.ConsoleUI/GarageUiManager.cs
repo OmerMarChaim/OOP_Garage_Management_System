@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using Ex03.GarageLogic;
 using static Ex03.ConsoleUI.ConsoleUserInterface;
 using static Ex03.GarageLogic.OwnerDetails.eStatus;
@@ -34,6 +35,7 @@ namespace Ex03.ConsoleUI
         internal void StartMenu()
         {
             int intUserInput;
+            eMenuOpiton numberOfUserChoose;
             do
             {
                
@@ -53,11 +55,11 @@ Which service do you need ? please write the number :
 ";
                 Console.WriteLine(menuOption);
                 string userInPut = Console.ReadLine();
-                intUserInput = ConsoleUserInterface.GetValidInputInRange(userInPut, 1, 7, menuOption);
-                eMenuOpiton numberOfUserChoose = (eMenuOpiton)intUserInput;
+                intUserInput = ConsoleUserInterface.GetValidInputInRange(userInPut, 1, 8, menuOption);
+                 numberOfUserChoose = (eMenuOpiton)intUserInput;
                 doUserChoice(numberOfUserChoose);
             }
-            while(intUserInput != 8);
+            while(numberOfUserChoose != eMenuOpiton.Exit);
         }
 
         private void doUserChoice(eMenuOpiton i_NumberOfUserChoose)
@@ -93,11 +95,13 @@ Which service do you need ? please write the number :
                     displayVehicleInformation();
 
                     break;
+                case eMenuOpiton.Exit:
+                    Console.WriteLine("See You in EX 4");
+                    break;
             }
         }
 
         /// <summary>
-        /// OMRI
         /// Display vehicle information (License number, Model name, Owner name, Status in garage,
         /// Tire specifications (manufacturer and air pressure),
         /// Fuel status + Fuel type / Battery status, other relevant information based on vehicle type)
@@ -115,7 +119,6 @@ Which service do you need ? please write the number :
         }
 
         /// <summary>
-        /// OMRI
         /// 6. Charge an electric-based vehicle
         /// (Prompting the user for the license number and number of minutes to charge)
         /// </summary>
@@ -127,12 +130,11 @@ Which service do you need ? please write the number :
             {
                 try
                 {
-
                     Console.WriteLine("How much hours do you want to add to your battery?");
                         float howManyMoreHoursToAdd = ConsoleUserInterface.GetValidAmount();
                         s_Garage.ChargeElectricVehicleInGarage(licenseNumber, howManyMoreHoursToAdd);
                         isValid = true;
-                        
+
                 }
                 catch(ArgumentException e)
                 {
@@ -150,7 +152,6 @@ Which service do you need ? please write the number :
         }
 
         /// <summary>
-        /// OMRI THE ONE AND ONLY
         /// 5. Refuel a fuel-based vehicle
         /// (Prompting the user for the license number, fuel type and amount to fill)
         /// </summary>
@@ -165,8 +166,7 @@ Which service do you need ? please write the number :
                 ///TODO -DEBUG
                 try
                 {
-                   
-
+                    
                         Console.WriteLine("How much fuel do you want to put in?");
                         float amountFuelToFill = ConsoleUserInterface.GetValidAmount();
 
@@ -176,7 +176,6 @@ Which service do you need ? please write the number :
                             "Please chose one of the following types of Fuel:");
                         s_Garage.ReFuelFuelInSpecificVehicle(licenseNumber, amountFuelToFill, desireFuelType);
                         isValidAmountOfFuel = true;
-
 
                 }
 
@@ -191,14 +190,12 @@ Which service do you need ? please write the number :
                 {
                     
                     Console.WriteLine(e.Message);
-                    
                 }
 
             }
         }
 
         /// <summary>
-        /// OMER
         /// 4. Inflate tires to maximum (Prompting the user for the license number)
         /// </summary>
         private void inflateTires()
@@ -208,7 +205,6 @@ Which service do you need ? please write the number :
         }
 
         /// <summary>
-        /// OMER
         /// 3. Change a certain vehicle’s status
         /// (Prompting the user for the license number and new desired status)
         /// </summary>
@@ -216,20 +212,10 @@ Which service do you need ? please write the number :
         {
             string licenseNumber = ConsoleUserInterface.GetValidLicenseNumberInGarage(s_Garage);
 
-            ///todo -
             /// get the current car status
             OwnerDetails.eStatus currentStatus = s_Garage.GetCurrentCarStatus(licenseNumber);
             Console.WriteLine($@"***Your current status is {currentStatus}***");
-            /*
-             string menuOption = $@"To which status you want to change the car :
- 1. In Repair,
- 2. Repaired,
- 3. Payed";
-             Console.WriteLine(menuOption);
-             string userInputInString = Console.ReadLine();
-             int userInputNumber = ConsoleUserInterface.GetValidLicenseNumberBetween1To3(userInputInString, menuOption);
-
-             */
+   
             string[] statusTypes = OwnerDetails.GetStatusOptions();
             OwnerDetails.eStatus desireStatus = ConsoleUserInterface.GetValidChoice<OwnerDetails.eStatus>(
                 statusTypes,
