@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
@@ -29,13 +25,8 @@ namespace Ex03.GarageLogic
             get { return m_CurrentAirPressure; }
         }
 
-        /// <summary>
-        /// be out not to cross the MaxAirPressure 
-        /// </summary>
-        /// <param name="i_AmountAirToAdd"></param>
-        internal void AddAirPressure(float i_AmountAirToAdd)
+        private void addAirPressure(float i_AmountAirToAdd)
         {
-           // bool lessThenMaxAirAfterAdd = (m_MaxAirPressure - (i_AmountAirToAdd + m_CurrentAirPressure)) >= 0;
             float wantedAmount = i_AmountAirToAdd + m_CurrentAirPressure;
             
             if(wantedAmount>r_MaxAirPressure)
@@ -52,7 +43,7 @@ namespace Ex03.GarageLogic
         public void InflateToMaximum()
         {
             float addToMax = r_MaxAirPressure - m_CurrentAirPressure;
-            AddAirPressure(addToMax);
+            addAirPressure(addToMax);
         }
     }
 }

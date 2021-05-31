@@ -1,28 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-   public class VehicleFactory
+    public class VehicleFactory
     {
         public enum eVehicleType
         {
-            Car=1,
+            Car = 1,
             Motorcycle,
             Truck
         }
 
-        public static Vehicle CreateNewVehicle(eVehicleType i_VehicleTypeFromUser, string i_LicenseNumber, string i_ModelName)
+        public static Vehicle CreateNewVehicle(
+            eVehicleType i_VehicleTypeFromUser,
+            string i_LicenseNumber,
+            string i_ModelName)
         {
             Vehicle newVehicle = null;
 
             switch(i_VehicleTypeFromUser)
             {
                 case eVehicleType.Car:
-                    newVehicle = new Car(i_LicenseNumber,  i_ModelName);
+                    newVehicle = new Car(i_LicenseNumber, i_ModelName);
 
                     break;
                 case eVehicleType.Motorcycle:
@@ -36,7 +35,6 @@ namespace Ex03.GarageLogic
             }
 
             return newVehicle;
-
         }
 
         public static string[] GetVehicleOptions()

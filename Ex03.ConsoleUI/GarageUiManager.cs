@@ -12,7 +12,7 @@ namespace Ex03.ConsoleUI
     {
         private static Garage s_Garage;
 
-        public enum eMenuOption
+        private enum eMenuOption
         {
             NewVehicle = 1,
             ListOfLicense,

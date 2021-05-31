@@ -7,7 +7,7 @@ namespace Ex03.GarageLogic
         private readonly float r_MinValue;
         private readonly float r_MaxValue;
 
-        public ValueOutOfRangeException(float i_MinValue, float i_MaxValue,string i_ErrorMessage )
+        public ValueOutOfRangeException(float i_MinValue, float i_MaxValue, string i_ErrorMessage)
             : base($"{i_ErrorMessage}, Value must be in the range: {i_MinValue} - {i_MaxValue}")
         {
             r_MinValue = i_MinValue;
