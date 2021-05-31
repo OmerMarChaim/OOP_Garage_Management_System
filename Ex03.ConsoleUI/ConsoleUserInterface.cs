@@ -78,7 +78,6 @@ namespace Ex03.ConsoleUI
         /// the logic check if its out of range.
         public static float GetValidAmount()
         {
-            Console.WriteLine("How much fuel do you want to put in?");
             string userInput = Console.ReadLine();
             bool isValidPositiveNumber = float.TryParse(userInput, out float userInputInNumber);
             if(!isValidPositiveNumber)

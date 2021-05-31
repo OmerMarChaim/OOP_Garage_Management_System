@@ -36,10 +36,11 @@ namespace Ex03.ConsoleUI
             int intUserInput;
             do
             {
-                string helloMessage = string.Format("Welcome to Our garage");
-                Console.WriteLine(helloMessage);
+               
 
-                string menuOption = @"Which service do you need ? please write the number :
+                string menuOption = @"
+=================       Welcome to Our garage      =====================
+Which service do you need ? please write the number :
 1. Insert a new vehicle into the garage.
 2. Display a list of license numbers currently in the garage
 3. Change a certain vehicle’s status
@@ -48,6 +49,7 @@ namespace Ex03.ConsoleUI
 6. Charge an electric-based vehicle
 7. Display specific vehicle information
 8. Exit
+========================================================================
 ";
                 Console.WriteLine(menuOption);
                 string userInPut = Console.ReadLine();
@@ -125,11 +127,14 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
-                    float howManyMoreHoursToAdd = ConsoleUserInterface.GetValidAmount();
-                    s_Garage.ChargeElectricVehicleInGarage(licenseNumber, howManyMoreHoursToAdd);
-                    isValid = true;
+
+                    Console.WriteLine("How much hours do you want to add to your battery?");
+                        float howManyMoreHoursToAdd = ConsoleUserInterface.GetValidAmount();
+                        s_Garage.ChargeElectricVehicleInGarage(licenseNumber, howManyMoreHoursToAdd);
+                        isValid = true;
+                        
                 }
-                catch(AggregateException e)
+                catch(ArgumentException e)
                 {
                     Console.WriteLine(e.Message);
                     Console.WriteLine("Return to Menu");
@@ -160,9 +165,9 @@ namespace Ex03.ConsoleUI
                 ///TODO -DEBUG
                 try
                 {
-                    isFuel = !s_Garage.IsElectricVehicle(licenseNumber);
-                    if(isFuel == true)
-                    {
+                   
+
+                        Console.WriteLine("How much fuel do you want to put in?");
                         float amountFuelToFill = ConsoleUserInterface.GetValidAmount();
 
                         string[] fuelTypes = Fuel.GetFuelOptions();
@@ -170,8 +175,9 @@ namespace Ex03.ConsoleUI
                             fuelTypes,
                             "Please chose one of the following types of Fuel:");
                         s_Garage.ReFuelFuelInSpecificVehicle(licenseNumber, amountFuelToFill, desireFuelType);
-                    }
-                 
+                        isValidAmountOfFuel = true;
+
+
                 }
 
                 catch (ArgumentException e)
@@ -188,7 +194,6 @@ namespace Ex03.ConsoleUI
                     
                 }
 
-                isValidAmountOfFuel = true;
             }
         }
 
