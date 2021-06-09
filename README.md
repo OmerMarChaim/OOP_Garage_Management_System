@@ -1,18 +1,24 @@
 # OOP_Garage_Management_System
 Final objective – a computer software that “manages” a vehicle garage.
 The system will manage a garage that handles these five types of vehicles -
- Fuel-Based Motorcycle
+
+Fuel-Based Motorcycle
 2 tires with max air pressure of 30 (psi), Octane 98 (fuel), 6 liters fuel tank
- Electric Motorcycle
+
+Electric Motorcycle
 2 tires with max air pressure of 30 (psi), Max battery life – 1.8 hours
- Fuel-Based Car
+
+Fuel-Based Car
 4 tires with max air pressure of 32 (psi), Octane 95 fuel, 45 liter fuel tank
- Electric Car
+
+Electric Car
 4 tires with max air pressure of 32 (psi), Max battery life – 3.2 hours
- Fuel-Based Truck
+
+Fuel-Based Truck
 16 tires with max air pressure of 28 (psi), Soler fuel, 120 liter fuel tank
 Every vehicle contains the following properties:
- Model Name (String)
+
+Model Name (String)
  License Number (String)
  Remaining Energy Percentage (Fuel/Battery) (float)
  Wheels, with each wheel containing the following:
